@@ -11,13 +11,15 @@
   
   
   
-  <meta property="og:type" content="article">
+  <meta name="description" content="方法 是否改变原数组 特点    forEach() 不改变 没有返回值。   map() 不改变 返回一个数组。   filter() 不改变 过滤数组。   for…of 不改 返回一个数组。   every（） 不改变 返回一个布尔值。只要有一个时false,就返回false。   some() 不改变 返回一个布尔值。只要有一个true,就返回true。   find() 不改变 返">
+<meta property="og:type" content="article">
 <meta property="og:title" content="数组的遍历方法">
 <meta property="og:url" content="https://sisiy-ung.github.io/2021/12/17/%E6%95%B0%E7%BB%84%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="方法 是否改变原数组 特点    forEach() 不改变 没有返回值。   map() 不改变 返回一个数组。   filter() 不改变 过滤数组。   for…of 不改 返回一个数组。   every（） 不改变 返回一个布尔值。只要有一个时false,就返回false。   some() 不改变 返回一个布尔值。只要有一个true,就返回true。   find() 不改变 返">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-17T07:22:27.000Z">
-<meta property="article:modified_time" content="2021-12-17T07:23:23.875Z">
+<meta property="article:modified_time" content="2021-12-17T19:13:54.264Z">
 <meta property="article:author" content="Sisiy">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -205,7 +207,240 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <table>
+<thead>
+<tr>
+<th>方法</th>
+<th>是否改变原数组</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>forEach()</td>
+<td>不改变</td>
+<td>没有返回值。</td>
+</tr>
+<tr>
+<td>map()</td>
+<td>不改变</td>
+<td>返回一个数组。</td>
+</tr>
+<tr>
+<td>filter()</td>
+<td>不改变</td>
+<td>过滤数组。</td>
+</tr>
+<tr>
+<td>for…of</td>
+<td>不改</td>
+<td>返回一个数组。</td>
+</tr>
+<tr>
+<td>every（）</td>
+<td>不改变</td>
+<td>返回一个布尔值。只要有一个时false,就返回false。</td>
+</tr>
+<tr>
+<td>some()</td>
+<td>不改变</td>
+<td>返回一个布尔值。只要有一个true,就返回true。</td>
+</tr>
+<tr>
+<td>find()</td>
+<td>不改变</td>
+<td>返回第一个符合条件的值。</td>
+</tr>
+<tr>
+<td>findIndex()</td>
+<td>不改变</td>
+<td>返回第一个符合条件的值的索引值。</td>
+</tr>
+<tr>
+<td>reduce()</td>
+<td>不改变</td>
+<td>返回执行之后的值。对数组正序操作。</td>
+</tr>
+<tr>
+<td>reduceRight()</td>
+<td>不改变</td>
+<td>返回执行之后的值。对数组逆序操作。</td>
+</tr>
+</tbody></table>
+<h1 id="forEach"><a href="#forEach" class="headerlink" title="forEach()"></a>forEach()</h1><p><strong><code>forEach()</code></strong> 方法对数组的每个元素执行一次给定的函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, , <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>]</span><br><span class="line"><span class="keyword">let</span> res = a.forEach(<span class="function">(<span class="params">v, i</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v, i)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(res)</span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> <span class="number">0</span></span><br><span class="line"><span class="number">2</span> <span class="number">1</span></span><br><span class="line"><span class="number">5</span> <span class="number">3</span> <span class="comment">//注意索引 2 被跳过了，因为在数组的这个位置没有项</span></span><br><span class="line"><span class="number">7</span> <span class="number">4</span></span><br><span class="line"><span class="number">9</span> <span class="number">5</span></span><br><span class="line"><span class="literal">undefined</span> <span class="comment">//res 无返回值</span></span><br><span class="line"><span class="comment">// [object Array] (6)</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="map（）"><a href="#map（）" class="headerlink" title="map（）"></a>map（）</h1><p><strong><code>map()</code></strong> 方法创建一个新数组，其结果是<strong>该数组中的每个元素是调用一次提供的函数</strong>后的返回值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>]</span><br><span class="line"><span class="keyword">let</span> res = arr.map(<span class="function"><span class="params">v</span> =&gt;</span> v * <span class="number">2</span>)</span><br><span class="line"><span class="built_in">console</span>.log(res)</span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"></span><br><span class="line"><span class="comment">// [object Array] (6) </span></span><br><span class="line">[<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">10</span>,<span class="number">14</span>,<span class="number">18</span>]</span><br><span class="line"><span class="comment">// [object Array] (6) </span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用案例技巧"><a href="#使用案例技巧" class="headerlink" title="使用案例技巧"></a>使用案例技巧</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>].map(<span class="built_in">parseInt</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>parseInt(string, radix) </code> 解析一个字符串，并返回一个整数或者NaN。</p>
+<p>radix可选。表示要解析的数字的基数。该值介于2~362之间。</p>
+<p>如果省略该参数或者其值为0，则以10为基础来解析。</p>
+<p>如果“0x”或”0X”开头，则以16为基数。</p>
+<p>如果该参数小于2或者大于36，则parseInt()将返回NaN。</p>
+<p><code>Array.prototype.map</code> 传递3个参数:</p>
+<ul>
+<li>the element</li>
+<li>the index</li>
+<li>the array</li>
+</ul>
+<p>下面是迭代步骤的简明示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// parseInt(string, radix) -&gt; map(parseInt(value, index))</span></span><br><span class="line"><span class="comment">/*  first iteration (index is 0): */</span> <span class="built_in">parseInt</span>(<span class="string">&quot;1&quot;</span>, <span class="number">0</span>); <span class="comment">// 1</span></span><br><span class="line"><span class="comment">/* second iteration (index is 1): */</span> <span class="built_in">parseInt</span>(<span class="string">&quot;2&quot;</span>, <span class="number">1</span>); <span class="comment">// NaN</span></span><br><span class="line"><span class="comment">/*  third iteration (index is 2): */</span> <span class="built_in">parseInt</span>(<span class="string">&quot;3&quot;</span>, <span class="number">2</span>); <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="filter"><a href="#filter" class="headerlink" title="filter()"></a>filter()</h1><p><strong><code>filter()</code></strong> 方法创建一个新数组, 返回原数组中符合函数条件的所有元素。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> words = [<span class="string">&#x27;spray&#x27;</span>, <span class="string">&#x27;limit&#x27;</span>, <span class="string">&#x27;elite&#x27;</span>, <span class="string">&#x27;exuberant&#x27;</span>, <span class="string">&#x27;destruction&#x27;</span>, <span class="string">&#x27;present&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result = words.filter(<span class="function"><span class="params">word</span> =&gt;</span> word.length &gt; <span class="number">6</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br><span class="line"></span><br><span class="line"><span class="comment">// [object Array] (3)</span></span><br><span class="line">[<span class="string">&quot;exuberant&quot;</span>,<span class="string">&quot;destruction&quot;</span>,<span class="string">&quot;present&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="for…of"><a href="#for…of" class="headerlink" title="for…of"></a>for…of</h1><p><strong><code>for...of</code>语句</strong>遍历<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Iterators_and_Generators#iterables">可迭代对象</a>（包括 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array"><code>Array</code></a>，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map"><code>Map</code></a>，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Set"><code>Set</code></a>，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String"><code>String</code></a>，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/TypedArray"><code>TypedArray</code></a>，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/arguments">arguments</a> 对象等等）定义要迭代的数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//迭代Array</span></span><br><span class="line"><span class="keyword">let</span> iterable = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> value <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">    value += <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(value); <span class="comment">// 11 21 31</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="for-of与for-in的区别"><a href="#for-of与for-in的区别" class="headerlink" title="for...of与for...in的区别"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...of#for...of%E4%B8%8Efor...in%E7%9A%84%E5%8C%BA%E5%88%AB"><code>for...of</code>与<code>for...in</code>的区别</a></h2><p>无论是<code>for...in</code>还是<code>for...of</code>语句都是迭代一些东西。它们之间的主要区别在于它们的迭代方式。</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in"><code>for...in</code></a> 语句以任意顺序迭代对象的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Enumerability_and_ownership_of_properties">可枚举属性</a>。</p>
+<p><code>for...of</code> 语句遍历<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Iterators_and_Generators#iterables">可迭代对象</a>定义要迭代的数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.objCustom = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="built_in">Array</span>.prototype.arrCustom = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> iterable = [<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>];</span><br><span class="line">iterable.foo = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i); <span class="comment">//  0, 1, 2, &quot;foo&quot;, &quot;arrCustom&quot;, &quot;objCustom&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> iterable) &#123;</span><br><span class="line">  <span class="keyword">if</span> (iterable.hasOwnProperty(i)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i); <span class="comment">//  0, 1, 2, &quot;foo&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i); <span class="comment">//  3, 5, 7</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="every"><a href="#every" class="headerlink" title="every()"></a>every()</h1><p>**<code>every() </code>**方法测试一个数组内的所有元素是否都能通过函数。</p>
+<blockquote>
+<p><strong>注意</strong>：若收到一个空数组，此方法在一切情况下都会返回 <code>true</code>。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">12</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">130</span>, <span class="number">44</span>].every(<span class="function"><span class="params">x</span> =&gt;</span> x &gt;= <span class="number">10</span>); <span class="comment">// false</span></span><br><span class="line">[<span class="number">12</span>, <span class="number">54</span>, <span class="number">18</span>, <span class="number">130</span>, <span class="number">44</span>].every(<span class="function"><span class="params">x</span> =&gt;</span> x &gt;= <span class="number">10</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="some"><a href="#some" class="headerlink" title="some()"></a>some()</h1><p><strong><code>some()</code></strong> 方法测试数组中是不是至少有1个元素通过了函数。(在满足特定条件时停止遍历)</p>
+<blockquote>
+<p><strong>注意：</strong>如果用一个空数组进行测试，在任何情况下它返回的都是<code>false</code>。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">2</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">4</span>].some(<span class="function"><span class="params">x</span> =&gt;</span> x &gt; <span class="number">10</span>);  <span class="comment">// false</span></span><br><span class="line">[<span class="number">12</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">4</span>].some(<span class="function"><span class="params">x</span> =&gt;</span> x &gt; <span class="number">10</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="find"><a href="#find" class="headerlink" title="find()"></a>find()</h1><p> <strong><code>find()</code></strong> 方法返回数组中满足函数的第一个元素的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array1 = [<span class="number">5</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">130</span>, <span class="number">44</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> found = array1.find(<span class="function"><span class="params">element</span> =&gt;</span> element &gt; <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(found); <span class="comment">// 12</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>const found = array1.find(element =&gt; element &gt; 10);</p>
+<p>console.log(found);<br>// expected output: 12</p>
+<h1 id="findIndex"><a href="#findIndex" class="headerlink" title="findIndex()"></a>findIndex()</h1><p><strong><code>findIndex()</code><strong>方法返回数组中满足函数的第一个元素的</strong>索引</strong>。若没有找到对应元素则返回-1。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array1 = [<span class="number">5</span>, <span class="number">12</span>, <span class="number">8</span>, <span class="number">130</span>, <span class="number">44</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> isLargeNumber = <span class="function">(<span class="params">element</span>) =&gt;</span> element &gt; <span class="number">13</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(array1.findIndex(isLargeNumber)); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="reduce"><a href="#reduce" class="headerlink" title="reduce()"></a>reduce()</h1><p><strong><code>reduce()</code></strong> 方法对数组中的每个元素执行<strong>reducer</strong>函数(升序执行)，将其结果汇总为单个返回值。</p>
+<p><strong>reducer</strong> 函数接收4个参数:</p>
+<ol>
+<li>Accumulator (acc) (累计器)</li>
+<li>Current Value (cur) (当前值)</li>
+<li>Current Index (idx) (当前索引)</li>
+<li>Source Array (src) (源数组)</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>].reduce(<span class="function"><span class="keyword">function</span>(<span class="params">accumulator, currentValue, currentIndex, array</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> accumulator + currentValue;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>callback 被调用四次，每次调用的参数和返回值如下表：</p>
+<table>
+<thead>
+<tr>
+<th align="left"><code>callback</code></th>
+<th align="left"><code>accumulator</code></th>
+<th align="left"><code>currentValue</code></th>
+<th align="left"><code>currentIndex</code></th>
+<th align="left"><code>array</code></th>
+<th align="left">return value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">first call</td>
+<td align="left"><code>0</code></td>
+<td align="left"><code>1</code></td>
+<td align="left"><code>1</code></td>
+<td align="left"><code>[0, 1, 2, 3, 4]</code></td>
+<td align="left"><code>1</code></td>
+</tr>
+<tr>
+<td align="left">second call</td>
+<td align="left"><code>1</code></td>
+<td align="left"><code>2</code></td>
+<td align="left"><code>2</code></td>
+<td align="left"><code>[0, 1, 2, 3, 4]</code></td>
+<td align="left"><code>3</code></td>
+</tr>
+<tr>
+<td align="left">third call</td>
+<td align="left"><code>3</code></td>
+<td align="left"><code>3</code></td>
+<td align="left"><code>3</code></td>
+<td align="left"><code>[0, 1, 2, 3, 4]</code></td>
+<td align="left"><code>6</code></td>
+</tr>
+<tr>
+<td align="left">fourth call</td>
+<td align="left"><code>6</code></td>
+<td align="left"><code>4</code></td>
+<td align="left"><code>4</code></td>
+<td align="left"><code>[0, 1, 2, 3, 4]</code></td>
+<td align="left"><code>10</code></td>
+</tr>
+</tbody></table>
+<h1 id="reduceRight"><a href="#reduceRight" class="headerlink" title="reduceRight()"></a>reduceRight()</h1><p><strong><code>reduceRight()</code></strong> 方法接受一个函数作为累加器（accumulator）和数组的每个值（从右到左）将其减少为单个值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>].reduceRight(<span class="function"><span class="keyword">function</span>(<span class="params">previousValue, currentValue, index, array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> previousValue + currentValue;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>一共会调用四次回调函数，每次调用的参数及返回值如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left"><code>callback</code></th>
+<th align="left"><code>previousValue</code></th>
+<th align="left"><code>currentValue</code></th>
+<th align="left"><code>index</code></th>
+<th align="left"><code>array</code></th>
+<th align="left">返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">第一次调用</td>
+<td align="left"><code>4</code></td>
+<td align="left"><code>3</code></td>
+<td align="left"><code>3</code></td>
+<td align="left"><code>[0,1,2,3,4]</code></td>
+<td align="left"><code>7</code></td>
+</tr>
+<tr>
+<td align="left">第二次调用</td>
+<td align="left"><code>7</code></td>
+<td align="left"><code>2</code></td>
+<td align="left"><code>2</code></td>
+<td align="left"><code>[0,1,2,3,4]</code></td>
+<td align="left"><code>9</code></td>
+</tr>
+<tr>
+<td align="left">第三次调用</td>
+<td align="left"><code>9</code></td>
+<td align="left"><code>1</code></td>
+<td align="left"><code>1</code></td>
+<td align="left"><code>[0,1,2,3,4]</code></td>
+<td align="left"><code>10</code></td>
+</tr>
+<tr>
+<td align="left">第四次调用</td>
+<td align="left"><code>10</code></td>
+<td align="left"><code>0</code></td>
+<td align="left"><code>0</code></td>
+<td align="left"><code>[0,1,2,3,4]</code></td>
+<td align="left"><code>10</code></td>
+</tr>
+</tbody></table>
+
       
     </div>
     <footer class="article-footer">
@@ -300,7 +535,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-        <ol class="nav">None</ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#forEach"><span class="nav-number">1.</span> <span class="nav-text">forEach()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#map%EF%BC%88%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">map（）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B%E6%8A%80%E5%B7%A7"><span class="nav-number">2.1.</span> <span class="nav-text">使用案例技巧</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#filter"><span class="nav-number">3.</span> <span class="nav-text">filter()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#for%E2%80%A6of"><span class="nav-number">4.</span> <span class="nav-text">for…of</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#for-of%E4%B8%8Efor-in%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.1.</span> <span class="nav-text">for...of与for...in的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#every"><span class="nav-number">5.</span> <span class="nav-text">every()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#some"><span class="nav-number">6.</span> <span class="nav-text">some()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#find"><span class="nav-number">7.</span> <span class="nav-text">find()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#findIndex"><span class="nav-number">8.</span> <span class="nav-text">findIndex()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reduce"><span class="nav-number">9.</span> <span class="nav-text">reduce()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reduceRight"><span class="nav-number">10.</span> <span class="nav-text">reduceRight()</span></a></li></ol>
     
     </div>
   </aside>
