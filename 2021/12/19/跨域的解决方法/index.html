@@ -16,17 +16,17 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="跨域问题的来源是浏览器为了请求安全而引入的基于同源策略的安全特性。当页面和请求的协议、主机名、端口不同时，浏览器判定两者不同源，即为跨域请求。 跨域常见的解决方案有CORS、JSONP、反向代理（Reverse Proxy）。 server.js 12345678910111213var express &#x3D; require(&amp;#x27;express&amp;#x27;)&#x2F;&#x2F; 90端口的服务 将目前目录作">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211219194241157.png">
-<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211220000919067.png">
-<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211219194843718.png">
-<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211219200334780.png">
-<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211220001545748.png">
-<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211220001846114.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211219194241157.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220000919067.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211219194843718.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211219200334780.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220001545748.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220001846114.png">
 <meta property="article:published_time" content="2021-12-19T09:54:48.000Z">
-<meta property="article:modified_time" content="2021-12-19T17:10:38.137Z">
+<meta property="article:modified_time" content="2021-12-19T17:47:30.105Z">
 <meta property="article:author" content="Sisiy">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211219194241157.png">
+<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211219194241157.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -222,9 +222,9 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>90端口页面<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    fetch(<span class="string">&quot;http://localhost:91/&quot;</span>)</span></span><br><span class="line"><span class="javascript">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.text())</span></span><br><span class="line"><span class="javascript">      .then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        alert(data);</span></span><br><span class="line"><span class="javascript">      &#125;);</span></span><br><span class="line"><span class="javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>报错：</p>
-<p><img src="upload%5Cimage-20211219194241157.png" alt="image-20211219194241157"></p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211219194241157.png" alt="image-20211219194241157"></p>
 <h1 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h1><p>当浏览器在进行跨域请求的时候，会在请求里添加头部origin，表明自己的协议、主机、端口号。当服务器收到请求并且看到这个origin头部时，如果需要允许能够访问，就得添加头部<code>Access-Control-Allow-Origin</code>到响应里面。</p>
-<p><img src="upload%5Cimage-20211220000919067.png" alt="image-20211220000919067"></p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220000919067.png" alt="image-20211220000919067"></p>
 <p><strong>涉及的端</strong></p>
 <p>CORS只需要服务端支持，不涉及前端改动。</p>
 <p><strong>具体实现方式</strong></p>
@@ -233,7 +233,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 91端口服务 返回数据</span></span><br><span class="line"><span class="keyword">var</span> app2 = express()</span><br><span class="line">app2.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.header(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="string">&quot;*&quot;</span>)</span><br><span class="line">  res.send(<span class="string">&#x27;91端口页面&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <p>请求成功</p>
-<p><img src="upload%5Cimage-20211219194843718.png" alt="image-20211219194843718"></p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211219194843718.png" alt="image-20211219194843718"></p>
 <h1 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h1><p>相对古老的跨域解决方案。主要利用了<strong>浏览器加载js资源文件时不受同源策略的限制</strong>而实现跨域。</p>
 <p><strong>涉及的端</strong></p>
 <p>需要服务器端和前端配合实现。</p>
@@ -250,11 +250,11 @@
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 91端口服务 返回数据</span></span><br><span class="line">app2.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> fun = req.query.callback <span class="comment">//获取参数</span></span><br><span class="line">  res.send(fun + <span class="string">&quot;(&#x27;91端口界面&#x27;)&quot;</span>) <span class="comment">//f(&#x27;91端口界面&#x27;)</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>请求成功<img src="upload%5Cimage-20211219200334780.png" alt="image-20211219200334780"></p>
+<p>请求成功<img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211219200334780.png" alt="image-20211219200334780"></p>
 <h1 id="服务器代理"><a href="#服务器代理" class="headerlink" title="服务器代理"></a>服务器代理</h1><p>通过nginx对请求做一个转发处理。</p>
-<p><img src="upload%5Cimage-20211220001545748.png" alt="image-20211220001545748"></p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220001545748.png" alt="image-20211220001545748"></p>
 <p><strong>在服务器端设置了反向代理，让前端页面请求反向代理，反向代理再把请求转给服务器。</strong>反向代理与服务器都属于服务器之间的沟通，没有同源策略限制，因此解决了跨域的问题。</p>
-<p><img src="upload%5Cimage-20211220001846114.png" alt="image-20211220001846114"></p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220001846114.png" alt="image-20211220001846114"></p>
 <p><strong>涉及的端</strong></p>
 <p>只需要服务端支持，几乎不涉及前端改动，只要切换接口即可。</p>
 <p><strong>具体实现方式</strong></p>

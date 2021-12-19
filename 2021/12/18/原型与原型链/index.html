@@ -18,17 +18,17 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="原型新对象被创建的时候，除了各自的属性以外，还有一个隐式的__proto__属性（是一个对象）被创建。   隐式原型__proto__的属性值 指向 它的构造函数的显式原型prototype属性值。 例：Student.prototype &#x3D;&#x3D;&#x3D; student.__propto__ ​           类            显示原型             实例         隐式原型">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/upload%5Cimage-20211218172154416.png">
-<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/upload%5Cimage-20211218172238638.png">
-<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/upload%5Cimage-20211218184854482.png">
-<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/upload%5Cimage-20211218184913909.png">
-<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/upload%5Cimage-20211218190511129.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218172154416.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218172238638.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218184854482.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218184913909.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218190511129.png">
 <meta property="article:published_time" content="2021-12-18T08:51:55.000Z">
-<meta property="article:modified_time" content="2021-12-18T17:32:14.001Z">
+<meta property="article:modified_time" content="2021-12-19T17:46:00.780Z">
 <meta property="article:author" content="Sisiy">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sisiy-ung.github.io/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/upload%5Cimage-20211218172154416.png">
+<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218172154416.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -214,16 +214,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h1><p>新对象被创建的时候，除了各自的属性以外，还有一个隐式的<code>__proto__</code>属性（是一个对象）被创建。</p>
-<p><img src="upload%5Cimage-20211218172154416.png" alt="image-20211218172154416"></p>
-<p><img src="upload%5Cimage-20211218172238638.png" alt="image-20211218172238638"></p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218172154416.png" alt="image-20211218172154416"></p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218172238638.png" alt="image-20211218172238638"></p>
 <p>隐式原型<code>__proto__</code>的属性值 指向 它的构造函数的显式原型<code>prototype</code>属性值。</p>
 <p>例：Student.<code>prototype</code> === student.<code>__propto__</code></p>
 <p>​           类            显示原型             实例         隐式原型</p>
-<p><img src="upload%5Cimage-20211218184854482.png" alt="image-20211218184854482"></p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218184854482.png" alt="image-20211218184854482"></p>
 <p>总结：</p>
-<p><img src="upload%5Cimage-20211218184913909.png" alt="image-20211218184913909"></p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218184913909.png" alt="image-20211218184913909"></p>
 <h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><p>当访问一个对象的属性时，如果这个对象内部不存在这个属性，那么它会去它的原型对象里找这个属性，这个原型对象又会有自己的原型，于是就这样一直找下去，这样一层一层往上找的过程就形成了原型链。</p>
-<p><img src="upload%5Cimage-20211218190511129.png" alt="image-20211218190511129"></p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218190511129.png" alt="image-20211218190511129"></p>
 
       
     </div>
