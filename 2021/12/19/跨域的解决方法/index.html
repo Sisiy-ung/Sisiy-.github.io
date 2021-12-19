@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>跨域的解决方法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="跨域问题的来源是浏览器为了请求安全而引入的基于同源策略的安全特性。当页面和请求的协议、主机名、端口不同时，浏览器判定两者不同源，即为跨域请求。 跨域常见的解决方案有CORS、JSONP、反向代理（Reverse Proxy）。 server.js 12345678910111213var express &#x3D; require(&amp;#x27;express&amp;#x27;)&#x2F;&#x2F; 90端口的服务 将目前目录作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跨域的解决方法">
+<meta property="og:url" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="跨域问题的来源是浏览器为了请求安全而引入的基于同源策略的安全特性。当页面和请求的协议、主机名、端口不同时，浏览器判定两者不同源，即为跨域请求。 跨域常见的解决方案有CORS、JSONP、反向代理（Reverse Proxy）。 server.js 12345678910111213var express &#x3D; require(&amp;#x27;express&amp;#x27;)&#x2F;&#x2F; 90端口的服务 将目前目录作">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211219194241157.png">
+<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211220000919067.png">
+<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211219194843718.png">
+<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211219200334780.png">
+<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211220001545748.png">
+<meta property="og:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211220001846114.png">
+<meta property="article:published_time" content="2021-12-19T09:54:48.000Z">
+<meta property="article:modified_time" content="2021-12-19T17:10:38.137Z">
+<meta property="article:author" content="Sisiy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sisiy-ung.github.io/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/upload%5Cimage-20211219194241157.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("/css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("/css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("/css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-跨域的解决方法" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      跨域的解决方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-date">
+	  <time datetime="2021-12-19T09:54:48.000Z" itemprop="datePublished">2021-12-19</time>
+	</a>
+
+      
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>跨域问题的来源是浏览器为了<strong>请求安全</strong>而引入的基于<strong>同源策略</strong>的安全特性。当页面和请求的<strong>协议、主机名、端口</strong>不同时，浏览器判定两者不同源，即为跨域请求。</p>
+<p>跨域常见的解决方案有<code>CORS、JSONP、反向代理（Reverse Proxy）</code>。</p>
+<p>server.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 90端口的服务 将目前目录作为http请求</span></span><br><span class="line"><span class="keyword">var</span> app1 = express()</span><br><span class="line">app1.use(express.static(__dirname))</span><br><span class="line">app1.listen(<span class="number">90</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 91端口服务 返回数据</span></span><br><span class="line"><span class="keyword">var</span> app2 = express()</span><br><span class="line">app2.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.send(<span class="string">&#x27;91端口页面&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line">app2.listen(<span class="number">91</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在index.html页面请求91端口</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>90端口页面<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    fetch(<span class="string">&quot;http://localhost:91/&quot;</span>)</span></span><br><span class="line"><span class="javascript">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.text())</span></span><br><span class="line"><span class="javascript">      .then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        alert(data);</span></span><br><span class="line"><span class="javascript">      &#125;);</span></span><br><span class="line"><span class="javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>报错：</p>
+<p><img src="upload%5Cimage-20211219194241157.png" alt="image-20211219194241157"></p>
+<h1 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h1><p>当浏览器在进行跨域请求的时候，会在请求里添加头部origin，表明自己的协议、主机、端口号。当服务器收到请求并且看到这个origin头部时，如果需要允许能够访问，就得添加头部<code>Access-Control-Allow-Origin</code>到响应里面。</p>
+<p><img src="upload%5Cimage-20211220000919067.png" alt="image-20211220000919067"></p>
+<p><strong>涉及的端</strong></p>
+<p>CORS只需要服务端支持，不涉及前端改动。</p>
+<p><strong>具体实现方式</strong></p>
+<p>CORS将请求分为<strong>简单请求（Simple Requests）</strong>和<strong>需预检请求（Preflighted  Requests）</strong>,不同场景有不同的行为。</p>
+<p>在91端口修改请求头</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 91端口服务 返回数据</span></span><br><span class="line"><span class="keyword">var</span> app2 = express()</span><br><span class="line">app2.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.header(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="string">&quot;*&quot;</span>)</span><br><span class="line">  res.send(<span class="string">&#x27;91端口页面&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>请求成功</p>
+<p><img src="upload%5Cimage-20211219194843718.png" alt="image-20211219194843718"></p>
+<h1 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h1><p>相对古老的跨域解决方案。主要利用了<strong>浏览器加载js资源文件时不受同源策略的限制</strong>而实现跨域。</p>
+<p><strong>涉及的端</strong></p>
+<p>需要服务器端和前端配合实现。</p>
+<p><strong>具体实现方式</strong></p>
+<ol>
+<li>注册一个函数</li>
+<li>构造一个请求url（带callback）</li>
+<li>生成一个<script>并把step2的url作为src插入到文档中</li>
+<li>服务端构造一个js函数调用表达式并返回</li>
+<li>浏览器加载并执行以上代码</li>
+</ol>
+<p>index页面</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>90端口页面<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">data</span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      alert(data)</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://localhost:91?callback=f&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 91端口服务 返回数据</span></span><br><span class="line">app2.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> fun = req.query.callback <span class="comment">//获取参数</span></span><br><span class="line">  res.send(fun + <span class="string">&quot;(&#x27;91端口界面&#x27;)&quot;</span>) <span class="comment">//f(&#x27;91端口界面&#x27;)</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>请求成功<img src="upload%5Cimage-20211219200334780.png" alt="image-20211219200334780"></p>
+<h1 id="服务器代理"><a href="#服务器代理" class="headerlink" title="服务器代理"></a>服务器代理</h1><p>通过nginx对请求做一个转发处理。</p>
+<p><img src="upload%5Cimage-20211220001545748.png" alt="image-20211220001545748"></p>
+<p><strong>在服务器端设置了反向代理，让前端页面请求反向代理，反向代理再把请求转给服务器。</strong>反向代理与服务器都属于服务器之间的沟通，没有同源策略限制，因此解决了跨域的问题。</p>
+<p><img src="upload%5Cimage-20211220001846114.png" alt="image-20211220001846114"></p>
+<p><strong>涉及的端</strong></p>
+<p>只需要服务端支持，几乎不涉及前端改动，只要切换接口即可。</p>
+<p><strong>具体实现方式</strong></p>
+<p>在页面同域下配置一套反向代理服务，页面请求同域的服务端，服务端请求上游实际的服务端，之后将结果返回给前端。</p>
+<h1 id="其他方式"><a href="#其他方式" class="headerlink" title="其他方式"></a>其他方式</h1><h2 id="postMessage"><a href="#postMessage" class="headerlink" title="postMessage"></a>postMessage</h2><p>postMessage是HTML5 XMLHttpRequest Level 2中的API，且是为数不多可以跨域操作的window属性之一，它可用于解决以下方面的问题：<br>a.） 页面和其打开的新窗口的数据传递<br>b.） 多窗口之间消息传递<br>c.） 页面与嵌套的iframe消息传递<br>d.） 上面三个场景的跨域数据传递</p>
+<p>在两个origin下分别部署一套页面A和B，A页面通过<code>iframe</code>加载B页面并监听信息，B页面发送信息。</p>
+<h2 id="window-name"><a href="#window-name" class="headerlink" title="window.name"></a>window.name</h2><p>window.name属性的独特之处：name值在不同的页面（甚至不同域名）加载后依旧存在，并且可以支持非常长的 name 值（2MB）。</p>
+<p>主要是利用<code>window.name</code>页面跳转不改变的属性实现跨域，即<code>iframe</code>加载一个跨域页面，设置<code>window.name</code>，跳转到同域页面，可以通过<code>$(&#39;iframe&#39;).contentWindow.name</code>拿到跨域页面的数据。</p>
+<h2 id="document-domain"><a href="#document-domain" class="headerlink" title="document.domain"></a>document.domain</h2><p>可将<strong>相同一级域名</strong>下的<strong>子域名</strong>页面的document.domain设置为<strong>一级域名</strong>实现跨域。</p>
+<p>可将<strong>同域不同端口</strong>的document.domian设置为<strong>同域名</strong>实现跨域（端口设置为null）。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>Sisiy</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2021/12/19/跨域的解决方法/" target="_blank" title="跨域的解决方法">https://Sisiy-ung.github.io/2021/12/19/跨域的解决方法/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/12/20/cookie%E3%80%81localStorage%E3%80%81sessionStorage%E7%9A%84%E5%8C%BA%E5%88%AB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          cookie、localStorage、sessionStorage的区别
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/12/19/%E7%9B%92%E5%AD%90%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">盒子垂直居中的方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CORS"><span class="nav-number">1.</span> <span class="nav-text">CORS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSONP"><span class="nav-number">2.</span> <span class="nav-text">JSONP</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2021 Hexo All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Hexo
+          </div>
+          <div class="panel-body">
+            Copyright © 2021 Sisiy All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
