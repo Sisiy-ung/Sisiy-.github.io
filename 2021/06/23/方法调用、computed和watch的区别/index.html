@@ -3,22 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>方法调用、computed和watch的区别 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="keywords" content="vue" />
   
   
   
-  <meta name="description" content="title: 方法调用、computed和watch的区别tags:  vuecategories: vuedate: 2021-06-23 23:12:00  方法：页面数据每次重新渲染都会重新执行。不希望有缓存的时候可以使用。性能消耗大。 computed:是计算属性，依赖其他属性计算值。computed的值有缓存，只有当计算值变化才会返回内容。 watch:监听到值得变化就会执行回调，在回调">
+  
+  <meta name="description" content="方法：页面数据每次重新渲染都会重新执行。不希望有缓存的时候可以使用。性能消耗大。 computed:是计算属性，依赖其他属性计算值。computed的值有缓存，只有当计算值变化才会返回内容。 watch:监听到值得变化就会执行回调，在回调中可以进行一些逻辑操作。 方法 VS computedcomputed可以实现的，一般采用methods方法调用也可以实现。 computed的值是有缓存的。多次">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="方法调用、computed和watch的区别">
 <meta property="og:url" content="https://sisiy-ung.github.io/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title: 方法调用、computed和watch的区别tags:  vuecategories: vuedate: 2021-06-23 23:12:00  方法：页面数据每次重新渲染都会重新执行。不希望有缓存的时候可以使用。性能消耗大。 computed:是计算属性，依赖其他属性计算值。computed的值有缓存，只有当计算值变化才会返回内容。 watch:监听到值得变化就会执行回调，在回调">
+<meta property="og:description" content="方法：页面数据每次重新渲染都会重新执行。不希望有缓存的时候可以使用。性能消耗大。 computed:是计算属性，依赖其他属性计算值。computed的值有缓存，只有当计算值变化才会返回内容。 watch:监听到值得变化就会执行回调，在回调中可以进行一些逻辑操作。 方法 VS computedcomputed可以实现的，一般采用methods方法调用也可以实现。 computed的值是有缓存的。多次">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-06-23T15:12:12.145Z">
-<meta property="article:modified_time" content="2021-12-25T12:41:32.090Z">
+<meta property="article:published_time" content="2021-06-23T15:12:00.000Z">
+<meta property="article:modified_time" content="2021-12-25T16:48:17.508Z">
 <meta property="article:author" content="Sisiy">
+<meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -175,10 +178,20 @@
   <div id="articleInner" class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      方法调用、computed和watch的区别
+    </h1>
+  
+
+      </header>
+    
     <div class="article-meta">
       
 	<a href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/" class="article-date">
-	  <time datetime="2021-06-23T15:12:12.145Z" itemprop="datePublished">2021-06-23</time>
+	  <time datetime="2021-06-23T15:12:00.000Z" itemprop="datePublished">2021-06-23</time>
 	</a>
 
       
@@ -194,11 +207,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: 方法调用、computed和watch的区别<br>tags:</p>
-<ul>
-<li>vue<br>categories: vue<br>date: 2021-06-23 23:12:00</li>
-</ul>
-<p>方法：页面数据每次重新渲染都会重新执行。不希望有缓存的时候可以使用。性能消耗大。</p>
+        <p>方法：页面数据每次重新渲染都会重新执行。不希望有缓存的时候可以使用。性能消耗大。</p>
 <p>computed:是计算属性，依赖其他属性计算值。computed的值有缓存，只有当计算值变化才会返回内容。</p>
 <p>watch:监听到值得变化就会执行回调，在回调中可以进行一些逻辑操作。</p>
 <h3 id="方法-VS-computed"><a href="#方法-VS-computed" class="headerlink" title="方法 VS computed"></a>方法 VS computed</h3><p>computed可以实现的，一般采用methods方法调用也可以实现。</p>
@@ -259,7 +268,7 @@ var a = new Donate({
           </li>
           <li class="post-copyright-link">
           <strong>Post link:  </strong>
-          <a href="/2021/06/23/方法调用、computed和watch的区别/" target="_blank" title="">https://Sisiy-ung.github.io/2021/06/23/方法调用、computed和watch的区别/</a>
+          <a href="/2021/06/23/方法调用、computed和watch的区别/" target="_blank" title="方法调用、computed和watch的区别">https://Sisiy-ung.github.io/2021/06/23/方法调用、computed和watch的区别/</a>
           </li>
           <li class="post-copyright-license">
             <strong>Copyright Notice:   </strong>
@@ -299,6 +308,8 @@ var a = new Donate({
       
       
         
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
       
 
     </footer>
