@@ -18,18 +18,18 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="浅拷贝的原理与实现 浅拷贝指的是一个新的对象对原始对象的属性值进行精确地拷贝。如果拷贝的是基本数据类型，拷贝的就是基本数据类型的值；如果拷贝的是引用数据类型，拷贝的就是内存地址。如果其中一个对象的引用内存地址发生改变，另一个对象也发生变化(指向同一地址)。 基本数据类型：   引用数据类型：      Object.assign()object.assign 是 ES6 中 object 的一个方">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16ce894a1f1b5c32~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/bc8a37373c90fa2c3c361aaf0ae6e45.png">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220223739872.png">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211221011724433.png">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220223950755.png">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211221011742994.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16ce893a54f6c13d~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/5640fb514ac668eaddee996b160b0d2.png">
 <meta property="article:published_time" content="2021-12-19T17:38:05.000Z">
-<meta property="article:modified_time" content="2021-12-20T18:27:55.513Z">
+<meta property="article:modified_time" content="2021-12-31T05:44:33.717Z">
 <meta property="article:author" content="Sisiy">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16ce894a1f1b5c32~tplv-t2oaga2asx-watermark.awebp">
+<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/bc8a37373c90fa2c3c361aaf0ae6e45.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -214,7 +214,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="浅拷贝的原理与实现"><a href="#浅拷贝的原理与实现" class="headerlink" title="浅拷贝的原理与实现"></a>浅拷贝的原理与实现</h1><p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16ce894a1f1b5c32~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+        <h1 id="浅拷贝的原理与实现"><a href="#浅拷贝的原理与实现" class="headerlink" title="浅拷贝的原理与实现"></a>浅拷贝的原理与实现</h1><p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/bc8a37373c90fa2c3c361aaf0ae6e45.png" alt="bc8a37373c90fa2c3c361aaf0ae6e45"></p>
 <p>浅拷贝指的是一个新的对象对原始对象的属性值进行精确地拷贝。如果拷贝的是<code>基本数据类型</code>，拷贝的就是<code>基本数据类型的值</code>；如果拷贝的是<code>引用数据类型</code>，拷贝的就是<code>内存地址</code>。如果其中一个对象的引用内存地址发生改变，另一个对象也发生变化(指向同一地址)。</p>
 <p>基本数据类型：</p>
 <p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220223739872.png" alt="image-20211220223739872"></p>
@@ -272,7 +272,7 @@
 
 <p>这里用到了 <code>hasOwnProperty()</code> 方法，该方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性。所有继承了 Object 的对象都会继承到 <code>hasOwnProperty()</code> 方法。这个方法可以用来检测一个对象是否是自身属性。</p>
 <p>可以看到，所有的浅拷贝都只能拷贝一层对象。如果存在对象的嵌套，那么浅拷贝就无能为力了。深拷贝就是为了解决这个问题而生的，它能解决多层对象嵌套问题，彻底实现拷贝。</p>
-<h1 id="深拷贝的原理与实现"><a href="#深拷贝的原理与实现" class="headerlink" title="深拷贝的原理与实现"></a>深拷贝的原理与实现</h1><p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16ce893a54f6c13d~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<h1 id="深拷贝的原理与实现"><a href="#深拷贝的原理与实现" class="headerlink" title="深拷贝的原理与实现"></a>深拷贝的原理与实现</h1><p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/5640fb514ac668eaddee996b160b0d2.png" alt="5640fb514ac668eaddee996b160b0d2"></p>
 <p>将一个对象从内存中完整的拷贝一份出来,从堆内存中开辟一个新的区域存放新对象,且修改新对象不会影响原对象。</p>
 <h2 id="JSON-stringfy"><a href="#JSON-stringfy" class="headerlink" title="JSON.stringfy"></a>JSON.stringfy</h2><p><code>JSON.parse(JSON.stringify(obj))</code>是比较常用的深拷贝方法之一，它的原理就是利用<code>JSON.stringify</code> 将<code>JavaScript</code>对象序列化成为JSON字符串，再使用<code>JSON.parse</code>来反序列化，将字符串生成一个新的JavaScript对象。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;  </span><br><span class="line">  <span class="attr">a</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">b</span>: &#123;</span><br><span class="line">    <span class="attr">c</span>: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> obj2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj1));</span><br><span class="line">obj1.a = <span class="number">1</span>;</span><br><span class="line">obj1.b.c = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj1); <span class="comment">// &#123;a: 1, b: &#123;c: 1&#125;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(obj2); <span class="comment">// &#123;a: 0, b: &#123;c: 0&#125;&#125;</span></span><br></pre></td></tr></table></figure>
