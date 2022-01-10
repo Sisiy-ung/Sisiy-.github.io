@@ -265,6 +265,218 @@
         
           <section id="main" style="float:none;">
   
+    <article id="post-原型与原型链"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">原型与原型链</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" class="article-date">
+	  <time datetime="2021-12-18T08:51:55.000Z" itemprop="datePublished">2021-12-18</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          原型新对象被创建的时候，除了各自的属性以外，还有一个隐式的__proto__属性（是一个对象）被创建。
+
+
+隐式原型__proto__的属性值 指向 它的构造函数的显式原型prototype属性值。
+例：Student.prototype === student.__propto__
+​           类            显示原型             实例         隐式原型
+
+总结：
+
+原型链当访问一个对象的属性时，如果这个对象内部不存在这个属性，那么它会去它的原型...
+        </p>
+        <p class="article-more-link">
+          <a href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-数组的遍历方法"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2021/12/17/%E6%95%B0%E7%BB%84%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/">数组的遍历方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/12/17/%E6%95%B0%E7%BB%84%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/" class="article-date">
+	  <time datetime="2021-12-17T07:22:27.000Z" itemprop="datePublished">2021-12-17</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          
+
+
+方法
+是否改变原数组
+特点
+
+
+
+forEach()
+不改变
+没有返回值。
+
+
+map()
+不改变
+返回一个数组。
+
+
+filter()
+不改变
+过滤数组。
+
+
+for…of
+不改
+返回一个数组。
+
+
+every（）
+不改变
+返回一个布尔值。只要有一个false,就返回false。
+
+
+some()
+不改变
+返回一个布尔值。只要有一个true,就返回true。
+
+
+find()
+不改变
+返回第一个符合条件的值。
+
+
+findIndex()
+不改变
+返回第一个符合条件的值的索引值。
+
+...
+        </p>
+        <p class="article-more-link">
+          <a href="/2021/12/17/%E6%95%B0%E7%BB%84%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-方法调用、computed和watch的区别"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/">方法调用、computed和watch的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/" class="article-date">
+	  <time datetime="2021-06-23T15:12:00.000Z" itemprop="datePublished">2021-06-23</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          方法：页面数据每次重新渲染都会重新执行。不希望有缓存的时候可以使用。性能消耗大。
+computed:是计算属性，依赖其他属性计算值。computed的值有缓存，只有当计算值变化才会返回内容。
+watch:监听到值得变化就会执行回调，在回调中可以进行一些逻辑操作。
+方法 VS computedcomputed可以实现的，一般采用methods方法调用也可以实现。
+computed的值是有缓存的。多次调用的时候方法会执行多次，但计算属性不会执行多次，除非依赖值改变。
+1234567&lt;di...
+        </p>
+        <p class="article-more-link">
+          <a href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
     <article id="post-hello-world"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
