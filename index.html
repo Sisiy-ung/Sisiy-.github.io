@@ -265,7 +265,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-闭包"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-数组去重"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -273,7 +273,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/09/%E9%97%AD%E5%8C%85/">闭包</a>
+      <a class="article-title" href="/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/">数组去重</a>
     </h1>
   
 
@@ -281,8 +281,8 @@
     
     <div class="article-meta">
       
-	<a href="/2022/01/09/%E9%97%AD%E5%8C%85/" class="article-date">
-	  <time datetime="2022-01-09T14:54:51.000Z" itemprop="datePublished">2022-01-09</time>
+	<a href="/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/" class="article-date">
+	  <time datetime="2022-02-10T12:45:31.000Z" itemprop="datePublished">2022-02-10</time>
 	</a>
 
       
@@ -293,10 +293,183 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
+          之前遇到过一个数组去重的面试题，整理一下。
+给定一个数组，去除重复项。
+1let arr =  [1,2,2,4,null,null,&#x27;3&#x27;,&#x27;abc&#x27;,3,5,4,1,2,2,4,null,null,&#x27;3&#x27;,&#x27;abc&#x27;,3,5,4]
+
+indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
+12345678let newArr = []arr.forEa...
         </p>
         <p class="article-more-link">
-          <a href="/2022/01/09/%E9%97%AD%E5%8C%85/#more">Read More</a>
+          <a href="/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-虚拟dom和diff算法"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2022/01/20/%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/">虚拟dom和diff算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2022/01/20/%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/" class="article-date">
+	  <time datetime="2022-01-20T15:42:36.000Z" itemprop="datePublished">2022-01-20</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          **数据改变 **–&gt; 虚拟DOM(计算变更)  –&gt; 操作Dom –&gt; 视图更新
+什么是虚拟DOM？虚拟DOM是一个对象，一个用来表示真实DOM的对象。
+首先看一段html代码
+12345678&lt;div id=&quot;app&quot; class=&quot;container&quot;&gt;  &lt;h1&gt;虚拟DOM&lt;/h1&gt;  &lt;ul style=&quot;color: orange&quot;&gt;    &lt;li...
+        </p>
+        <p class="article-more-link">
+          <a href="/2022/01/20/%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-Vue2之数组"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2022/01/19/Vue2%E4%B9%8B%E6%95%B0%E7%BB%84/">Vue2之数组</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2022/01/19/Vue2%E4%B9%8B%E6%95%B0%E7%BB%84/" class="article-date">
+	  <time datetime="2022-01-19T06:28:25.000Z" itemprop="datePublished">2022-01-19</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          前言数组的索引和数组长度发生改变，Vue2检测不到变化。
+Vue官方文档
+
+由于 JavaScript 的限制，Vue 不能检测数组和对象的变化。
+
+Vue 不能检测以下数组的变动：
+
+当你利用索引直接设置一个数组项时，例如：vm.items[indexOfItem] = newValue
+当你修改数组的长度时，例如：vm.items.length = newLength
+
+Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，是Object.de...
+        </p>
+        <p class="article-more-link">
+          <a href="/2022/01/19/Vue2%E4%B9%8B%E6%95%B0%E7%BB%84/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-HTTPS"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2022/01/11/HTTPS/">HTTPS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2022/01/11/HTTPS/" class="article-date">
+	  <time datetime="2022-01-11T08:57:49.000Z" itemprop="datePublished">2022-01-11</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          对称加密使用相同密钥进行加解密。适用于大量数据的加密场景算法公开，安全性取决于秘钥大小，但秘钥越大效率越低，需要权衡在安全和效率中做权衡。
+特点算法本身安全，但使用场景不够安全，因为解密和加密都是同一个秘钥。但对称加密的速度快很多。
+
+常见算法DES、3DES、AES、Blowfish、IDEA、RC5、RC6。
+非对称加密使用 匹配的一对密钥 来分别进行加密和解密，这两个秘钥是公开密钥（public key，简称公钥）和私有密钥（private key，简称私钥）。
+注意：公钥加密的数据...
+        </p>
+        <p class="article-more-link">
+          <a href="/2022/01/11/HTTPS/#more">Read More</a>
         </p>
       
     </div>
@@ -670,179 +843,6 @@ server.js
         </p>
         <p class="article-more-link">
           <a href="/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-盒子垂直居中的方法"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2021/12/19/%E7%9B%92%E5%AD%90%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95/">盒子垂直居中的方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2021/12/19/%E7%9B%92%E5%AD%90%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95/" class="article-date">
-	  <time datetime="2021-12-18T18:40:30.000Z" itemprop="datePublished">2021-12-19</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          flex布局兼容问题
-1234567.father &#123;  height: 100px;  width: 50px;  display: flex;  justify-content: center;  align-items: center;&#125;
-
-
-
-子绝父相脱离文档流
-12345678910.father &#123;  position: relative;&#125;.son &#123;  height: 50px;  width: 50px;  positio...
-        </p>
-        <p class="article-more-link">
-          <a href="/2021/12/19/%E7%9B%92%E5%AD%90%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-扩展运算符"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2021/12/19/%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6/">扩展运算符</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2021/12/19/%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6/" class="article-date">
-	  <time datetime="2021-12-18T17:32:51.000Z" itemprop="datePublished">2021-12-19</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          
-扩展运算符（spread）是三个点（...）。
-
-对象扩展运算符对象的扩展运算符用于取出参数对象中的所有可遍历属性，拷贝到当前对象之中。
-12let bar = &#123;a: 1, b: 2&#125;let baz = &#123;...bar&#125;  //&#123;a: 1, b: 2&#125;
-
-**扩展运算符对对象实例的拷贝属于浅拷贝**。
-数组扩展运算符数组的扩展运算符可以将一个数组转化为用逗号分割的参数序列，且每次只能展开一层数组。
-123456function...
-        </p>
-        <p class="article-more-link">
-          <a href="/2021/12/19/%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-原型与原型链"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">原型与原型链</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" class="article-date">
-	  <time datetime="2021-12-18T08:51:55.000Z" itemprop="datePublished">2021-12-18</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          原型新对象被创建的时候，除了各自的属性以外，还有一个隐式的__proto__属性（是一个对象）被创建。
-
-
-隐式原型__proto__的属性值 指向 它的构造函数的显式原型prototype属性值。
-例：Student.prototype === student.__propto__
-​           类            显示原型             实例         隐式原型
-
-总结：
-
-原型链当访问一个对象的属性时，如果这个对象内部不存在这个属性，那么它会去它的原型...
-        </p>
-        <p class="article-more-link">
-          <a href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/#more">Read More</a>
         </p>
       
     </div>

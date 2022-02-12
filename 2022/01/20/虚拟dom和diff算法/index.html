@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>虚拟dom和diff算法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Vue" />
+  
+  
+  
+  
+  <meta name="description" content="**数据改变 **–&gt; 虚拟DOM(计算变更)  –&gt; 操作Dom –&gt; 视图更新 什么是虚拟DOM？虚拟DOM是一个对象，一个用来表示真实DOM的对象。 首先看一段html代码 12345678&lt;div id&#x3D;&quot;app&quot; class&#x3D;&quot;container&quot;&gt;  &lt;h1&gt;虚拟DOM&lt;&#x2F;h1&gt;  &lt;u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="虚拟dom和diff算法">
+<meta property="og:url" content="https://sisiy-ung.github.io/2022/01/20/%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="**数据改变 **–&gt; 虚拟DOM(计算变更)  –&gt; 操作Dom –&gt; 视图更新 什么是虚拟DOM？虚拟DOM是一个对象，一个用来表示真实DOM的对象。 首先看一段html代码 12345678&lt;div id&#x3D;&quot;app&quot; class&#x3D;&quot;container&quot;&gt;  &lt;h1&gt;虚拟DOM&lt;&#x2F;h1&gt;  &lt;u">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212195023249.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212211654815.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212183502328.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212184226792.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212184444187.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212190746709.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191113905.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191251446.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191521416.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212193529243.png">
+<meta property="article:published_time" content="2022-01-20T15:42:36.000Z">
+<meta property="article:modified_time" content="2022-02-12T13:18:31.318Z">
+<meta property="article:author" content="Sisiy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212195023249.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("/css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("/css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("/css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-虚拟dom和diff算法" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      虚拟dom和diff算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2022/01/20/%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/" class="article-date">
+	  <time datetime="2022-01-20T15:42:36.000Z" itemprop="datePublished">2022-01-20</time>
+	</a>
+
+      
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>**数据改变 **–&gt; 虚拟DOM(计算变更)  –&gt; 操作Dom –&gt; <strong>视图更新</strong></p>
+<h1 id="什么是虚拟DOM？"><a href="#什么是虚拟DOM？" class="headerlink" title="什么是虚拟DOM？"></a>什么是虚拟DOM？</h1><p>虚拟DOM是一个<code>对象</code>，<code>一个用来表示真实DOM的对象</code>。</p>
+<p>首先看一段html代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>虚拟DOM<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">style</span>=<span class="string">&quot;color: orange&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>第一项<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>第二项<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>第三项<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如何表示这个div？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">tag</span>: <span class="string">&#x27;div&#x27;</span>, <span class="comment">//标签名</span></span><br><span class="line">  <span class="attr">props</span>: &#123; <span class="comment">//标签属性</span></span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;app&#x27;</span>,</span><br><span class="line">    <span class="attr">className</span>: <span class="string">&#x27;container&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">children</span>: [ <span class="comment">//标签子节点</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">tag</span>: <span class="string">&#x27;h1&#x27;</span>,</span><br><span class="line">      <span class="attr">children</span>: <span class="string">&#x27;虚拟DOM&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">tag</span>: <span class="string">&#x27;ul&#x27;</span>,</span><br><span class="line">      <span class="attr">props</span>: &#123; <span class="attr">style</span>: <span class="string">&#x27;color: orange&#x27;</span> &#125;,</span><br><span class="line">      <span class="attr">children</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">tag</span>: <span class="string">&#x27;li&#x27;</span>,</span><br><span class="line">          <span class="attr">children</span>: <span class="string">&#x27;第一项&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">tag</span>: <span class="string">&#x27;li&#x27;</span>,</span><br><span class="line">          <span class="attr">children</span>: <span class="string">&#x27;第二项&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">tag</span>: <span class="string">&#x27;li&#x27;</span>,</span><br><span class="line">          <span class="attr">children</span>: <span class="string">&#x27;第三项&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>虚拟DOM算法操作真实DOM，性能高于直接操作真实DOM。</strong></p>
+<h1 id="什么是diff算法"><a href="#什么是diff算法" class="headerlink" title="什么是diff算法?"></a>什么是diff算法?</h1><p>用虚拟DOM表示真实DOM，计算出最小的变化，根据变化去更新真实DOM。</p>
+<p><strong>diff算法是一种对比算法。</strong>对比<code>旧虚拟DOM和新虚拟DOM</code>,对比出哪个是<code>虚拟节点</code>更改了，从而<code>找出</code>这个<code>虚拟节点</code>，<code>更新</code>这个虚拟节点对应的<code>真实节点</code>，实现<code>精准</code>更新真实DOM，进而提高效率。</p>
+<h1 id="diff算法原理"><a href="#diff算法原理" class="headerlink" title="diff算法原理"></a>diff算法原理</h1><h2 id="diff同层对比"><a href="#diff同层对比" class="headerlink" title="diff同层对比"></a>diff同层对比</h2><p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212195023249.png" alt="image-20220212195023249"></p>
+<h2 id="diff对比流程"><a href="#diff对比流程" class="headerlink" title="diff对比流程"></a>diff对比流程</h2><p>当数据改变时，会触发<code>setter</code>，并且通过<code>Dep.notify</code>去通知所有<code>订阅者Watcher</code>，订阅者们就会调用<code>patch方法</code>，给真实DOM打补丁，更新相应的视图。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212211654815.png" alt="image-20220212211654815"></p>
+<h2 id="patch函数"><a href="#patch函数" class="headerlink" title="patch函数"></a>patch函数</h2><p>作用：对比当前同层的虚拟节点<code>是否为同一类型的标签</code>。</p>
+<ul>
+<li>是：继续执行<code>patchVnode方法</code>进行深层比对</li>
+<li>否：没必要比对了，直接整个节点替换成<code>新虚拟节点</code>（创建新的DOM元素并插入，移除老的DOM元素）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">patch(container, vnode) <span class="comment">//首次渲染 container（dom元素）是element类型</span></span><br><span class="line">patch(vnode, newVnode) <span class="comment">//更新</span></span><br></pre></td></tr></table></figure>
+
+<p>核心原理代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">patch</span>(<span class="params">oldVnode, newVnode</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 比较是否为一个类型的节点</span></span><br><span class="line">  <span class="keyword">if</span> (sameVnode(oldVnode, newVnode)) &#123;</span><br><span class="line">    <span class="comment">// 是：继续进行深层比较</span></span><br><span class="line">    patchVnode(oldVnode, newVnode)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 否</span></span><br><span class="line">    <span class="keyword">const</span> oldEl = oldVnode.el <span class="comment">// 旧虚拟节点的真实DOM节点</span></span><br><span class="line">    <span class="keyword">const</span> parentEle = api.parentNode(oldEl) <span class="comment">// 获取父节点</span></span><br><span class="line">    createEle(newVnode) <span class="comment">// 创建新虚拟节点对应的真实DOM节点</span></span><br><span class="line">    <span class="keyword">if</span> (parentEle !== <span class="literal">null</span>) &#123;</span><br><span class="line">      api.insertBefore(parentEle, vnode.el, api.nextSibling(oEl)) <span class="comment">// 将新元素添加进父元素</span></span><br><span class="line">      api.removeChild(parentEle, oldVnode.el)  <span class="comment">// 移除以前的旧元素节点</span></span><br><span class="line">      <span class="comment">// 设置null，释放内存</span></span><br><span class="line">      oldVnode = <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> newVnode</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="sameVnode函数"><a href="#sameVnode函数" class="headerlink" title="sameVnode函数"></a>sameVnode函数</h2><p>patch关键的一步：<code>sameVnode方法判断是否为同一类型节点</code>，怎样才算是同一类型节点呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sameVnode</span>(<span class="params">oldVnode, newVnode</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    oldVnode.key === newVnode.key &amp;&amp; <span class="comment">// key值是否一样</span></span><br><span class="line">    oldVnode.tagName === newVnode.tagName &amp;&amp; <span class="comment">// 标签名是否一样</span></span><br><span class="line">    oldVnode.isComment === newVnode.isComment &amp;&amp; <span class="comment">// 是否都为注释节点</span></span><br><span class="line">    isDef(oldVnode.data) === isDef(newVnode.data) &amp;&amp; <span class="comment">// 是否都定义了data</span></span><br><span class="line">    sameInputType(oldVnode, newVnode) <span class="comment">// 当标签为input时，type必须是否相同</span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="patchVnode函数"><a href="#patchVnode函数" class="headerlink" title="patchVnode函数"></a>patchVnode函数</h2><p>主要任务：</p>
+<ul>
+<li>找到对应的<code>真实dom</code>(需要知道newVnode得更新到哪一个dom元素上)，称为<code>el</code></li>
+<li>判断<code>newVnode和oldVnode</code>是否<code>指向同一对象</code>，如果是，直接<code>return</code></li>
+<li>如果两者<code>都有文本节点</code>且<code>不相等</code>，那么<code>el</code>的文本节点设置为<code>newVnode</code>的文本节点</li>
+<li>如果两者<code>都有子节点</code>，则执行<code>updateChildren</code>函数比较子节点</li>
+<li>如果<code>oldVnode</code>有子节点而<code>newVnode</code>没有，移除<code>el</code>的子节点</li>
+<li>如果<code>oldVnode</code>无子节点而<code>newVnode</code>有，则将newVnode的子节点真实化后添加到<code>el</code></li>
+</ul>
+<p>需要知道newVnode得更新到哪一个dom元素上（关联dom元素）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">patchVnode</span>(<span class="params">oldVnode, newVnode</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> el = newVnode.el = oldVnode.el <span class="comment">// 获取真实DOM对象</span></span><br><span class="line">  <span class="comment">// 获取新旧虚拟节点的子节点数组</span></span><br><span class="line">  <span class="keyword">const</span> oldCh = oldVnode.children, newCh = newVnode.children</span><br><span class="line">  <span class="comment">// 如果新旧虚拟节点是同一个对象，则终止(不需要用patch做更新)</span></span><br><span class="line">  <span class="keyword">if</span> (oldVnode === newVnode) <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">  <span class="comment">// 如果新旧虚拟节点是文本节点，且文本不一样</span></span><br><span class="line">  <span class="keyword">if</span> (oldVnode.text !== <span class="literal">null</span> &amp;&amp; newVnode.text !== <span class="literal">null</span> &amp;&amp; oldVnode.text !== newVnode.text) &#123;</span><br><span class="line">    <span class="comment">// 则直接将真实DOM中文本更新为新虚拟节点的文本</span></span><br><span class="line">    api.setTextContent(el, newVnode.text)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 否则</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (oldCh &amp;&amp; newCh &amp;&amp; oldCh !== newCh) &#123;</span><br><span class="line">      <span class="comment">// 新旧虚拟节点都有子节点，且子节点不一样</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// 对比子节点，并更新</span></span><br><span class="line">      updateChildren(el, oldCh, newCh)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newCh) &#123;</span><br><span class="line">      <span class="comment">// 新虚拟节点有子节点，旧虚拟节点没有</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// 创建新虚拟节点的子节点，并更新到真实DOM上去</span></span><br><span class="line">      createEle(newVnode)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (oldCh) &#123;</span><br><span class="line">      <span class="comment">// 旧虚拟节点有子节点，新虚拟节点没有</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">//直接删除真实DOM里对应的子节点</span></span><br><span class="line">      api.removeChild(el)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="updateChildren函数"><a href="#updateChildren函数" class="headerlink" title="updateChildren函数"></a>updateChildren函数</h2><p>在patchVnode函数中如果oldVnode和newVnode<code>都有子节点</code>，则需要执行<code>updateChildren</code>函数比较子节点。</p>
+<p>这里的对比采用的是<code>首尾指针法</code>。新的子节点集合和老的子节点集合，各有首尾两个指针。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212183502328.png" alt="image-20220212183502328"></p>
+<p>指针指向的节点就会互相进行比较，总共有五种比较情况。</p>
+<p>1、<code>oldS 和 newS </code>使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldS, newS)</code></p>
+<p>2、<code>oldS 和 newE </code>使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldS, newE)</code></p>
+<p>3、<code>oldE 和 newS </code>使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldE, newS)</code></p>
+<p>4、<code>oldE 和 newE </code>使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldE, newE)</code></p>
+<p>5、如果以上逻辑都匹配不到，再把所有旧子节点的 <code>key</code> 做一个映射到旧节点下标的 <code>key -&gt; index</code> 表，然后用新 <code>vnode</code> 的 <code>key</code> 去找出在旧节点中可以复用的位置。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212184226792.png" alt="image-20220212184226792"></p>
+<p>比较过程如下：</p>
+<p>移动是以<code>newCh</code>的位置为准的，也就是说移动的时候需要将原来的<code>真实DOM</code>位置移到<code>newCh</code>所对应的位置。（找相等节点，移节点，移指针）</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212184444187.png" alt="image-20220212184444187"></p>
+<ol>
+<li><p>oldS和newE相等，节点a移动到newE对应的位置，同时oldS++，newE–</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212190746709.png" alt="image-20220212190746709"></p>
+</li>
+<li><p>oldS和newS相等，节点b移动到newS对应的位置，同时oldS++，newS++</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191113905.png" alt="image-20220212191113905"></p>
+</li>
+<li><p>oldE，oldS和newS相等，节点c移动到newS对应的位置，同时oldE–，oldS++和newS++</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191251446.png" alt="image-20220212191251446"></p>
+</li>
+<li><p>此时oldS &gt; oldE，则oldCh已经遍历完了，而newCh还没有遍历完，说明newCh比oldCh多，需要将多余的节点插入到真实DOM对应的位置上。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191521416.png" alt="image-20220212191521416"></p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateChildren</span>(<span class="params">parentElm, oldCh, newCh</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> oldStartIdx = <span class="number">0</span>, newStartIdx = <span class="number">0</span></span><br><span class="line">  <span class="keyword">let</span> oldEndIdx = oldCh.length - <span class="number">1</span></span><br><span class="line">  <span class="keyword">let</span> oldStartVnode = oldCh[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">let</span> oldEndVnode = oldCh[oldEndIdx]</span><br><span class="line">  <span class="keyword">let</span> newEndIdx = newCh.length - <span class="number">1</span></span><br><span class="line">  <span class="keyword">let</span> newStartVnode = newCh[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">let</span> newEndVnode = newCh[newEndIdx]</span><br><span class="line">  <span class="keyword">let</span> oldKeyToIdx</span><br><span class="line">  <span class="keyword">let</span> idxInOld</span><br><span class="line">  <span class="keyword">let</span> elmToMove</span><br><span class="line">  <span class="keyword">let</span> before</span><br><span class="line">  <span class="keyword">while</span> (oldStartIdx &lt;= oldEndIdx &amp;&amp; newStartIdx &lt;= newEndIdx) &#123;</span><br><span class="line">    <span class="keyword">if</span> (oldStartVnode == <span class="literal">null</span>) &#123;</span><br><span class="line">      oldStartVnode = oldCh[++oldStartIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (oldEndVnode == <span class="literal">null</span>) &#123;</span><br><span class="line">      oldEndVnode = oldCh[--oldEndIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newStartVnode == <span class="literal">null</span>) &#123;</span><br><span class="line">      newStartVnode = newCh[++newStartIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newEndVnode == <span class="literal">null</span>) &#123;</span><br><span class="line">      newEndVnode = newCh[--newEndIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sameVnode(oldStartVnode, newStartVnode)) &#123;</span><br><span class="line">      patchVnode(oldStartVnode, newStartVnode)</span><br><span class="line">      oldStartVnode = oldCh[++oldStartIdx]</span><br><span class="line">      newStartVnode = newCh[++newStartIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sameVnode(oldEndVnode, newEndVnode)) &#123;</span><br><span class="line">      patchVnode(oldEndVnode, newEndVnode)</span><br><span class="line">      oldEndVnode = oldCh[--oldEndIdx]</span><br><span class="line">      newEndVnode = newCh[--newEndIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sameVnode(oldStartVnode, newEndVnode)) &#123;</span><br><span class="line">      patchVnode(oldStartVnode, newEndVnode)</span><br><span class="line">      api.insertBefore(parentElm, oldStartVnode.el, api.nextSibling(oldEndVnode.el))</span><br><span class="line">      oldStartVnode = oldCh[++oldStartIdx]</span><br><span class="line">      newEndVnode = newCh[--newEndIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sameVnode(oldEndVnode, newStartVnode)) &#123;</span><br><span class="line">      patchVnode(oldEndVnode, newStartVnode)</span><br><span class="line">      api.insertBefore(parentElm, oldEndVnode.el, oldStartVnode.el)</span><br><span class="line">      oldEndVnode = oldCh[--oldEndIdx]</span><br><span class="line">      newStartVnode = newCh[++newStartIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 使用key时的比较</span></span><br><span class="line">      <span class="keyword">if</span> (oldKeyToIdx === <span class="literal">undefined</span>) &#123;</span><br><span class="line">        oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx) <span class="comment">// 有key生成index表</span></span><br><span class="line">      &#125;</span><br><span class="line">      idxInOld = oldKeyToIdx[newStartVnode.key]</span><br><span class="line">      <span class="keyword">if</span> (!idxInOld) &#123;</span><br><span class="line">        api.insertBefore(parentElm, createEle(newStartVnode).el, oldStartVnode.el)</span><br><span class="line">        newStartVnode = newCh[++newStartIdx]</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        elmToMove = oldCh[idxInOld]</span><br><span class="line">        <span class="keyword">if</span> (elmToMove.sel !== newStartVnode.sel) &#123;</span><br><span class="line">          api.insertBefore(parentElm, createEle(newStartVnode).el, oldStartVnode.el)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          patchVnode(elmToMove, newStartVnode)</span><br><span class="line">          oldCh[idxInOld] = <span class="literal">null</span></span><br><span class="line">          api.insertBefore(parentElm, elmToMove.el, oldStartVnode.el)</span><br><span class="line">        &#125;</span><br><span class="line">        newStartVnode = newCh[++newStartIdx]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (oldStartIdx &gt; oldEndIdx) &#123;</span><br><span class="line">    before = newCh[newEndIdx + <span class="number">1</span>] == <span class="literal">null</span> ? <span class="literal">null</span> : newCh[newEndIdx + <span class="number">1</span>].el</span><br><span class="line">    addVnodes(parentElm, before, newCh, newStartIdx, newEndIdx)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newStartIdx &gt; newEndIdx) &#123;</span><br><span class="line">    removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="用index做key"><a href="#用index做key" class="headerlink" title="用index做key"></a>用index做key</h1><p>v-for循环渲染的时候，一般用什么作为key的值？之前面试的时候就被问到了，还被问倒了。俺记得回答的是用index，答出来之后就感觉不妙了。</p>
+<p>左边是初始数据，右边是在初始数据之前插入一条新数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;                      <span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&quot;0&quot;</span>&gt;</span>a<span class="tag">&lt;/<span class="name">li</span>&gt;</span>        <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&quot;0&quot;</span>&gt;</span>new<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&quot;1&quot;</span>&gt;</span>b<span class="tag">&lt;/<span class="name">li</span>&gt;</span>        <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&quot;1&quot;</span>&gt;</span>a<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&quot;2&quot;</span>&gt;</span>c<span class="tag">&lt;/<span class="name">li</span>&gt;</span>        <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&quot;2&quot;</span>&gt;</span>b<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">                              <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&quot;3&quot;</span>&gt;</span>c<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span>                     &lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<p>最理想的情况是给列表增加一条数据，其他li无需重新渲染。但事实是所有的li标签都会更新。</p>
+<p><code>v-for</code>默认使用就地<code>复用</code>策略，列表数据修改的时候，他会根据<code>key值</code>去判断某个值是否修改，如果修改，则重新渲染这一项，否则复用之前的元素。</p>
+<p>整个过程就是：</p>
+<p>先进行<code>sameNode</code>对比，相同key节点会去进行<code>patchVnode</code>更新文本，而原来就有的节点<code>c</code>，因为之前没有<code>key</code>为4的节点，就被当成了新节点，所以最后新增的是原本已经存在的c节点。总结就是前三个进行<code>patchVnode</code>更新文本，最后一个进行<code>新增</code>。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212193529243.png" alt="image-20220212193529243"></p>
+<p>所以最好就是使用一个<code>独一无二的值</code>来作为key。</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/snabbdom/snabbdom">snabbdom</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6994959998283907102">15张图，20分钟吃透Diff算法核心原理，我说的！！！</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6899602713860898830">快速、简洁讲明Vue中v-for循环key的作用</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>Sisiy</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2022/01/20/虚拟dom和diff算法/" target="_blank" title="虚拟dom和diff算法">https://Sisiy-ung.github.io/2022/01/20/虚拟dom和diff算法/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          数组去重
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/01/19/Vue2%E4%B9%8B%E6%95%B0%E7%BB%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vue2之数组</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%99%9A%E6%8B%9FDOM%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是虚拟DOM？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFdiff%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">什么是diff算法?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#diff%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">diff算法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#diff%E5%90%8C%E5%B1%82%E5%AF%B9%E6%AF%94"><span class="nav-number">3.1.</span> <span class="nav-text">diff同层对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#diff%E5%AF%B9%E6%AF%94%E6%B5%81%E7%A8%8B"><span class="nav-number">3.2.</span> <span class="nav-text">diff对比流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#patch%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">patch函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sameVnode%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.</span> <span class="nav-text">sameVnode函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#patchVnode%E5%87%BD%E6%95%B0"><span class="nav-number">3.5.</span> <span class="nav-text">patchVnode函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#updateChildren%E5%87%BD%E6%95%B0"><span class="nav-number">3.6.</span> <span class="nav-text">updateChildren函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8index%E5%81%9Akey"><span class="nav-number">4.</span> <span class="nav-text">用index做key</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2022 Hexo All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Hexo
+          </div>
+          <div class="panel-body">
+            Copyright © 2022 Sisiy All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

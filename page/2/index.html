@@ -265,6 +265,179 @@
         
           <section id="main" style="float:none;">
   
+    <article id="post-盒子垂直居中的方法"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2021/12/19/%E7%9B%92%E5%AD%90%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95/">盒子垂直居中的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/12/19/%E7%9B%92%E5%AD%90%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95/" class="article-date">
+	  <time datetime="2021-12-18T18:40:30.000Z" itemprop="datePublished">2021-12-19</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          flex布局兼容问题
+1234567.father &#123;  height: 100px;  width: 50px;  display: flex;  justify-content: center;  align-items: center;&#125;
+
+
+
+子绝父相脱离文档流
+12345678910.father &#123;  position: relative;&#125;.son &#123;  height: 50px;  width: 50px;  positio...
+        </p>
+        <p class="article-more-link">
+          <a href="/2021/12/19/%E7%9B%92%E5%AD%90%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-扩展运算符"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2021/12/19/%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6/">扩展运算符</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/12/19/%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6/" class="article-date">
+	  <time datetime="2021-12-18T17:32:51.000Z" itemprop="datePublished">2021-12-19</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          
+扩展运算符（spread）是三个点（...）。
+
+对象扩展运算符对象的扩展运算符用于取出参数对象中的所有可遍历属性，拷贝到当前对象之中。
+12let bar = &#123;a: 1, b: 2&#125;let baz = &#123;...bar&#125;  //&#123;a: 1, b: 2&#125;
+
+**扩展运算符对对象实例的拷贝属于浅拷贝**。
+数组扩展运算符数组的扩展运算符可以将一个数组转化为用逗号分割的参数序列，且每次只能展开一层数组。
+123456function...
+        </p>
+        <p class="article-more-link">
+          <a href="/2021/12/19/%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-原型与原型链"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">原型与原型链</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" class="article-date">
+	  <time datetime="2021-12-18T08:51:55.000Z" itemprop="datePublished">2021-12-18</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          原型新对象被创建的时候，除了各自的属性以外，还有一个隐式的__proto__属性（是一个对象）被创建。
+
+
+隐式原型__proto__的属性值 指向 它的构造函数的显式原型prototype属性值。
+例：Student.prototype === student.__propto__
+​           类            显示原型             实例         隐式原型
+
+总结：
+
+原型链当访问一个对象的属性时，如果这个对象内部不存在这个属性，那么它会去它的原型...
+        </p>
+        <p class="article-more-link">
+          <a href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
     <article id="post-数组的遍历方法"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     

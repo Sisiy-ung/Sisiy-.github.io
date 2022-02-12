@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220001545748.png">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220001846114.png">
 <meta property="article:published_time" content="2021-12-19T09:54:48.000Z">
-<meta property="article:modified_time" content="2021-12-25T16:47:55.037Z">
+<meta property="article:modified_time" content="2022-01-17T11:34:35.501Z">
 <meta property="article:author" content="Sisiy">
 <meta property="article:tag" content="浏览器">
 <meta name="twitter:card" content="summary">
@@ -256,7 +256,7 @@
 <p>请求成功<img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211219200334780.png" alt="image-20211219200334780"></p>
 <h1 id="服务器代理"><a href="#服务器代理" class="headerlink" title="服务器代理"></a>服务器代理</h1><p>通过nginx对请求做一个转发处理。</p>
 <p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220001545748.png" alt="image-20211220001545748"></p>
-<p><strong>在服务器端设置了反向代理，让前端页面请求反向代理，反向代理再把请求转给服务器。</strong>反向代理与服务器都属于服务器之间的沟通，没有同源策略限制，因此解决了跨域的问题。</p>
+<p><strong>在服务器端设置了反向代理，让前端页面请求反向代理，反向代理再把请求转给服务器。</strong>反向代理与服务器都属于服务器之间的沟通，没有同源策略限制，因此解决了跨域的问题。(为什么前端页面向NGINX发请求时不会出现跨域？NGINX底层已经帮忙处理好浏览器了。)</p>
 <p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211220001846114.png" alt="image-20211220001846114"></p>
 <p><strong>涉及的端</strong></p>
 <p>只需要服务端支持，几乎不涉及前端改动，只要切换接口即可。</p>

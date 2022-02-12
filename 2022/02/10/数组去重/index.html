@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>清除浮动 | Hexo</title>
+  <title>数组去重 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="css" />
+  <meta name="keywords" content="JavaScript" />
   
   
   
   
-  <meta name="description" content="为什么要清除浮动？ 因为浮动的盒子脱离文档流，如果包含块没有高度，或者高度自适应，此时，浮动元素的高度不会被计算进去，包含块撑不起来，形成塌陷的状态。 clear最后一个浮动元素之后添加一个空的块级元素，并添加clear:both样式。 BFC创建BFC包含住浮动的子元素。 overflow在包含块元素的样式添加overflow:hidden或者overflow:auto。 float在包含块元">
+  <meta name="description" content="之前遇到过一个数组去重的面试题，整理一下。 给定一个数组，去除重复项。 1let arr &#x3D;  [1,2,2,4,null,null,&amp;#x27;3&amp;#x27;,&amp;#x27;abc&amp;#x27;,3,5,4,1,2,2,4,null,null,&amp;#x27;3&amp;#x27;,&amp;#x27;abc&amp;#x27;,3,5,4]  indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第一个索">
 <meta property="og:type" content="article">
-<meta property="og:title" content="清除浮动">
-<meta property="og:url" content="https://sisiy-ung.github.io/2021/12/21/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/index.html">
+<meta property="og:title" content="数组去重">
+<meta property="og:url" content="https://sisiy-ung.github.io/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="为什么要清除浮动？ 因为浮动的盒子脱离文档流，如果包含块没有高度，或者高度自适应，此时，浮动元素的高度不会被计算进去，包含块撑不起来，形成塌陷的状态。 clear最后一个浮动元素之后添加一个空的块级元素，并添加clear:both样式。 BFC创建BFC包含住浮动的子元素。 overflow在包含块元素的样式添加overflow:hidden或者overflow:auto。 float在包含块元">
+<meta property="og:description" content="之前遇到过一个数组去重的面试题，整理一下。 给定一个数组，去除重复项。 1let arr &#x3D;  [1,2,2,4,null,null,&amp;#x27;3&amp;#x27;,&amp;#x27;abc&amp;#x27;,3,5,4,1,2,2,4,null,null,&amp;#x27;3&amp;#x27;,&amp;#x27;abc&amp;#x27;,3,5,4]  indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第一个索">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-12-21T10:45:40.000Z">
-<meta property="article:modified_time" content="2022-01-11T15:59:21.543Z">
+<meta property="article:published_time" content="2022-02-10T12:45:31.000Z">
+<meta property="article:modified_time" content="2022-02-10T13:44:39.394Z">
 <meta property="article:author" content="Sisiy">
-<meta property="article:tag" content="css">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -174,7 +174,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-清除浮动" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-数组去重" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -182,7 +182,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      清除浮动
+      数组去重
     </h1>
   
 
@@ -190,8 +190,8 @@
     
     <div class="article-meta">
       
-	<a href="/2021/12/21/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/" class="article-date">
-	  <time datetime="2021-12-21T10:45:40.000Z" itemprop="datePublished">2021-12-21</time>
+	<a href="/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/" class="article-date">
+	  <time datetime="2022-02-10T12:45:31.000Z" itemprop="datePublished">2022-02-10</time>
 	</a>
 
       
@@ -207,13 +207,49 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p> 为什么要清除浮动？</p>
-<p>因为浮动的盒子脱离文档流，如果包含块没有高度，或者高度自适应，此时，浮动元素的高度不会被计算进去，包含块撑不起来，形成塌陷的状态。</p>
-<h1 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h1><p>最后一个浮动元素之后添加一个空的块级元素，并添加<code>clear:both</code>样式。</p>
-<h1 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h1><p>创建BFC包含住浮动的子元素。</p>
-<h2 id="overflow"><a href="#overflow" class="headerlink" title="overflow"></a>overflow</h2><p>在包含块元素的样式添加<code>overflow:hidden</code>或者<code>overflow:auto</code>。</p>
-<h1 id="float"><a href="#float" class="headerlink" title="float"></a>float</h1><p>在包含块元素的样式添加float属性，但是这种方式会影响布局，十分局限。</p>
-<h1 id="伪元素（最推荐）"><a href="#伪元素（最推荐）" class="headerlink" title="伪元素（最推荐）"></a>伪元素（最推荐）</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//包含块</span><br><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">::after</span>&#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">clear</span>: both    </span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.clearfix</span>&#123;</span><br><span class="line">    *zoom: <span class="number">1</span>; <span class="comment">/*IE6-IE7不支持：after*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>之前遇到过一个数组去重的面试题，整理一下。</p>
+<p>给定一个数组，去除重复项。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr =  [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="string">&#x27;3&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="string">&#x27;3&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+
+<h1 id="indexOf"><a href="#indexOf" class="headerlink" title="indexOf()"></a>indexOf()</h1><p><code>indexOf()</code>方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newArr = []</span><br><span class="line">arr.forEach( <span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">  newArr.indexOf(item) === -<span class="number">1</span> ? newArr.push(item) : <span class="string">&#x27;&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(newArr)</span><br><span class="line"></span><br><span class="line"><span class="comment">// [object Array] (8)</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="literal">null</span>,<span class="string">&quot;3&quot;</span>,<span class="string">&quot;abc&quot;</span>,<span class="number">3</span>,<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="filter-indexOf"><a href="#filter-indexOf" class="headerlink" title="filter()+indexOf()"></a>filter()+indexOf()</h1><p><code>filter()</code> 方法创建一个新数组, 新数组包含指定数组中符合条件的所有元素。如果没有符合条件的元素则返回空数组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 利用indexOf检测元素在数组中第一次出现的位置是否和元素现在的位置相等，如果不等则说明该元素是重复元素</span></span><br><span class="line"><span class="keyword">let</span> newArr = arr.filter(<span class="function">(<span class="params">item, index</span>) =&gt;</span> arr.indexOf(item) === index)</span><br><span class="line"><span class="built_in">console</span>.log(newArr)</span><br><span class="line"></span><br><span class="line"><span class="comment">// [object Array] (8)</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="literal">null</span>,<span class="string">&quot;3&quot;</span>,<span class="string">&quot;abc&quot;</span>,<span class="number">3</span>,<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="includes"><a href="#includes" class="headerlink" title="includes()"></a>includes()</h1><p><code>includes()</code> 方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 <code>true</code>，否则返回 <code>false</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newArr = []</span><br><span class="line">arr.forEach( <span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">  !newArr.includes(item) ? newArr.push(item) : <span class="string">&#x27;&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(newArr)</span><br><span class="line"></span><br><span class="line"><span class="comment">// [object Array] (8)</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="literal">null</span>,<span class="string">&quot;3&quot;</span>,<span class="string">&quot;abc&quot;</span>,<span class="number">3</span>,<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="reduce-includes"><a href="#reduce-includes" class="headerlink" title="reduce()+includes()"></a>reduce()+includes()</h1><p><code>reduce() </code>接收一个函数作为累加器，数组中的每个值从左到右开始计算，最终计算为一个值。语法：</p>
+<p>arr.reduce(function(acc, cur, idx, src), initValue)</p>
+<p><strong>reducer</strong> 函数接收4个参数:</p>
+<ol>
+<li>Accumulator (acc) (累计器)</li>
+<li>Current Value (cur) (当前值)</li>
+<li>Current Index (idx) (当前索引)</li>
+<li>Source Array (src) (源数组)</li>
+</ol>
+<p>initValue：可选。累加器初始值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newArr = arr.reduce(<span class="function">(<span class="params">accu,cur</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> accu.includes(cur) ? accu : accu.concat(cur) <span class="comment">//拼接</span></span><br><span class="line">  <span class="comment">// return accu.includes(cur) ? accu : [...accu, cur] //扩展</span></span><br><span class="line">&#125;, [])</span><br><span class="line"><span class="built_in">console</span>.log(newArr)</span><br><span class="line"></span><br><span class="line"><span class="comment">// [object Array] (8)</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="literal">null</span>,<span class="string">&quot;3&quot;</span>,<span class="string">&quot;abc&quot;</span>,<span class="number">3</span>,<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><p>Set中的元素只会<strong>出现一次</strong>，即 Set 中的元素是唯一的。Set本身是一个构造函数，可以接受一个具有 iterable 接口数据结构作为参数（如数组，字符串），用来初始化。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newArr = [...new <span class="built_in">Set</span>(arr)]</span><br><span class="line"><span class="keyword">let</span> newArr = <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(arr))</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>Map类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。</p>
+<p><code>set()</code>设置键名key对应的键值为value，然后返回整个 Map 结构。如果key已经有值，则键值会被更新，否则就新生成该键。</p>
+<p><code>get()</code>读取key对应的键值，如果找不到key，返回undefined。</p>
+<p><code>has()</code>返回一个布尔值，表示某个键是否在当前 Map 对象之中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line"><span class="keyword">let</span> newArr = []</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!map.has(arr[i])) &#123;</span><br><span class="line">        map.set(arr[i], <span class="literal">true</span>);</span><br><span class="line">        newArr.push(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -243,7 +279,7 @@ var a = new Donate({
           </li>
           <li class="post-copyright-link">
           <strong>Post link:  </strong>
-          <a href="/2021/12/21/清除浮动/" target="_blank" title="清除浮动">https://Sisiy-ung.github.io/2021/12/21/清除浮动/</a>
+          <a href="/2022/02/10/数组去重/" target="_blank" title="数组去重">https://Sisiy-ung.github.io/2022/02/10/数组去重/</a>
           </li>
           <li class="post-copyright-license">
             <strong>Copyright Notice:   </strong>
@@ -283,7 +319,7 @@ var a = new Donate({
       
       
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
 
       
 
@@ -293,19 +329,10 @@ var a = new Donate({
     
 <nav id="article-nav">
   
-    <a href="/2022/01/06/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          对称加密与非对称加密
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/12/20/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/01/20/%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">深拷贝与浅拷贝</div>
+      <div class="article-nav-title">虚拟dom和diff算法</div>
     </a>
   
 </nav>
@@ -319,7 +346,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#clear"><span class="nav-number">1.</span> <span class="nav-text">clear</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BFC"><span class="nav-number">2.</span> <span class="nav-text">BFC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#overflow"><span class="nav-number">2.1.</span> <span class="nav-text">overflow</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#float"><span class="nav-number">3.</span> <span class="nav-text">float</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%AA%E5%85%83%E7%B4%A0%EF%BC%88%E6%9C%80%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">伪元素（最推荐）</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#indexOf"><span class="nav-number">1.</span> <span class="nav-text">indexOf()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#filter-indexOf"><span class="nav-number">2.</span> <span class="nav-text">filter()+indexOf()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#includes"><span class="nav-number">3.</span> <span class="nav-text">includes()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reduce-includes"><span class="nav-number">4.</span> <span class="nav-text">reduce()+includes()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Set"><span class="nav-number">5.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">6.</span> <span class="nav-text">Map</span></a></li></ol>
     
     </div>
   </aside>
