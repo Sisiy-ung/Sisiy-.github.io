@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>promise | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="1. 回调地狱需求：现在有三个文件1.txt,2.txt,3.txt，内容分别是“冬”，“奥”，“会”。使用fs.readFile（异步）顺序读取三个文件里面的内容，再把内容异步写进data.txt中。 12345678910111213141516171819202122232425262728293031323334let filePath1 &#x3D; path.join(__dirname, &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise">
+<meta property="og:url" content="https://sisiy-ung.github.io/2022/02/16/promise/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. 回调地狱需求：现在有三个文件1.txt,2.txt,3.txt，内容分别是“冬”，“奥”，“会”。使用fs.readFile（异步）顺序读取三个文件里面的内容，再把内容异步写进data.txt中。 12345678910111213141516171819202122232425262728293031323334let filePath1 &#x3D; path.join(__dirname, &amp;#">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220216235700734.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220216235637620.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220217000617116.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220217001045310.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220217001351454.png">
+<meta property="article:published_time" content="2022-02-16T10:01:16.000Z">
+<meta property="article:modified_time" content="2022-02-17T08:03:16.684Z">
+<meta property="article:author" content="Sisiy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220216235700734.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("/css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("/css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("/css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-promise" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Promise
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2022/02/16/promise/" class="article-date">
+	  <time datetime="2022-02-16T10:01:16.000Z" itemprop="datePublished">2022-02-16</time>
+	</a>
+
+      
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-回调地狱"><a href="#1-回调地狱" class="headerlink" title="1. 回调地狱"></a>1. 回调地狱</h1><p>需求：现在有三个文件1.txt,2.txt,3.txt，内容分别是“冬”，“奥”，“会”。使用fs.readFile（异步）顺序读取三个文件里面的内容，再把内容异步写进data.txt中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> filePath1 = path.join(__dirname, <span class="string">&#x27;files&#x27;</span>, <span class="string">&#x27;1.txt&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> filePath2 = path.join(__dirname, <span class="string">&#x27;files&#x27;</span>, <span class="string">&#x27;2.txt&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> filePath3 = path.join(__dirname, <span class="string">&#x27;files&#x27;</span>, <span class="string">&#x27;3.txt&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> datafile = path.join(__dirname, <span class="string">&#x27;files&#x27;</span>, <span class="string">&#x27;data.txt&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.readFile(filePath1, <span class="string">&#x27;utf-8&#x27;</span>, <span class="function">(<span class="params">err1, data1</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(err1)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(err1);</span><br><span class="line">      <span class="keyword">return</span> </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//读取完第1个文件的数据之后，继续读取第2个文件的数据</span></span><br><span class="line">    fs.readFile(filePath2, <span class="string">&#x27;utf-8&#x27;</span>, <span class="function">(<span class="params">err2, data2</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(err2)&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(err2);</span><br><span class="line">          <span class="keyword">return</span> </span><br><span class="line">      &#125;</span><br><span class="line">        <span class="comment">//读取完第2个文件的数据之后，继续读取第3个文件的数据</span></span><br><span class="line">        fs.readFile(pathName3, <span class="string">&quot;utf-8&quot;</span>,<span class="function">(<span class="params">err3, data3</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(err3)&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(err3);</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//读取完第3个文件的数据后，异步写入到data.txt文件中</span></span><br><span class="line">            <span class="keyword">let</span> str1 = data1+data2+data3;</span><br><span class="line">            fs.writeFile(datafile, str1, <span class="string">&quot;utf-8&quot;</span>, <span class="function">(<span class="params">err4</span>)=&gt;</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(err4)&#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(err4);</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">&quot;写完啦！！&quot;</span>);</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>上面代码回调里面嵌套回调，这样会形成<code>回调地狱</code>，影响代码可读性和可维护性。</p>
+<h1 id="2-Promise的基本使用"><a href="#2-Promise的基本使用" class="headerlink" title="2. Promise的基本使用"></a>2. Promise的基本使用</h1><p>Promise是异步编程的一种解决方案，比传统的解决方案——<code>回调函数和事件</code>更合理和更强大。Promise是一个<code>对象</code>，从它可以获取异步操作的消息。</p>
+<p>新建的Promise就是一个容器，里面可以存放异步操作，也可以存放同步操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//异步操作可能成功或者失败</span></span><br><span class="line"><span class="comment">//第一个形参resolve 成功的时候执行的函数</span></span><br><span class="line"><span class="comment">//第二个函数reject  失败的时候执行的函数</span></span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>( <span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//1.同步代码</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;同步代码&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">  <span class="comment">//2.异步代码</span></span><br><span class="line">  fs.readFile(filePath1, <span class="string">&#x27;utf-8&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">      reject(err) <span class="comment">//调用的是p1.then的第2个函数</span></span><br><span class="line">    &#125;</span><br><span class="line">    resolve(data) <span class="comment">//成功了，调用的是p1.then的第1个函数。data是文件里面的数据</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p1.then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;读取成功&quot;</span>, data);</span><br><span class="line">&#125;,<span class="function">(<span class="params">err</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;读取失败&quot;</span>, err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-Promise的then链式调用的特点"><a href="#3-Promise的then链式调用的特点" class="headerlink" title="3. Promise的then链式调用的特点"></a>3. Promise的then链式调用的特点</h1><p>链式调用的特点：</p>
+<ol>
+<li>第一个then执行完（不管成功还是失败）会执行第二个then</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>( <span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  </span><br><span class="line">  fs.readFile(filePath1, <span class="string">&#x27;utf-8&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">      reject(err) </span><br><span class="line">    &#125;</span><br><span class="line">    resolve(data) </span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p1.then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123; <span class="comment">//data是1.txt里面的内容</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;成功了&quot;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;,<span class="function">(<span class="params">err</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;失败了&quot;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;).then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;第二个then&quot;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>成功结果：</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220216235700734.png" alt="image-20220216235700734"></p>
+<p>失败结果：</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220216235637620.png" alt="image-20220216235637620"></p>
+<ol start="2">
+<li>then的函数里面可以有返回值，被下一个then的形参接收</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">p1.then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;成功了&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">123</span></span><br><span class="line">&#125;,<span class="function">(<span class="params">err</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;失败了&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">456</span></span><br><span class="line">&#125;).then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123; <span class="comment">//data是第一个then的返回值</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;第二个then&quot;</span>, data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>成功结果：</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220217000617116.png" alt="image-20220217000617116"></p>
+<p>失败结果：</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220217001045310.png" alt="image-20220217001045310"></p>
+<ol start="3">
+<li>如果返回的是一个promise对象，下一个then的形参接收到的不是这个promise对象，而是这个promise对象内部调用resolve时候的实际参数</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">p1.then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;成功了&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> p1</span><br><span class="line">&#125;,<span class="function">(<span class="params">err</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;失败了&quot;</span>)</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;  <span class="comment">//data是p1 resolve(data)里的data,即“冬”</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;第二个then&quot;</span>, data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220217001351454.png" alt="image-20220217001351454"></p>
+<h1 id="4-使用Promise完成"><a href="#4-使用Promise完成" class="headerlink" title="4. 使用Promise完成"></a>4. 使用Promise完成</h1><p>使用Promise完成上文需求</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 封装成一个函数，返回一个promise对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readFilePromise</span>(<span class="params">filePath</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>( <span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.readFile(filePath, <span class="string">&#x27;utf-8&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        reject(err)</span><br><span class="line">      &#125;</span><br><span class="line">      resolve(data)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p1 = readFilePromise(filePath1) </span><br><span class="line"><span class="keyword">let</span> p2 = readFilePromise(filePath2)</span><br><span class="line"><span class="keyword">let</span> p3 = readFilePromise(filePath3)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">p1.then( <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  str += data</span><br><span class="line">  <span class="keyword">return</span> p2</span><br><span class="line">&#125;, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;).then( <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  str += data</span><br><span class="line">  <span class="keyword">return</span> p3</span><br><span class="line">&#125;, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;).then( <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  str += data</span><br><span class="line">  <span class="built_in">console</span>.log(str);</span><br><span class="line">&#125;, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-Promise的常用其他的方法"><a href="#5-Promise的常用其他的方法" class="headerlink" title="5. Promise的常用其他的方法"></a>5. Promise的常用其他的方法</h1><h2 id="5-1-Promise对象的catch-方法和finally-方法"><a href="#5-1-Promise对象的catch-方法和finally-方法" class="headerlink" title="5.1. Promise对象的catch()方法和finally()方法"></a>5.1. Promise对象的catch()方法和finally()方法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一般，我们会把以下代码：</span></span><br><span class="line">p1.then(<span class="function">(<span class="params">data1</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;承诺成功&quot;</span>, data1);</span><br><span class="line">&#125;,<span class="function">(<span class="params">error1</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;承诺失败&quot;</span>, error1);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//写成</span></span><br><span class="line">p1.then(<span class="function">(<span class="params">data1</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;承诺成功&quot;</span>, data1);</span><br><span class="line">&#125;).catch(<span class="function">(<span class="params">error1</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;承诺失败&quot;</span>, error1);</span><br><span class="line">&#125;).finally(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;承诺成功与失败都会执行这里的代码&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-2-Promise类的all-方法"><a href="#5-2-Promise类的all-方法" class="headerlink" title="5.2. Promise类的all()方法"></a>5.2. Promise类的all()方法</h2><p>参数：是一个数组，数组元素是Promise实例对象，只有数组里面所有的Promise成功了，则才会执行 then 第一个回调。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.all([p1,p2]).then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// data是一个数组，分别是p1和p2最后传来的数据</span></span><br><span class="line">    <span class="built_in">console</span>.log(data); <span class="comment">// [ &#x27;冬&#x27;, &#x27;奥&#x27; ]</span></span><br><span class="line">&#125;).catch(<span class="function">(<span class="params">error</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//只要执行p1,p2时其中一个报错，就会执行这里的代码</span></span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-3-Promise类的race-方法"><a href="#5-3-Promise类的race-方法" class="headerlink" title="5.3. Promise类的race()  方法"></a>5.3. Promise类的race()  方法</h2><p>参数：是一个数组，数组元素是Promise实例对象，只要数组里面的任何一个Promise成功了，则才会执行 then 第一个回调，且只执行1次。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.race([p1,p2]).then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// p1,p2只要其中一个执行完，就会执行一遍这里的代码，且这里的代码只会执行1次</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">123</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//123</span></span><br><span class="line"><span class="comment">//我</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-使用场景"><a href="#6-使用场景" class="headerlink" title="6. 使用场景"></a>6. 使用场景</h1><h2 id="6-1-接口请求超时"><a href="#6-1-接口请求超时" class="headerlink" title="6.1. 接口请求超时"></a>6.1. 接口请求超时</h2><p>给定一个时间，如果接口请求超过这个时间的话就报错。</p>
+<p>实现思路就是：<code>接口请求</code>和<code>延时函数</code>赛跑，并使用一个<code>Promise</code>包着，由于<code>Promise</code>的状态是不可逆的，所以如果<code>接口请求</code>先跑完则说明<code>未超时</code>且<code>Promise</code>的状态是<code>fulfilled</code>，反之，<code>延时函数</code>先跑完则说明<code>超时了</code>且<code>Promise</code>的状态是<code>rejetced</code>，最后根据<code>Promise</code>的状态来判断有无超时。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模拟延时</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">delay</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> reject(<span class="string">&#x27;超时&#x27;</span>), delay)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//模拟请求</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//假设请求需要1s</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      resolve(<span class="string">&quot;成功&quot;</span>)</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断是否超时</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isTimeOut</span>(<span class="params">requestFn, delay</span>) </span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="built_in">Promise</span>.race([requestFn(), sleep(delay)])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//进行测试</span></span><br><span class="line"><span class="comment">//超时</span></span><br><span class="line">isTimeOut(request, <span class="number">500</span>).catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.log(err))</span><br><span class="line"><span class="comment">//不超时</span></span><br><span class="line">isTimeOut(request, <span class="number">2000</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>学习🔗：</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7033395086696136711">你说你会Promise？那你解决一下项目中的这五个难题？</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7007031572238958629">7张图，20分钟就能搞定的async/await原理！为什么要拖那么久？</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>Sisiy</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2022/02/16/promise/" target="_blank" title="Promise">https://Sisiy-ung.github.io/2022/02/16/promise/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数组去重</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%9B%9E%E8%B0%83%E5%9C%B0%E7%8B%B1"><span class="nav-number">1.</span> <span class="nav-text">1. 回调地狱</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Promise%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">2. Promise的基本使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Promise%E7%9A%84then%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">3. Promise的then链式调用的特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E4%BD%BF%E7%94%A8Promise%E5%AE%8C%E6%88%90"><span class="nav-number">4.</span> <span class="nav-text">4. 使用Promise完成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Promise%E7%9A%84%E5%B8%B8%E7%94%A8%E5%85%B6%E4%BB%96%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">5. Promise的常用其他的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-Promise%E5%AF%B9%E8%B1%A1%E7%9A%84catch-%E6%96%B9%E6%B3%95%E5%92%8Cfinally-%E6%96%B9%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text">5.1. Promise对象的catch()方法和finally()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-Promise%E7%B1%BB%E7%9A%84all-%E6%96%B9%E6%B3%95"><span class="nav-number">5.2.</span> <span class="nav-text">5.2. Promise类的all()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-Promise%E7%B1%BB%E7%9A%84race-%E6%96%B9%E6%B3%95"><span class="nav-number">5.3.</span> <span class="nav-text">5.3. Promise类的race()  方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">6.</span> <span class="nav-text">6. 使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82%E8%B6%85%E6%97%B6"><span class="nav-number">6.1.</span> <span class="nav-text">6.1. 接口请求超时</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2022 Hexo All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Hexo
+          </div>
+          <div class="panel-body">
+            Copyright © 2022 Sisiy All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
