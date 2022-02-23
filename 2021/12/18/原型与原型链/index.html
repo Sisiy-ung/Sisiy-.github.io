@@ -11,20 +11,26 @@
   
   
   
-  <meta name="description" content="原型新对象被创建的时候，除了各自的属性以外，还有一个隐式的__proto__属性（是一个对象）被创建。   隐式原型__proto__的属性值 指向 它的构造函数的显式原型prototype属性值。 例：Student.prototype &#x3D;&#x3D;&#x3D; student.__propto__ ​           类            显示原型             实例         隐式原型">
+  <meta name="description" content="原型prototype和__proto__是什么？prototype:显式原型 __proto__:隐式原型 新对象被创建的时候，除了各自的属性以外，还有一个隐式的__proto__属性被创建。这个__proto__是一个Object。   关系构造函数的prototype和其实例的__proto__是指向同一个地方的，这个地方就叫做原型对象。 Person.prototype &#x3D;&#x3D;&#x3D; perso">
 <meta property="og:type" content="article">
 <meta property="og:title" content="原型与原型链">
 <meta property="og:url" content="https://sisiy-ung.github.io/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="原型新对象被创建的时候，除了各自的属性以外，还有一个隐式的__proto__属性（是一个对象）被创建。   隐式原型__proto__的属性值 指向 它的构造函数的显式原型prototype属性值。 例：Student.prototype &#x3D;&#x3D;&#x3D; student.__propto__ ​           类            显示原型             实例         隐式原型">
+<meta property="og:description" content="原型prototype和__proto__是什么？prototype:显式原型 __proto__:隐式原型 新对象被创建的时候，除了各自的属性以外，还有一个隐式的__proto__属性被创建。这个__proto__是一个Object。   关系构造函数的prototype和其实例的__proto__是指向同一个地方的，这个地方就叫做原型对象。 Person.prototype &#x3D;&#x3D;&#x3D; perso">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218172154416.png">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218172238638.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218184854482.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224022345105.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224024919128.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224025612091.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224030451000.png">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218184913909.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224031547856.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224032141305.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224032720787.png">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218190511129.png">
 <meta property="article:published_time" content="2021-12-18T08:51:55.000Z">
-<meta property="article:modified_time" content="2021-12-19T17:46:00.780Z">
+<meta property="article:modified_time" content="2022-02-23T19:30:32.776Z">
 <meta property="article:author" content="Sisiy">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -213,17 +219,72 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h1><p>新对象被创建的时候，除了各自的属性以外，还有一个隐式的<code>__proto__</code>属性（是一个对象）被创建。</p>
+        <h1 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h1><h2 id="prototype和-proto"><a href="#prototype和-proto" class="headerlink" title="prototype和__proto__"></a>prototype和<code>__proto__</code></h2><h3 id="是什么？"><a href="#是什么？" class="headerlink" title="是什么？"></a>是什么？</h3><p>prototype:显式原型</p>
+<p><code>__proto__</code>:隐式原型</p>
+<p>新对象被创建的时候，除了各自的属性以外，还有一个隐式的<code>__proto__</code>属性被创建。这个<code>__proto__</code>是一个Object。</p>
 <p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218172154416.png" alt="image-20211218172154416"></p>
 <p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218172238638.png" alt="image-20211218172238638"></p>
-<p>隐式原型<code>__proto__</code>的属性值 指向 它的构造函数的显式原型<code>prototype</code>属性值。</p>
-<p>例：Student.<code>prototype</code> === student.<code>__propto__</code></p>
-<p>​           类            显示原型             实例         隐式原型</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218184854482.png" alt="image-20211218184854482"></p>
-<p>总结：</p>
+<h3 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h3><p><code>构造函数的</code>prototype和其<code>实例</code>的__proto__是指向同一个地方的，这个地方就叫做<code>原型对象</code>。</p>
+<p>Person.<code>prototype</code> === person1.<code>__propto__</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123; <span class="comment">// 这个就是构造函数</span></span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person1 = <span class="keyword">new</span> Person(<span class="string">&#x27;小明&#x27;</span>, <span class="number">20</span>) <span class="comment">// 这个是Person构造函数的实例</span></span><br><span class="line"><span class="keyword">const</span> person2 = <span class="keyword">new</span> Person(<span class="string">&#x27;小红&#x27;</span>, <span class="number">30</span>) <span class="comment">// 这个也是Person构造函数的实例</span></span><br></pre></td></tr></table></figure>
+
+<p>​                         <img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224022345105.png" alt="image-20220224022345105">          </p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>平时定义函数的方法，有下面几种：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params">name, age</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;name&#125;</span>今年<span class="subst">$&#123;age&#125;</span>岁`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span></span><br><span class="line"><span class="keyword">const</span> fn2 = <span class="function"><span class="keyword">function</span>(<span class="params">name, age</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;name&#125;</span>今年<span class="subst">$&#123;age&#125;</span>岁`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span></span><br><span class="line"><span class="keyword">const</span> fn3 = <span class="function">(<span class="params">name, age</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;name&#125;</span>今年<span class="subst">$&#123;age&#125;</span>岁`</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面这些方法都可以使用<code>new Function</code>来声明。这么说<code>Function</code>也是一个构造函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fn1 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;console.log(`$&#123;name&#125;今年$&#123;age&#125;岁`)&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> fn2 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;console.log(`$&#123;name&#125;今年$&#123;age&#125;岁`)&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> fn3 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;console.log(`$&#123;name&#125;今年$&#123;age&#125;岁`)&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>那么fn1，fn2，fn3就是<code>构造函数</code>Function的<code>实例</code>。</p>
+<p>就有：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype === fn1.__proto__</span><br><span class="line"><span class="built_in">Function</span>.prototype === fn2.__proto__</span><br><span class="line"><span class="built_in">Function</span>.prototype === fn3.__proto__</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224024919128.png" alt="image-20220224024919128"></p>
+<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>创建对象的方法：</p>
+<ul>
+<li><code>构造函数创建对象</code>（Function构造函数的实例，不讨论）</li>
+<li><code>字面量创建对象</code></li>
+<li><code>new Object创建对象</code></li>
+<li><code>Object.create创建对象</code>(创建出来的是一个空原型的对象，不讨论）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种：构造函数创建对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种：字面量创建对象</span></span><br><span class="line"><span class="keyword">const</span> person2 = &#123;<span class="attr">name</span>: <span class="string">&#x27;scout&#x27;</span>, <span class="attr">age</span>: <span class="number">24</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第三种：new Object创建对象</span></span><br><span class="line"><span class="keyword">const</span> person3 = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">person3.name = <span class="string">&#x27;scout&#x27;</span></span><br><span class="line">person3.age = <span class="number">24</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 第四种：Object.create创建对象</span></span><br><span class="line"><span class="keyword">const</span> person4 = <span class="built_in">Object</span>.create(&#123;&#125;)</span><br><span class="line">person4.name = <span class="string">&#x27;scout&#x27;</span></span><br><span class="line">person4.age = <span class="number">24</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里<code>字面量创建对象</code>和<code>new Object</code>两种的方式，本质都是<code>new Object</code>创建对象。</p>
+<p>那么person2, person3都是<code>Object构造函数</code>的<code>实例</code>。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224025612091.png" alt="image-20220224025612091"></p>
+<h3 id="Function和Object"><a href="#Function和Object" class="headerlink" title="Function和Object"></a>Function和Object</h3><ul>
+<li><code>函数</code>是<code>Function构造函数</code>的实例</li>
+<li><code>对象</code>是<code>Object构造函数</code>的实例</li>
+</ul>
+<p>那<code>Function构造函数</code>和<code>Object构造函数</code>的实例？</p>
+<ul>
+<li><code>function Object()</code>其实也是个函数，所以他是<code>Function构造函数</code>的实例</li>
+<li><code>function Function()</code>其实也是个函数，所以他也是<code>Function构造函数</code>的实例，他是他自己本身的实例</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype === <span class="built_in">Object</span>.__proto__</span><br><span class="line"><span class="built_in">Function</span>.prototype === <span class="built_in">Function</span>.__proto__</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224030451000.png" alt="image-20220224030451000"></p>
+<p>b站上的一张图也贴出来：</p>
 <p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218184913909.png" alt="image-20211218184913909"></p>
-<h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><p>当访问一个对象的属性时，如果这个对象内部不存在这个属性，那么它会去它的原型对象里找这个属性，这个原型对象又会有自己的原型，于是就这样一直找下去，这样一层一层往上找的过程就形成了原型链。</p>
+<h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><h3 id="Person-prototype-和-Function-prototype"><a href="#Person-prototype-和-Function-prototype" class="headerlink" title="Person.prototype 和 Function.prototype"></a>Person.prototype 和 Function.prototype</h3><ul>
+<li>Person.prototype，它是<code>构造函数Person</code>的原型对象</li>
+<li>Function.prototype，他是<code>构造函数Function</code>的原型对象</li>
+</ul>
+<p><code>原型对象</code>本质也是<code>对象</code>，是通过<code>new Object()</code>创建出来的。说明<code>Person.prototype</code>和<code>Function.prototype</code>都是<code>构造函数Object</code>的实例。所以：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.__proto__ === <span class="built_in">Object</span>.prototype</span><br><span class="line"><span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224031547856.png" alt="image-20220224031547856"></p>
+<h2 id="什么是原型链？"><a href="#什么是原型链？" class="headerlink" title="什么是原型链？"></a>什么是原型链？</h2><p><code>__proto__的路径</code>就叫原型链。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224032141305.png" alt="image-20220224032141305"></p>
+<p>再整理一下：</p>
+<p>三条原型链。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220224032720787.png" alt="image-20220224032720787"></p>
+<p>当访问一个对象的属性时，如果这个对象内部不存在这个属性，那么它会去它的原型对象里找这个属性，这个原型对象又会有自己的原型，于是就这样一直找下去，这样一层一层往上找的过程就形成了原型链。</p>
 <p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20211218190511129.png" alt="image-20211218190511129"></p>
+<h2 id="原型链终点"><a href="#原型链终点" class="headerlink" title="原型链终点"></a>原型链终点</h2><p><code>Object.prototype</code>的<code>__proto__</code>指向null，就是原型链的终点。</p>
+<h2 id="原型继承"><a href="#原型继承" class="headerlink" title="原型继承"></a>原型继承</h2><p><code>原型继承</code>就是，<code>实例</code>可以使用<code>构造函数上的prototype</code>中的方法。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7007416743215759373#heading-10">这可能是掘金讲「原型链」，讲的最好最通俗易懂的了，附练习题！</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7008526225207640078">【JS】图解原型链相关练习题，带你彻底搞懂原型链！！！（这可能是掘金画原型链画的最正的😃）</a></p>
 
       
     </div>
@@ -328,7 +389,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="nav-number">2.</span> <span class="nav-text">原型链</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">原型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#prototype%E5%92%8C-proto"><span class="nav-number">1.1.</span> <span class="nav-text">prototype和__proto__</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.1.</span> <span class="nav-text">是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB"><span class="nav-number">1.1.2.</span> <span class="nav-text">关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.3.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.4.</span> <span class="nav-text">对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Function%E5%92%8CObject"><span class="nav-number">1.1.5.</span> <span class="nav-text">Function和Object</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="nav-number">2.</span> <span class="nav-text">原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Person-prototype-%E5%92%8C-Function-prototype"><span class="nav-number">2.0.1.</span> <span class="nav-text">Person.prototype 和 Function.prototype</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8E%9F%E5%9E%8B%E9%93%BE%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">什么是原型链？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%BB%88%E7%82%B9"><span class="nav-number">2.2.</span> <span class="nav-text">原型链终点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF"><span class="nav-number">2.3.</span> <span class="nav-text">原型继承</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol>
     
     </div>
   </aside>

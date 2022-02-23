@@ -460,16 +460,14 @@ server.js
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          原型新对象被创建的时候，除了各自的属性以外，还有一个隐式的__proto__属性（是一个对象）被创建。
+          原型prototype和__proto__是什么？prototype:显式原型
+__proto__:隐式原型
+新对象被创建的时候，除了各自的属性以外，还有一个隐式的__proto__属性被创建。这个__proto__是一个Object。
 
 
-隐式原型__proto__的属性值 指向 它的构造函数的显式原型prototype属性值。
-例：Student.prototype === student.__propto__
-​           类            显示原型             实例         隐式原型
-
-总结：
-
-原型链当访问一个对象的属性时，如果这个对象内部不存在这个属性，那么它会去它的原型...
+关系构造函数的prototype和其实例的__proto__是指向同一个地方的，这个地方就叫做原型对象。
+Person.prototype === person1.__propto__
+1234567function Person(name, age)...
         </p>
         <p class="article-more-link">
           <a href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/#more">Read More</a>
