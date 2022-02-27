@@ -265,6 +265,64 @@
         
           <section id="main" style="float:none;">
   
+    <article id="post-防抖和节流"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2022/02/27/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/">防抖和节流</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2022/02/27/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" class="article-date">
+	  <time datetime="2022-02-27T10:03:51.000Z" itemprop="datePublished">2022-02-27</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          防抖例子
+这里一个例子：
+
+有一个自动感应的门，当有人经过的时候，触发了大门的感应，大门执行了开门的动作（**触发事件**）。
+开门了之后这个门是需要关闭的，门不能关得太快也不能关得太慢，因此我们需要设定时间，这个时间就是延迟关门的时间(setTimeOut)，这里假设时间是5s。
+门感应到有人，打开门，并且开始5s倒计时。在5s内如果又有人靠近门边，门感应到人，打开门，重新5s计时。
+5s过去了，没有人来了，门就闭合了(clearTimeOut)。
+
+基本概念防抖就是指触发事件后 n 秒...
+        </p>
+        <p class="article-more-link">
+          <a href="/2022/02/27/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
     <article id="post-Vue组件通信"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
@@ -739,65 +797,6 @@ float在包含块元素的样式添加float属性，但是这种方式会影响�
         </p>
         <p class="article-more-link">
           <a href="/2021/12/21/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-深拷贝与浅拷贝"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2021/12/20/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">深拷贝与浅拷贝</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2021/12/20/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" class="article-date">
-	  <time datetime="2021-12-19T17:38:05.000Z" itemprop="datePublished">2021-12-20</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          浅拷贝的原理与实现
-浅拷贝指的是一个新的对象对原始对象的属性值进行精确地拷贝。如果拷贝的是基本数据类型，拷贝的就是基本数据类型的值；如果拷贝的是引用数据类型，拷贝的就是内存地址。如果其中一个对象的引用内存地址发生改变，另一个对象也发生变化(指向同一地址)。
-基本数据类型：
-
-
-引用数据类型：   
-
-
-Object.assign()object.assign 是 ES6 中 object 的一个方法，该方法可以用于 JS 对象的合并。我们可以使用它来实现浅拷贝。
-1Object.assig...
-        </p>
-        <p class="article-more-link">
-          <a href="/2021/12/20/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/#more">Read More</a>
         </p>
       
     </div>
