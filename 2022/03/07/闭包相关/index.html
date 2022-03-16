@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>闭包相关 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="javaScript" />
+  
+  
+  
+  
+  <meta name="description" content="基于ECMAScript 5.1(ES5) 为参考。  词法环境（Lexical Env）1.什么是词法环境？ 词法环境是一种包含 标识符 &#x3D;&gt; 变量 隐射关系的一种结构。 2.为什么叫词法环境？ 因为它是和源程序的结构相对应的，在你写代码的时候这个环境就已经定了。词法环境和一下类型的代码结构相对应：  Global code:通俗点讲就是源文件代码，就是一个词法环境 函数代码 ：一个函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闭包相关">
+<meta property="og:url" content="https://sisiy-ung.github.io/2022/03/07/%E9%97%AD%E5%8C%85%E7%9B%B8%E5%85%B3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="基于ECMAScript 5.1(ES5) 为参考。  词法环境（Lexical Env）1.什么是词法环境？ 词法环境是一种包含 标识符 &#x3D;&gt; 变量 隐射关系的一种结构。 2.为什么叫词法环境？ 因为它是和源程序的结构相对应的，在你写代码的时候这个环境就已经定了。词法环境和一下类型的代码结构相对应：  Global code:通俗点讲就是源文件代码，就是一个词法环境 函数代码 ：一个函数">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/1677429807aea76d~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220307180115285.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220307180840254.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220307182817638.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167770ed6eb120b9~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16777272202fd490~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/1677732ebdff1086~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16786a0d75d237bb~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16786a715de5a26f~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/12/7/16789541424ce02a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16789531db8b243e~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16789541424ce02a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167895e30a9fc74e~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16789689f4693f36~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/12/8/1678972cb7406044~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/12/8/16789740629854b7~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/12/8/16789761e37c65a5~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/12/8/167897913a99d275~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16787db4ee153c41~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16787eb3eea0656d~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16787ed91c3de6b9~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16788da7f58ced87~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16788eda7ded5aee~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167890745ba61797~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/12/7/16789063cd71e649~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/1678902caca9e362~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167a2923abe35811~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167a29a34dd031a1~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167a2cc42da78052~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167a2d2b5930c0f4~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167a2e4a4a21b246~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167a2f4003443433~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="article:published_time" content="2022-03-07T09:34:00.000Z">
+<meta property="article:modified_time" content="2022-03-07T11:35:20.696Z">
+<meta property="article:author" content="Sisiy">
+<meta property="article:tag" content="javaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/1677429807aea76d~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("/css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("/css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("/css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-闭包相关" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      闭包相关
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2022/03/07/%E9%97%AD%E5%8C%85%E7%9B%B8%E5%85%B3/" class="article-date">
+	  <time datetime="2022-03-07T09:34:00.000Z" itemprop="datePublished">2022-03-07</time>
+	</a>
+
+      
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>基于ECMAScript 5.1(ES5) 为参考。</p>
+</blockquote>
+<h1 id="词法环境（Lexical-Env）"><a href="#词法环境（Lexical-Env）" class="headerlink" title="词法环境（Lexical Env）"></a>词法环境（Lexical Env）</h1><p>1.什么是词法环境？</p>
+<p>词法环境是一种包含 标识符 =&gt; 变量 隐射关系的一种结构。</p>
+<p>2.为什么叫词法环境？</p>
+<p>因为它是和源程序的结构相对应的，在你写代码的时候这个环境就已经定了。词法环境和一下类型的代码结构相对应：</p>
+<ul>
+<li>Global code:通俗点讲就是源文件代码，就是一个词法环境</li>
+<li>函数代码 ：一个函数块内自己是一个新的词法环境</li>
+<li>eval：进入eval调用的代码有时会创建一个新的词法环境</li>
+<li>with结构：一个with结构块内也是自己一个词法环境</li>
+<li>catch结构：一个catch结构快内也是自己一个词环境</li>
+</ul>
+<img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/1677429807aea76d~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="图1" style="zoom:67%;" />
+
+<p>3.什么时候创建词法环境？</p>
+<p>进入上述几种代码结构之前创建。</p>
+<p>4.组成部分？</p>
+<p>!<img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220307180115285.png" alt="image-20220307180115285"></p>
+<p>5.GlobalEnv(全局词法变量)</p>
+<p>在js中，global Lexical Env，也就是GlobalEnv，是最外层的词法环境，所以GlobalEnvironment的outer = null。它的EnvironmentRecord 是一个object environment records，且与全局对象global object（浏览器：window对象）关联。</p>
+<p>6.EnvRecord</p>
+<p>EnvRecord是真正登记变量信息的地方。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220307180840254.png" alt="image-20220307180840254"></p>
+<p>问题：</p>
+<p>什么时候登记，怎么登记？</p>
+<h1 id="运行上下文（Execution-Contexts）"><a href="#运行上下文（Execution-Contexts）" class="headerlink" title="运行上下文（Execution Contexts）"></a>运行上下文（Execution Contexts）</h1><p>1.在哪里登记？</p>
+<p>执行上下文。</p>
+<p>2.执行上下文的组成部分？</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220307182817638.png" alt="image-20220307182817638"></p>
+<p>3.什么时候创建执行上下文？</p>
+<p>运行这些代码时会创建执行上下文。</p>
+<ul>
+<li>global code：就是js整个“程序”，就是源代码文件中所有不在function体中的代码。</li>
+<li>function code：就是函数体中的代码，除了内嵌函数体中的代码以外</li>
+<li>eval code ： 就是传给内置eval函数的代码字符串</li>
+</ul>
+<p>4.如何管理执行上下文？</p>
+<p>把执行上下文放在执行栈（调用栈）里。调用栈顶部的执行上下文称为当前执行上下文。</p>
+<img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167770ed6eb120b9~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img" style="zoom:50%;" />
+
+<p>5.JS引擎开始执行你的代码时，会干哪些事情？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">4</span>;</span><br><span class="line">print();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><em><strong>初始化执行上下文</strong></em></li>
+</ol>
+<ul>
+<li>创建一个空的执行上下文</li>
+<li>创建全局词法环境</li>
+<li>设置执行上下文</li>
+</ul>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16777272202fd490~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<ol start="2">
+<li><em><strong>提升（Hosting）</strong></em></li>
+</ol>
+<p>基本运行环境初始化完，然后开始解析代码，找出var声明和函数声明，并登记到globalExecutionContext.VariableEnvironment：</p>
+<ul>
+<li>找到var a ，登记并初始化为undefined：</li>
+</ul>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/1677732ebdff1086~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<ul>
+<li>找到函数声明，创建函数对象fo，并登记到globalExecutionContext.VariableEnvironment： function print()</li>
+</ul>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16786a0d75d237bb~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<ol start="3">
+<li><em><strong>执行代码</strong></em></li>
+</ol>
+<ul>
+<li>执行console.log(a)：发现有对a的引用，就是要a进行解析</li>
+<li>执行var a = 4</li>
+</ul>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16786a715de5a26f~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<ul>
+<li>执行print()，发现print引用，就是要print进行解析</li>
+<li>执行完毕，退出当前运行上下文，把globalExecutionContext从调用栈上移除</li>
+</ul>
+<p>6.运行模型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">运行代码 = 运行上下文初始化 + var声明和函数声明扫描scan + 执行语句</span><br></pre></td></tr></table></figure>
+
+<h1 id="函数创建"><a href="#函数创建" class="headerlink" title="函数创建"></a>函数创建</h1><p>1.什么时候函数会被创建？</p>
+<p>对于使用不同方式定义的函数是不同的：</p>
+<h3 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h3><blockquote>
+<p>在扫描var声明和函数声明时就创建了。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function functionname ( parameters ) &#123;</span><br><span class="line">    functionbody</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和var不同的是，在登记阶段var声明初始化为undefined，而函数则会在内存创建一个函数对象，并初始化为该函数对象。所以函数“提升”，是直接可用的，不是undefined。</p>
+<h3 id="函数表达式（两种）"><a href="#函数表达式（两种）" class="headerlink" title="函数表达式（两种）"></a>函数表达式（两种）</h3><blockquote>
+<p>在“ 执行语句”阶段进行函数的创建的，所以它没有“提升的现象”。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//funcOne()//错误，</span><br><span class="line">//funcTwo()//错误</span><br><span class="line">var funcOne = function funname()&#123; //命名函数表达式：带有函数名称标识符的函数表达式</span><br><span class="line">    console.log(&#x27;One&#x27;);</span><br><span class="line">    console.log(funname)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var funcTwo = function () &#123; //匿名函数表达式</span><br><span class="line">    console.log(&#x27;Two&#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funcOne()// &#x27;One&#x27; &#x27;ƒ funname()&#123;console.log(&#x27;One&#x27;);console.log(funname)&#125;&#x27;</span><br><span class="line">funname()//Uncaught ReferenceError: funname is not defined</span><br></pre></td></tr></table></figure>
+
+<p>命名函数表达式的函数创建和函数声明的函数创建是有差异的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function funndec()&#123; </span><br><span class="line">    console.log(&#x27;Declarations&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var funcOne = function funname()&#123; //命名函数表达式</span><br><span class="line">    console.log(&#x27;Expressions&#x27;);</span><br><span class="line">    console.log(funname);//&quot;function funname()&#123;console.log(&#x27;Expressions&#x27;); console.log(funname);&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funndec()//Declarations</span><br><span class="line">funname()//error</span><br></pre></td></tr></table></figure>
+
+<p>对于函数声明，函数名可以在函数外调用，但对于命名函数表达式，它的名字函数外是不能使用（未定义），只能在函数内部使用。</p>
+<p>2.函数创建过程</p>
+<h3 id="函数声明-1"><a href="#函数声明-1" class="headerlink" title="函数声明"></a>函数声明</h3><ul>
+<li><p>运行上下文初始化</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/12/7/16789541424ce02a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+</li>
+<li><p>var声明和函数声明扫描scan</p>
+<ul>
+<li>解析代码，找到函数声明function lex() {console.log(‘lexical’)}</li>
+</ul>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16789531db8b243e~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+</li>
+<li><p>执行代码语句</p>
+<ul>
+<li>执行lex()：先解析lex，然后运行lex</li>
+</ul>
+</li>
+</ul>
+<h3 id="命名函数表达式"><a href="#命名函数表达式" class="headerlink" title="命名函数表达式"></a>命名函数表达式</h3><ul>
+<li><p>运行上下文初始化</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16789541424ce02a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+</li>
+<li><p>var声明和函数声明扫描scan</p>
+<ul>
+<li>找到函数声明function funndec() {console.log(‘Declarations’);}，执行登记到当前词法环境操作</li>
+<li>找到var声明：var funcOne，执行登记到当前词法环境操作</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167895e30a9fc74e~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<ul>
+<li>执行语句</li>
+</ul>
+<p>遇到赋值语句“funcOne = function funname(){…}”，运行函数表达式function funname(){…}</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16789689f4693f36~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>区别就是:</p>
+<p>函数声明的函数创建过程：使用的当前运行上下的词法环境；</p>
+<p>命名函数表达式创建函数过程：在当前运行上下的词法环境之前，有加了个新的词法环境，并通过outer和当前运行上下的词法环境链接起来。在自己的词法环境添加对函数命名的绑定funname，这样做的目的是为能够在函数表达式里面递归调用自己。</p>
+<h3 id="匿名函数表达式"><a href="#匿名函数表达式" class="headerlink" title="匿名函数表达式"></a>匿名函数表达式</h3><p>除了创建时机和函数声明不同（在语句执行的时候创建），创建过程和函数声明一样。</p>
+<h3 id="new-Function-arg1-arg2-…-argn-body-创建函数"><a href="#new-Function-arg1-arg2-…-argn-body-创建函数" class="headerlink" title="new Function(arg1,arg2,…,argn,body) 创建函数"></a>new Function(arg1,arg2,…,argn,body) 创建函数</h3><p>和上面函数表达式类似，不同地方在于，创建函数使用的scope是直接使用全局词法环境(glbal enviroment),而不管当前运行上下文，一律取全局词法环境(glbal enviroment)。</p>
+<p>3.[[scope]]属性</p>
+<p>存放着<code>函数创建时的词法环境</code>(Lexical Enviroment)。是函数”先天”的作用域，是静态的，是在<code>函数创建</code>是就被<code>保存</code>在函数体内。</p>
+<p>在不同的情况下函数创建时的[[scope]]属性什么样的：</p>
+<h3 id="函数声明-2"><a href="#函数声明-2" class="headerlink" title="函数声明"></a>函数声明</h3><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/12/8/1678972cb7406044~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<h3 id="函数表达式"><a href="#函数表达式" class="headerlink" title="函数表达式"></a>函数表达式</h3><h4 id="匿名函数表达式-1"><a href="#匿名函数表达式-1" class="headerlink" title="匿名函数表达式"></a>匿名函数表达式</h4><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/12/8/16789740629854b7~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<h4 id="命名函数表达式-1"><a href="#命名函数表达式-1" class="headerlink" title="命名函数表达式"></a>命名函数表达式</h4><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/12/8/16789761e37c65a5~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<h4 id="new-Function"><a href="#new-Function" class="headerlink" title="new Function"></a>new Function</h4><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/12/8/167897913a99d275~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<h1 id="函数的运行"><a href="#函数的运行" class="headerlink" title="函数的运行"></a>函数的运行</h1><p>1.函数的调用方式</p>
+<p>函数调用分为几类：</p>
+<ul>
+<li>作为函数调用：如 functionName();</li>
+<li>作为方法调用：如someObj.method();</li>
+<li>函数表达式调用：其实也是函数调用一种，(function(){})(),(function functionName(){})(); 这类是马上创建函数，马上调用，记得上一篇，我们提到函数表达式在执行语句的时候创建函数对象，()表示调用，所以这类也叫立即调用函数表达式(IIFE)</li>
+<li>作为构造函数调用：new functionName() 方式的调用</li>
+<li>functionName.call 和functionName.apply方式</li>
+</ul>
+<p>区别：</p>
+<p>在准备进入函数代码运行之前做的准备不一样。（带的this不一样）</p>
+<p>带undefined 进去的：函数调用functionName();和 立即调用函数表达式(function(){})(),(function functionName(){})();</p>
+<p>带对象进去的：</p>
+<ul>
+<li>方法调用：如someObj.method() : 带someObj进去</li>
+<li>new functionName() 方式的调用：创建一个新对象 newObject，带进去</li>
+<li>functionName.call和functionName.apply：把call和apply指定thisArg带进去</li>
+</ul>
+<p>2.函数调用过程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var a = 2;</span><br><span class="line"></span><br><span class="line">function foo() &#123;</span><br><span class="line">    console.log(a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function bar()&#123;</span><br><span class="line">    var a = 5;</span><br><span class="line">    foo()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bar()//2</span><br></pre></td></tr></table></figure>
+
+<h3 id="全局代码运行"><a href="#全局代码运行" class="headerlink" title="全局代码运行"></a>全局代码运行</h3><ul>
+<li><p>全局运行上下文初始化</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16787db4ee153c41~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+</li>
+<li><p>var声明和函数声明扫描scan</p>
+<ul>
+<li>扫描var 声明：“var a = 2;”</li>
+<li>扫描到函数声明：“function foo() {console.log(a)}”</li>
+<li>扫描到函数声明:”function bar(){ var a = 5;foo()}”</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16787eb3eea0656d~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<ul>
+<li><p>执行语句</p>
+<ul>
+<li>执行语句“a = 2;”</li>
+</ul>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16787ed91c3de6b9~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<ul>
+<li><p>执行调用语句：bar()</p>
+<p>bar()运行以后，上述讲到，会携带undefined作为thisArg，开始进入函数代码的运行。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="进入函数代码"><a href="#进入函数代码" class="headerlink" title="进入函数代码"></a>进入函数代码</h3><p>函数代码的执行和global的执行类似，也遵循我们的运行模型。</p>
+<ul>
+<li><p>初始化函数的运行上下文</p>
+<ul>
+<li><p>创建一个新的词法环境(Lexical Enviroment)：localEnviroment（使localEnviroment的outer为函数的’先天作用域’—-函数对象的[[scope]]的值。）</p>
+</li>
+<li><p>创建一个新的运行上下文(Execution Context): barExecutionContext（使得barExecutionContextt的LexicalEnvironment和VariableEnvironment 为localEnviroment。）</p>
+</li>
+<li><p>判断携带进来的thisArg的值：</p>
+<p>如果是strict，使barExecutionContext.ThisBinding = thisArg；</p>
+<p>不是strict</p>
+<ul>
+<li>如果thisArg是undefined，使barExecutionContext.ThisBinding = globalobject；</li>
+<li>如果thisArg不是undefined，使barExecutionContext.ThisBinding = toObject(thisArg);</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16788da7f58ced87~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.创建一个函数的词法环境</span><br><span class="line">2.虚线的意思：outer实际指向。</span><br><span class="line">outer指向函数创建时的Lexical Environment。（函数在全局执行上下文创建，Lexical Environment为全局词法环境Global Environment）</span><br><span class="line">即outer实际指向全局词法环境。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16788eda7ded5aee~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<ul>
+<li>var声明和函数声明扫描scan<ul>
+<li>扫描到var声明：“var a = 5;”<ul>
+<li>把a登记到当前的词法环境</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167890745ba61797~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<ul>
+<li><p>执行语句</p>
+<ul>
+<li>执行语句：a = 5</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/12/7/16789063cd71e649~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<ul>
+<li>执行函数调用foo()</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/1678902caca9e362~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>重点：函数运行时的词法环境与它被调用时的词法环境无关，而只与它被创建时的词法环境有关。</p>
+<h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><h1 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h1><p>在JavaScript语言中，有两种类型的作用域：</p>
+<ul>
+<li>全局作用域</li>
+<li>函数作用域</li>
+</ul>
+<p>这两种作用域是如何连接起来的呢？</p>
+<p>函数词法环境链接在一起，就是就是函数的作用域链。</p>
+<p>函数运行时的outer指向函数对象的[[scope]]，而创建对象的[[scope]]保存着函数创建时的词法环境。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var bestAvenger = &quot;global&quot;;</span><br><span class="line">function a() &#123;</span><br><span class="line">  var bestActor = &quot;in a&quot;;</span><br><span class="line">  console.log(bestAvenger); // &quot;global&quot;;</span><br><span class="line">    </span><br><span class="line">  function c() &#123;</span><br><span class="line">    var bestC = &quot;in c&quot;;</span><br><span class="line">    console.log(bestActor); // &quot;in a&quot;;</span><br><span class="line">    b();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  c();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function b() &#123;</span><br><span class="line">  console.log(bestC); //**not defined error**</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167a2923abe35811~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167a29a34dd031a1~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><p>函数执行完，函数执行上下文从运行栈弹出。此时，对上次运行的函数时创建的词法环境的访问链路就断了。无法再引用函数词法环境里的变量。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167a2cc42da78052~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>对这个词法变量的引用保存下来？</p>
+<p>函数创建时会把创建函数时候的运行上下文的词法环境保存在函数对象的[[scope]]中。因此，如果我们在函数运行的上下文创建一个函数，这个函数的[[scope]]就可以<code>保存父级函数运行的时的词法环境</code>了。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167a2d2b5930c0f4~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>构建闭包:</p>
+<p>全局上创建一个变量，并把内部函数返回给它，进而可以访问外部函数那些“失联的词法环境”。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167a2e4a4a21b246~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>闭包，可以让函数在运行完毕后，其运行时的上下文的词法环境仍然能被访问。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/167a2f4003443433~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>Sisiy</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2022/03/07/闭包相关/" target="_blank" title="闭包相关">https://Sisiy-ung.github.io/2022/03/07/闭包相关/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaScript/" rel="tag">javaScript</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/14/CSS%E5%B8%83%E5%B1%80%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          css布局面试题整理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/03/Flex%E5%B8%83%E5%B1%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Flex布局</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%8D%E6%B3%95%E7%8E%AF%E5%A2%83%EF%BC%88Lexical-Env%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">词法环境（Lexical Env）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%88Execution-Contexts%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">运行上下文（Execution Contexts）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA"><span class="nav-number">3.</span> <span class="nav-text">函数创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E"><span class="nav-number">3.0.1.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%88%E4%B8%A4%E7%A7%8D%EF%BC%89"><span class="nav-number">3.0.2.</span> <span class="nav-text">函数表达式（两种）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E-1"><span class="nav-number">3.0.3.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.0.4.</span> <span class="nav-text">命名函数表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.0.5.</span> <span class="nav-text">匿名函数表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new-Function-arg1-arg2-%E2%80%A6-argn-body-%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0"><span class="nav-number">3.0.6.</span> <span class="nav-text">new Function(arg1,arg2,…,argn,body) 创建函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E-2"><span class="nav-number">3.0.7.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.0.8.</span> <span class="nav-text">函数表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F-1"><span class="nav-number">3.0.8.1.</span> <span class="nav-text">匿名函数表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F-1"><span class="nav-number">3.0.8.2.</span> <span class="nav-text">命名函数表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#new-Function"><span class="nav-number">3.0.8.3.</span> <span class="nav-text">new Function</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%90%E8%A1%8C"><span class="nav-number">4.</span> <span class="nav-text">函数的运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C"><span class="nav-number">4.0.1.</span> <span class="nav-text">全局代码运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E5%87%BD%E6%95%B0%E4%BB%A3%E7%A0%81"><span class="nav-number">4.0.2.</span> <span class="nav-text">进入函数代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#this"><span class="nav-number">5.</span> <span class="nav-text">this</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="nav-number">6.</span> <span class="nav-text">作用域链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AD%E5%8C%85"><span class="nav-number">7.</span> <span class="nav-text">闭包</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2022 Hexo All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Hexo
+          </div>
+          <div class="panel-body">
+            Copyright © 2022 Sisiy All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

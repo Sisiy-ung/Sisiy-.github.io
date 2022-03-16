@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于树的一些题目 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="数据结构" />
+  
+  
+  
+  
+  <meta name="description" content="概念  节点的度：一个节点含有的子树的个数称为该节点的度； 树的度：一棵树中，最大的节点的度称为树的度； 叶节点或终端节点：度为零的节点； 非终端节点或分支节点：度不为零的节点； 父亲节点或父节点：若一个节点含有子节点，则这个节点称为其子节点的父节点； 孩子节点或子节点：一个节点含有的子树的根节点称为该节点的子节点； 兄弟节点：具有相同父节点的节点互称为兄弟节点； 节点的层次：从根开始定义起，根为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于树的一些题目">
+<meta property="og:url" content="https://sisiy-ung.github.io/2022/03/03/%E5%85%B3%E4%BA%8E%E6%A0%91%E7%9A%84%E4%B8%80%E4%BA%9B%E9%A2%98%E7%9B%AE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="概念  节点的度：一个节点含有的子树的个数称为该节点的度； 树的度：一棵树中，最大的节点的度称为树的度； 叶节点或终端节点：度为零的节点； 非终端节点或分支节点：度不为零的节点； 父亲节点或父节点：若一个节点含有子节点，则这个节点称为其子节点的父节点； 孩子节点或子节点：一个节点含有的子树的根节点称为该节点的子节点； 兄弟节点：具有相同父节点的节点互称为兄弟节点； 节点的层次：从根开始定义起，根为">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16255795c9012080~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/05f071184c814abfbc0e257d10bc5189~tplv-k3u1fbpfcp-watermark.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/b5adcb5313074abaa5756e07eaebe19d~tplv-k3u1fbpfcp-watermark.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/ee958582e1ac4f8385c5a93b55ecc00a~tplv-k3u1fbpfcp-watermark.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220303163348901.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220303172403479.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220303171756336.png">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220303171132523.png">
+<meta property="article:published_time" content="2022-03-03T08:25:43.000Z">
+<meta property="article:modified_time" content="2022-03-03T09:30:43.144Z">
+<meta property="article:author" content="Sisiy">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16255795c9012080~tplv-t2oaga2asx-watermark.awebp">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("/css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("/css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("/css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-关于树的一些题目" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      关于树的一些题目
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2022/03/03/%E5%85%B3%E4%BA%8E%E6%A0%91%E7%9A%84%E4%B8%80%E4%BA%9B%E9%A2%98%E7%9B%AE/" class="article-date">
+	  <time datetime="2022-03-03T08:25:43.000Z" itemprop="datePublished">2022-03-03</time>
+	</a>
+
+      
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><blockquote>
+<ol>
+<li><strong>节点的度</strong>：一个节点含有的子树的个数称为该节点的度；</li>
+<li><strong>树的度</strong>：一棵树中，最大的节点的度称为树的度；</li>
+<li><strong>叶节点</strong>或<strong>终端节点</strong>：度为零的节点；</li>
+<li><strong>非终端节点</strong>或<strong>分支节点</strong>：度不为零的节点；</li>
+<li><strong>父亲节点</strong>或<strong>父节点</strong>：若一个节点含有子节点，则这个节点称为其子节点的父节点；</li>
+<li><strong>孩子节点</strong>或<strong>子节点</strong>：一个节点含有的子树的根节点称为该节点的子节点；</li>
+<li><strong>兄弟节点</strong>：具有相同父节点的节点互称为兄弟节点；</li>
+<li>节点的<strong>层次</strong>：从根开始定义起，根为第1层，根的子节点为第2层，以此类推；</li>
+<li>树的<strong>高度</strong>或<strong>深度</strong>：树中节点的最大层次；</li>
+<li><strong>堂兄弟节点</strong>：父节点在同一层的节点互为堂兄弟；</li>
+<li><strong>节点的祖先</strong>：从根到该节点所经分支上的所有节点；</li>
+<li><strong>子孙</strong>：以某节点为根的子树中任一节点都称为该节点的子孙。</li>
+<li><strong>森林</strong>：由m（m&gt;=0）棵互不相交的树的集合称为森林；</li>
+</ol>
+</blockquote>
+<h1 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h1><p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/16255795c9012080~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<h1 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h1><ol>
+<li><p>先序遍历（根-&gt;左-&gt;右）</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/05f071184c814abfbc0e257d10bc5189~tplv-k3u1fbpfcp-watermark.awebp" alt="2.gif"></p>
+</li>
+<li><p>中序遍历（左-&gt;根-&gt;右）</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/b5adcb5313074abaa5756e07eaebe19d~tplv-k3u1fbpfcp-watermark.awebp" alt="5.gif"></p>
+</li>
+<li><p>后序遍历 （左-&gt;右-&gt;根）</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/ee958582e1ac4f8385c5a93b55ecc00a~tplv-k3u1fbpfcp-watermark.awebp" alt="7.gif"></p>
+</li>
+</ol>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><ol>
+<li>度</li>
+</ol>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220303163348901.png" alt="image-20220303163348901">       节点的度：一个节点含有的子树数目。</p>
+<p>树的度：最大的节点的度称为树的度。</p>
+<p>度 和 节点的关系：</p>
+<p><strong>节点数目=所有节点度数之和+1</strong></p>
+<ol start="2">
+<li><p>二叉树</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7065513748789723150#heading-3">二叉树</a> : 满足每个结点度不大于2</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220303172403479.png" alt="image-20220303172403479"></p>
+</li>
+<li><p>AVL</p>
+</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg2ODUxOTY1NA==&mid=2247484325&idx=1&sn=79559ac770d52fc60ebdcf3286a0fd05&chksm=ceaa582cf9ddd13a69f98fdae498eca95d1ca8cde75268d8c32f243855ed991d64459856762e&scene=21#wechat_redirect">二叉搜索树</a></p>
+<blockquote>
+<p>二叉搜索树的基本性质：</p>
+<ul>
+<li>若它的左子树不为空，则左子树上所有节点的值均小于根节点的值</li>
+<li>若它的右子树不为空，则右子树上所有节点的值均大于根节点的值</li>
+<li>它的左、右子树也分别为二叉搜索树</li>
+</ul>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6886103714818424846">AVL</a></p>
+<blockquote>
+<p>AVL树，也称平衡二叉搜索树，AVL是其发明者姓名简写。AVL树属于树的一种，而且它也是一棵二叉搜索树，不同的是他通过一定机制能保证二叉搜索树的平衡，<code>平衡的二叉搜索树的查询效率更高</code>。</p>
+<p>特点：</p>
+<ul>
+<li>本身首先是一棵二叉搜索树。</li>
+<li>带有平衡条件：每个结点的左右子树的高度之差的不大于1（平衡因子）。</li>
+</ul>
+</blockquote>
+<p>高度为h的AVL树的最少节点数</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220303171756336.png" alt="image-20220303171756336"></p>
+<p>高度为h的AVL树的最少节点数</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220303171132523.png" alt="image-20220303171132523"></p>
+<p>所有节点：2^n - 1</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>Sisiy</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2022/03/03/关于树的一些题目/" target="_blank" title="关于树的一些题目">https://Sisiy-ung.github.io/2022/03/03/关于树的一些题目/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/03/%E5%85%B3%E4%BA%8E%E5%A0%86%E7%9A%84%E4%B8%80%E4%BA%9B%E9%A2%98%E7%9B%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          关于堆的一些题目
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/03/%E3%80%90%E6%B2%A1%E6%9C%89%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E7%9A%84%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E3%80%91%E5%AE%9A%E5%88%B6%E5%8C%96%E8%BE%93%E5%87%BA%E6%95%B0%E7%BB%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【没有每日一题的每日一题】定制化输出数组</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%81%8D%E5%8E%86"><span class="nav-number">2.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86"><span class="nav-number">3.</span> <span class="nav-text">二叉树遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">4.</span> <span class="nav-text">题目</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2022 Hexo All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Hexo
+          </div>
+          <div class="panel-body">
+            Copyright © 2022 Sisiy All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

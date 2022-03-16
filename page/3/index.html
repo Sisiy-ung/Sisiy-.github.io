@@ -11,7 +11,7 @@
   
   <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://sisiy-ung.github.io/page/2/index.html">
+<meta property="og:url" content="https://sisiy-ung.github.io/page/3/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Sisiy">
@@ -265,7 +265,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-数组去重"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-CSS居中"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -273,7 +273,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/">数组去重</a>
+      <a class="article-title" href="/2021/12/19/CSS%E5%B1%85%E4%B8%AD/">CSS居中</a>
     </h1>
   
 
@@ -281,8 +281,8 @@
     
     <div class="article-meta">
       
-	<a href="/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/" class="article-date">
-	  <time datetime="2022-02-10T12:45:31.000Z" itemprop="datePublished">2022-02-10</time>
+	<a href="/2021/12/19/CSS%E5%B1%85%E4%B8%AD/" class="article-date">
+	  <time datetime="2021-12-18T18:40:30.000Z" itemprop="datePublished">2021-12-19</time>
 	</a>
 
       
@@ -293,15 +293,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          之前遇到过一个数组去重的面试题，整理一下。
-给定一个数组，去除重复项。
-1let arr =  [1,2,2,4,null,null,&#x27;3&#x27;,&#x27;abc&#x27;,3,5,4,1,2,2,4,null,null,&#x27;3&#x27;,&#x27;abc&#x27;,3,5,4]
-
-indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
-12345678let newArr = []arr.forEa...
+          
+水平居中行内元素
+其父元素设置text-align:center
+块级元素
+设置宽度+margin:0 auto（不设置宽度默认占满一行，这样居中没效果）
+浮动元素
+123456789div &#123;    height: 200px;    width: 200px;    background: gold;    float: left;    position: relative;    left: 50%;    transform: translateX(-50%)&#12...
         </p>
         <p class="article-more-link">
-          <a href="/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/#more">Read More</a>
+          <a href="/2021/12/19/CSS%E5%B1%85%E4%B8%AD/#more">Read More</a>
         </p>
       
     </div>
@@ -320,7 +321,7 @@ indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第�
 
 
   
-    <article id="post-虚拟dom和diff算法"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-盒子垂直居中的方法"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -328,7 +329,7 @@ indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第�
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/20/%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/">虚拟dom和diff算法</a>
+      <a class="article-title" href="/2021/12/19/%E7%9B%92%E5%AD%90%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95/">CSS居中</a>
     </h1>
   
 
@@ -336,8 +337,8 @@ indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第�
     
     <div class="article-meta">
       
-	<a href="/2022/01/20/%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/" class="article-date">
-	  <time datetime="2022-01-20T15:42:36.000Z" itemprop="datePublished">2022-01-20</time>
+	<a href="/2021/12/19/%E7%9B%92%E5%AD%90%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95/" class="article-date">
+	  <time datetime="2021-12-18T18:40:30.000Z" itemprop="datePublished">2021-12-19</time>
 	</a>
 
       
@@ -348,13 +349,16 @@ indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第�
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          **数据改变 **–&gt; 虚拟DOM(计算变更)  –&gt; 操作Dom –&gt; 视图更新
-什么是虚拟DOM？虚拟DOM是一个对象，一个用来表示真实DOM的对象。
-首先看一段html代码
-12345678&lt;div id=&quot;app&quot; class=&quot;container&quot;&gt;  &lt;h1&gt;虚拟DOM&lt;/h1&gt;  &lt;ul style=&quot;color: orange&quot;&gt;    &lt;li...
+          
+水平居中行内元素
+其父元素设置text-align:center
+块级元素
+设置宽度+margin:0 auto（不设置宽度默认占满一行，这样居中没效果）
+浮动元素
+123456789div &#123;    height: 200px;    width: 200px;    background: gold;    float: left;    position: relative;    left: 50%;    transform: translateX(-50%)&#12...
         </p>
         <p class="article-more-link">
-          <a href="/2022/01/20/%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/#more">Read More</a>
+          <a href="/2021/12/19/%E7%9B%92%E5%AD%90%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95/#more">Read More</a>
         </p>
       
     </div>
@@ -373,7 +377,7 @@ indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第�
 
 
   
-    <article id="post-Vue2之数组"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-扩展运算符"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -381,7 +385,7 @@ indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第�
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/19/Vue2%E4%B9%8B%E6%95%B0%E7%BB%84/">Vue2之数组</a>
+      <a class="article-title" href="/2021/12/19/%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6/">扩展运算符</a>
     </h1>
   
 
@@ -389,8 +393,8 @@ indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第�
     
     <div class="article-meta">
       
-	<a href="/2022/01/19/Vue2%E4%B9%8B%E6%95%B0%E7%BB%84/" class="article-date">
-	  <time datetime="2022-01-19T06:28:25.000Z" itemprop="datePublished">2022-01-19</time>
+	<a href="/2021/12/19/%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6/" class="article-date">
+	  <time datetime="2021-12-18T17:32:51.000Z" itemprop="datePublished">2021-12-19</time>
 	</a>
 
       
@@ -401,20 +405,18 @@ indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第�
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          前言数组的索引和数组长度发生改变，Vue2检测不到变化。
-Vue官方文档
+          
+扩展运算符（spread）是三个点（...）。
 
-由于 JavaScript 的限制，Vue 不能检测数组和对象的变化。
+对象扩展运算符对象的扩展运算符用于取出参数对象中的所有可遍历属性，拷贝到当前对象之中。
+12let bar = &#123;a: 1, b: 2&#125;let baz = &#123;...bar&#125;  //&#123;a: 1, b: 2&#125;
 
-Vue 不能检测以下数组的变动：
-
-当你利用索引直接设置一个数组项时，例如：vm.items[indexOfItem] = newValue
-当你修改数组的长度时，例如：vm.items.length = newLength
-
-Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，是Object.de...
+**扩展运算符对对象实例的拷贝属于浅拷贝**。
+数组扩展运算符数组的扩展运算符可以将一个数组转化为用逗号分割的参数序列，且每次只能展开一层数组。
+123456function...
         </p>
         <p class="article-more-link">
-          <a href="/2022/01/19/Vue2%E4%B9%8B%E6%95%B0%E7%BB%84/#more">Read More</a>
+          <a href="/2021/12/19/%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6/#more">Read More</a>
         </p>
       
     </div>
@@ -433,7 +435,7 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
 
 
   
-    <article id="post-HTTPS"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-原型与原型链"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -441,7 +443,7 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/11/HTTPS/">HTTPS</a>
+      <a class="article-title" href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">原型与原型链</a>
     </h1>
   
 
@@ -449,8 +451,8 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
     
     <div class="article-meta">
       
-	<a href="/2022/01/11/HTTPS/" class="article-date">
-	  <time datetime="2022-01-11T08:57:49.000Z" itemprop="datePublished">2022-01-11</time>
+	<a href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" class="article-date">
+	  <time datetime="2021-12-18T08:51:55.000Z" itemprop="datePublished">2021-12-18</time>
 	</a>
 
       
@@ -461,15 +463,17 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          对称加密使用相同密钥进行加解密。适用于大量数据的加密场景算法公开，安全性取决于秘钥大小，但秘钥越大效率越低，需要权衡在安全和效率中做权衡。
-特点算法本身安全，但使用场景不够安全，因为解密和加密都是同一个秘钥。但对称加密的速度快很多。
+          原型prototype和__proto__是什么？prototype:显式原型
+__proto__:隐式原型
+新对象被创建的时候，除了各自的属性以外，还有一个隐式的__proto__属性被创建。这个__proto__是一个Object。
 
-常见算法DES、3DES、AES、Blowfish、IDEA、RC5、RC6。
-非对称加密使用 匹配的一对密钥 来分别进行加密和解密，这两个秘钥是公开密钥（public key，简称公钥）和私有密钥（private key，简称私钥）。
-注意：公钥加密的数据...
+
+关系构造函数的prototype和其实例的__proto__是指向同一个地方的，这个地方就叫做原型对象。
+Person.prototype === person1.__propto__
+1234567function Person(name, age)...
         </p>
         <p class="article-more-link">
-          <a href="/2022/01/11/HTTPS/#more">Read More</a>
+          <a href="/2021/12/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/#more">Read More</a>
         </p>
       
     </div>
@@ -488,7 +492,7 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
 
 
   
-    <article id="post-Vue响应式原理"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-数组的遍历方法"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -496,7 +500,7 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/08/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">Vue响应式原理</a>
+      <a class="article-title" href="/2021/12/17/%E6%95%B0%E7%BB%84%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/">数组的遍历方法</a>
     </h1>
   
 
@@ -504,8 +508,8 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
     
     <div class="article-meta">
       
-	<a href="/2022/01/08/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" class="article-date">
-	  <time datetime="2022-01-08T11:57:39.000Z" itemprop="datePublished">2022-01-08</time>
+	<a href="/2021/12/17/%E6%95%B0%E7%BB%84%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/" class="article-date">
+	  <time datetime="2021-12-17T07:22:27.000Z" itemprop="datePublished">2021-12-17</time>
 	</a>
 
       
@@ -516,11 +520,58 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          一个new Vue的过程:
-1234567891011121314151617181920212223242526272829303132333435363738// 1.Vue.proptotype._init(option)// 2.initState(vm)// 3.observe(vm.data)// 4.new Observer(data)// 5.调用walk方法，遍历data中的每一个属性，监听数据的变化function walk(obj)&#123;  const keys...
+          
+
+
+方法
+是否改变原数组
+特点
+
+
+
+forEach()
+不改变
+没有返回值。
+
+
+map()
+不改变
+返回一个数组。
+
+
+filter()
+不改变
+过滤数组。
+
+
+for…of
+不改
+返回一个数组。
+
+
+every（）
+不改变
+返回一个布尔值。只要有一个false,就返回false。
+
+
+some()
+不改变
+返回一个布尔值。只要有一个true,就返回true。
+
+
+find()
+不改变
+返回第一个符合条件的值。
+
+
+findIndex()
+不改变
+返回第一个符合条件的值的索引值。
+
+...
         </p>
         <p class="article-more-link">
-          <a href="/2022/01/08/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/#more">Read More</a>
+          <a href="/2021/12/17/%E6%95%B0%E7%BB%84%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/#more">Read More</a>
         </p>
       
     </div>
@@ -539,7 +590,7 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
 
 
   
-    <article id="post-对称加密与非对称加密"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-方法调用、computed和watch的区别"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -547,7 +598,7 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/06/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/">对称加密与非对称加密</a>
+      <a class="article-title" href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/">方法调用、computed和watch的区别</a>
     </h1>
   
 
@@ -555,8 +606,8 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
     
     <div class="article-meta">
       
-	<a href="/2022/01/06/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/" class="article-date">
-	  <time datetime="2022-01-05T17:58:15.000Z" itemprop="datePublished">2022-01-06</time>
+	<a href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/" class="article-date">
+	  <time datetime="2021-06-23T15:12:00.000Z" itemprop="datePublished">2021-06-23</time>
 	</a>
 
       
@@ -567,11 +618,15 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          对称加密对称密钥算法（英语：Symmetric-key algorithm）又称为对称加密、私钥加密、共享密钥加密，是密码学中的一类加密算法。这类算法在加密和解密时使用相同的密钥，或是使用两个可以简单地相互推算的密钥。事实上，这组密钥成为在两个或多个成员间的共同秘密，以便维持专属的通信联系。
-为什么叫对称加密呢，你可以这么理解，一方通过密钥将信息加密后，把密文传给另一方，另一方通过这个相同的密钥将密文解密，转换成可以理解的明文。他们之间的关系如下：明文 &lt;-&gt; 密钥 &lt;-...
+          方法：页面数据每次重新渲染都会重新执行。不希望有缓存的时候可以使用。性能消耗大。
+computed:是计算属性，依赖其他属性计算值。computed的值有缓存，只有当计算值变化才会返回内容。
+watch:监听到值得变化就会执行回调，在回调中可以进行一些逻辑操作。
+方法 VS computedcomputed可以实现的，一般采用methods方法调用也可以实现。
+computed的值是有缓存的。多次调用的时候方法会执行多次，但计算属性不会执行多次，除非依赖值改变。
+1234567&lt;di...
         </p>
         <p class="article-more-link">
-          <a href="/2022/01/06/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/#more">Read More</a>
+          <a href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/#more">Read More</a>
         </p>
       
     </div>
@@ -590,7 +645,7 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
 
 
   
-    <article id="post-清除浮动"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-hello-world"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -598,7 +653,7 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2021/12/21/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/">清除浮动</a>
+      <a class="article-title" href="/2021/06/09/hello-world/">Hello World</a>
     </h1>
   
 
@@ -606,8 +661,8 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
     
     <div class="article-meta">
       
-	<a href="/2021/12/21/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/" class="article-date">
-	  <time datetime="2021-12-21T10:45:40.000Z" itemprop="datePublished">2021-12-21</time>
+	<a href="/2021/06/09/hello-world/" class="article-date">
+	  <time datetime="2021-06-09T02:53:41.526Z" itemprop="datePublished">2021-06-09</time>
 	</a>
 
       
@@ -618,231 +673,11 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-           为什么要清除浮动？
-因为浮动的盒子脱离文档流，如果包含块没有高度，或者高度自适应，此时，浮动元素的高度不会被计算进去，包含块撑不起来，形成塌陷的状态。
-clear最后一个浮动元素之后添加一个空的块级元素，并添加clear:both样式。
-BFC创建BFC包含住浮动的子元素。
-overflow在包含块元素的样式添加overflow:hidden或者overflow:auto。
-float在包含块元素的样式添加float属性，但是这种方式会影响布局，十分局限。
-伪元素（最推荐）1234567...
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Hello AoyamaCreate a new post1$ hexo new &quot;My Ne...
         </p>
         <p class="article-more-link">
-          <a href="/2021/12/21/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-深拷贝与浅拷贝"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2021/12/20/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">深拷贝与浅拷贝</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2021/12/20/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" class="article-date">
-	  <time datetime="2021-12-19T17:38:05.000Z" itemprop="datePublished">2021-12-20</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          浅拷贝的原理与实现
-浅拷贝指的是一个新的对象对原始对象的属性值进行精确地拷贝。如果拷贝的是基本数据类型，拷贝的就是基本数据类型的值；如果拷贝的是引用数据类型，拷贝的就是内存地址。如果其中一个对象的引用内存地址发生改变，另一个对象也发生变化(指向同一地址)。
-基本数据类型：
-
-
-引用数据类型：   
-
-
-Object.assign()object.assign 是 ES6 中 object 的一个方法，该方法可以用于 JS 对象的合并。我们可以使用它来实现浅拷贝。
-1Object.assig...
-        </p>
-        <p class="article-more-link">
-          <a href="/2021/12/20/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-cookie、localStorage、sessionStorage的区别"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2021/12/20/cookie%E3%80%81localStorage%E3%80%81sessionStorage%E7%9A%84%E5%8C%BA%E5%88%AB/">cookie、localStorage、sessionStorage的区别</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2021/12/20/cookie%E3%80%81localStorage%E3%80%81sessionStorage%E7%9A%84%E5%8C%BA%E5%88%AB/" class="article-date">
-	  <time datetime="2021-12-19T17:13:52.000Z" itemprop="datePublished">2021-12-20</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          浏览器端常用的存储技术： cookie 、localStorage 、sessionStorage。（都存在跨域限制）
-
-
-
-
-cookie
-localStorage
-sessionStorage
-
-
-
-大小
-4kb
-5M+
-5M+
-
-
-兼容
-H4/H5
-H5
-H5
-
-
-访问
-任何窗口
-任何窗口
-同一窗口
-
-
-有效期
-手动设置
-无（存储持久数据，除非主动删除）
-窗口关闭自动删除
-
-
-存储位置
-浏览器与服务器
-浏览器
-浏览器
-
-
-与请求一起发送
-是
-否
-否
-
-
-语法
-复杂
-简易
-简易
-
-
-c...
-        </p>
-        <p class="article-more-link">
-          <a href="/2021/12/20/cookie%E3%80%81localStorage%E3%80%81sessionStorage%E7%9A%84%E5%8C%BA%E5%88%AB/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-跨域的解决方法"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">跨域的解决方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-date">
-	  <time datetime="2021-12-19T09:54:48.000Z" itemprop="datePublished">2021-12-19</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          跨域问题的来源是浏览器为了请求安全而引入的基于同源策略的安全特性。当页面和请求的协议、主机名、端口不同时，浏览器判定两者不同源，即为跨域请求。
-跨域常见的解决方案有CORS、JSONP、反向代理（Reverse Proxy）。
-server.js
-12345678910111213var express = require(&#x27;express&#x27;)// 90端口的服务 将目前目录作为http请求var app1 = express()app1.use(express.sta...
-        </p>
-        <p class="article-more-link">
-          <a href="/2021/12/19/%E8%B7%A8%E5%9F%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/#more">Read More</a>
+          <a href="/2021/06/09/hello-world/#more">Read More</a>
         </p>
       
     </div>
@@ -865,7 +700,7 @@ server.js
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
   </nav>
 
 </section>
