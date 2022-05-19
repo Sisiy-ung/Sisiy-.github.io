@@ -11,24 +11,25 @@
   
   
   
-  <meta name="description" content="同步、异步、推迟的区别想要知道async和defer的区别，先了解一下同步、异步、推迟三者的区别。 ![GIF 2022-3-15 17-12-19](..&#x2F;..&#x2F;..&#x2F;gif&#x2F;GIF 2022-3-15 17-12-19.gif) 同步：步行街的宽度只能容纳一个人，前面的人不走快一点，后面的人想走到前面也没有办法。这样就会出现阻塞的情况。 异步：为了解决同步阻塞的情况，我们将一条步行街改为两条步">
+  <meta name="description" content="同步、异步、推迟的区别想要知道async和defer的区别，先了解一下同步、异步、推迟三者的区别。  同步：步行街的宽度只能容纳一个人，前面的人不走快一点，后面的人想走到前面也没有办法。这样就会出现阻塞的情况。 异步：为了解决同步阻塞的情况，我们将一条步行街改为两条步行街。两条步行街的出口是一样的。这样后面的人想走的快一点前面的人也拦不住他了。但是由于只有一个出口，“异步”会出现谁先出出口的问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="async和defer">
 <meta property="og:url" content="https://sisiy-ung.github.io/2022/03/15/async%E5%92%8Cdefer/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="同步、异步、推迟的区别想要知道async和defer的区别，先了解一下同步、异步、推迟三者的区别。 ![GIF 2022-3-15 17-12-19](..&#x2F;..&#x2F;..&#x2F;gif&#x2F;GIF 2022-3-15 17-12-19.gif) 同步：步行街的宽度只能容纳一个人，前面的人不走快一点，后面的人想走到前面也没有办法。这样就会出现阻塞的情况。 异步：为了解决同步阻塞的情况，我们将一条步行街改为两条步">
+<meta property="og:description" content="同步、异步、推迟的区别想要知道async和defer的区别，先了解一下同步、异步、推迟三者的区别。  同步：步行街的宽度只能容纳一个人，前面的人不走快一点，后面的人想走到前面也没有办法。这样就会出现阻塞的情况。 异步：为了解决同步阻塞的情况，我们将一条步行街改为两条步行街。两条步行街的出口是一样的。这样后面的人想走的快一点前面的人也拦不住他了。但是由于只有一个出口，“异步”会出现谁先出出口的问题。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/202203311846751.gif">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/caf2f618530046658ab8e3b4a8699589~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/021b5dbeddb64db0a7099dc0a4dd076d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/4e5a89a4a1fe49ed9d5acaf25ef9aadd~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/b8313e4787f04c79838fec9961bda0fb~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220315175120369.png">
 <meta property="article:published_time" content="2022-03-15T08:56:33.000Z">
-<meta property="article:modified_time" content="2022-03-15T10:01:53.846Z">
+<meta property="article:modified_time" content="2022-04-01T11:18:43.466Z">
 <meta property="article:author" content="Sisiy">
 <meta property="article:tag" content="javaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/caf2f618530046658ab8e3b4a8699589~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/202203311846751.gif">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -214,7 +215,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="同步、异步、推迟的区别"><a href="#同步、异步、推迟的区别" class="headerlink" title="同步、异步、推迟的区别"></a>同步、异步、推迟的区别</h1><p>想要知道<code>async</code>和<code>defer</code>的区别，先了解一下同步、异步、推迟三者的区别。</p>
-<p>![GIF 2022-3-15 17-12-19](../../../gif/GIF 2022-3-15 17-12-19.gif)</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/202203311846751.gif" alt="GIF 2022-3-15cc "></p>
 <p>同步：步行街的宽度只能容纳一个人，前面的人不走快一点，后面的人想走到前面也没有办法。这样就会出现<code>阻塞</code>的情况。</p>
 <p>异步：为了解决同步<code>阻塞</code>的情况，我们将一条步行街改为两条步行街。两条步行街的出口是一样的。这样后面的人想走的快一点前面的人也拦不住他了。但是由于只有一个出口，“异步”会出现<code>谁先出出口</code>的问题。</p>
 <p>推迟：我们为“异步“增加一个条件，就是后面的人不管走得快还是慢，但是必须等到<code>前面的人出去了后面的人才能出去</code>。</p>
@@ -226,7 +227,7 @@
 <p>不确定性：<code>async</code>下的脚本具体在什么时候<code>执行</code>是<code>不清楚</code>的。有时页面还没有加载完就执行了，也有可能页面加载后才执行。所以有可能会阻塞解析<code>HTML</code>。</p>
 <p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/021b5dbeddb64db0a7099dc0a4dd076d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="页面还没有加载完就执行了"></p>
 <p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/4e5a89a4a1fe49ed9d5acaf25ef9aadd~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp" alt="页面加载后才执行"></p>
-<p>因为这种不确定性，脚本是需要修改<code>DOM</code>的，就有可能会出错了。</p>
+<p>因为这种不确定性，如果脚本是需要修改<code>DOM</code>的，就有可能会出错了。</p>
 <p><code>执行顺序</code>：而且如果存在多个 <code>async</code> 的时候，它们之间的<code>执行顺序</code>也不确定，完全依赖于网络传输结果，谁先到执行谁。</p>
 <p><code>async</code>适合一些第三方脚本。</p>
 <h1 id="defer-script（推迟）"><a href="#defer-script（推迟）" class="headerlink" title="defer script（推迟）"></a>defer script（推迟）</h1><p><strong>告诉浏览器立即下载，但延迟执行。</strong></p>
