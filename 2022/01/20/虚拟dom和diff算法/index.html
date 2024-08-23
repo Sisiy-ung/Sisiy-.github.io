@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="**数据改变 **–&gt; 虚拟DOM(计算变更)  –&gt; 操作Dom –&gt; 视图更新 什么是虚拟DOM？虚拟DOM是一个对象，一个用来表示真实DOM的对象。 首先看一段html代码 12345678&lt;div id&#x3D;&quot;app&quot; class&#x3D;&quot;container&quot;&gt;  &lt;h1&gt;虚拟DOM&lt;&#x2F;h1&gt;  &lt;u">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212195023249.png">
+<meta property="og:image" content="https://github.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212195023249.png">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212211654815.png">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212183502328.png">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212184226792.png">
@@ -29,11 +29,11 @@
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191521416.png">
 <meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212193529243.png">
 <meta property="article:published_time" content="2022-01-20T15:42:36.000Z">
-<meta property="article:modified_time" content="2022-02-12T13:18:31.318Z">
+<meta property="article:modified_time" content="2024-08-23T16:14:56.123Z">
 <meta property="article:author" content="Sisiy">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212195023249.png">
+<meta name="twitter:image" content="https://github.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212195023249.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -229,7 +229,7 @@
 <p><strong>虚拟DOM算法操作真实DOM，性能高于直接操作真实DOM。</strong></p>
 <h1 id="什么是diff算法"><a href="#什么是diff算法" class="headerlink" title="什么是diff算法?"></a>什么是diff算法?</h1><p>用虚拟DOM表示真实DOM，计算出最小的变化，根据变化去更新真实DOM。</p>
 <p><strong>diff算法是一种对比算法。</strong>对比<code>旧虚拟DOM和新虚拟DOM</code>,对比出哪个是<code>虚拟节点</code>更改了，从而<code>找出</code>这个<code>虚拟节点</code>，<code>更新</code>这个虚拟节点对应的<code>真实节点</code>，实现<code>精准</code>更新真实DOM，进而提高效率。</p>
-<h1 id="diff算法原理"><a href="#diff算法原理" class="headerlink" title="diff算法原理"></a>diff算法原理</h1><h2 id="diff同层对比"><a href="#diff同层对比" class="headerlink" title="diff同层对比"></a>diff同层对比</h2><p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212195023249.png" alt="image-20220212195023249"></p>
+<h1 id="diff算法原理"><a href="#diff算法原理" class="headerlink" title="diff算法原理"></a>diff算法原理</h1><h2 id="diff同层对比"><a href="#diff同层对比" class="headerlink" title="diff同层对比"></a>diff同层对比</h2><p><img src="https://github.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212195023249.png" alt="image-20220212195023249"></p>
 <h2 id="diff对比流程"><a href="#diff对比流程" class="headerlink" title="diff对比流程"></a>diff对比流程</h2><p>当数据改变时，会触发<code>setter</code>，并且通过<code>Dep.notify</code>去通知所有<code>订阅者Watcher</code>，订阅者们就会调用<code>patch方法</code>，给真实DOM打补丁，更新相应的视图。</p>
 <p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212211654815.png" alt="image-20220212211654815"></p>
 <h2 id="patch函数"><a href="#patch函数" class="headerlink" title="patch函数"></a>patch函数</h2><p>作用：对比当前同层的虚拟节点<code>是否为同一类型的标签</code>。</p>
@@ -425,7 +425,7 @@ var a = new Donate({
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2013 - 2022 Hexo All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2024 Hexo All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -587,7 +587,7 @@ var a = new Donate({
             Hexo
           </div>
           <div class="panel-body">
-            Copyright © 2022 Sisiy All Rights Reserved.
+            Copyright © 2024 Sisiy All Rights Reserved.
           </div>
         </div>
       </div>

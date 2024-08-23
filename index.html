@@ -265,6 +265,157 @@
         
           <section id="main" style="float:none;">
   
+    <article id="post-230220"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+    <div class="article-meta">
+      
+	<a href="/2023/02/20/230220/" class="article-date">
+	  <time datetime="2023-02-19T17:53:45.968Z" itemprop="datePublished">2023-02-20</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          const proxy  = new proxy(target, handler)
+target:  拦截对象
+handler: 拦截行为
+hander.get(target, propKey, ?receiver)
+
+target目标对象
+propKey属性名
+receiver Proxy实例本身
+
+可撤销的proxy
+const &#123;proxy, revoke&#125; = Proxy.revocable(target, handler)
+ 为什么用proxy重构
+回顾Obj...
+        </p>
+        <p class="article-more-link">
+          <a href="/2023/02/20/230220/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-vue3"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+    <div class="article-meta">
+      
+	<a href="/2023/02/18/vue3/" class="article-date">
+	  <time datetime="2023-02-17T17:27:16.352Z" itemprop="datePublished">2023-02-18</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          vue3对比vue2
+生命周期
+
+
+
+vue2
+vue3
+
+
+
+
+
+beforeCreate
+setup
+
+
+
+
+created
+
+
+
+
+
+beforeMount
+onBeforeMount
+
+
+
+
+mounted
+onMounted
+
+
+
+
+beforeUpdate
+onBeforeUpdate
+
+
+
+
+updated
+onUpdated
+
+
+
+
+beforeDestory
+onBeforeUnmount
+
+
+
+
+destroyed
+onUnmounted
+
+
+
+如何实现响应式vue2响...
+        </p>
+        <p class="article-more-link">
+          <a href="/2023/02/18/vue3/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
     <article id="post-async和defer"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
@@ -727,117 +878,6 @@ i 结点的左子结点 2...
 
 
   
-    <article id="post-Vue组件通信"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/02/25/Vue%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/">Vue组件通信</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2022/02/25/Vue%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/" class="article-date">
-	  <time datetime="2022-02-25T10:53:59.000Z" itemprop="datePublished">2022-02-25</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          
-父子组件props / $emit父组件通过props的方式向子组件传递数据，而通过$emit 子组件可以向父组件通信。
-1.父组件向子组件传值步骤：
-
-在父组件中引入子组件
-注册子组件
-父组件页面中，子组件标签上动态绑定
-在子组件中，使用props接收父组件传递过来的值
-
-在子组件my-list中接收父组件的数据list。
-1234567891011121314151617181920212223242526&lt;!-- 父组件 --&gt;&lt;body&gt;    &lt;d...
-        </p>
-        <p class="article-more-link">
-          <a href="/2022/02/25/Vue%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-promise"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/02/16/promise/">Promise</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2022/02/16/promise/" class="article-date">
-	  <time datetime="2022-02-16T10:01:16.000Z" itemprop="datePublished">2022-02-16</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          1. 回调地狱需求：现在有三个文件1.txt,2.txt,3.txt，内容分别是“冬”，“奥”，“会”。使用fs.readFile（异步）顺序读取三个文件里面的内容，再把内容异步写进data.txt中。
-12345678910111213141516171819202122232425262728293031323334let filePath1 = path.join(__dirname, &#x27;files&#x27;, &#x27;1.txt&#x27;)let filePath...
-        </p>
-        <p class="article-more-link">
-          <a href="/2022/02/16/promise/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
 
 
   <nav id="page-nav">
@@ -857,7 +897,7 @@ i 结点的左子结点 2...
   <div class="container">
       	<div class="row">
 	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
-	      <p id="copyRightEn">Copyright &copy; 2013 - 2022 Hexo All Rights Reserved.</p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2024 Hexo All Rights Reserved.</p>
 	      
 	      
     		<p class="busuanzi_uv">
@@ -1019,7 +1059,7 @@ i 结点的左子结点 2...
             Hexo
           </div>
           <div class="panel-body">
-            Copyright © 2022 Sisiy All Rights Reserved.
+            Copyright © 2024 Sisiy All Rights Reserved.
           </div>
         </div>
       </div>

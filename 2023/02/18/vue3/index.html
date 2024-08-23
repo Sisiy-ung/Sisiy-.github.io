@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="vue3对比vue2 生命周期    vue2 vue3      beforeCreate setup     created      beforeMount onBeforeMount     mounted onMounted     beforeUpdate onBeforeUpdate     updated onUpdated     beforeDestory onBeforeUn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://sisiy-ung.github.io/2023/02/18/vue3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="vue3对比vue2 生命周期    vue2 vue3      beforeCreate setup     created      beforeMount onBeforeMount     mounted onMounted     beforeUpdate onBeforeUpdate     updated onUpdated     beforeDestory onBeforeUn">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://sisiung-1310988733.cos.ap-guangzhou.myqcloud.com/blog/202302180020557.webp">
+<meta property="article:published_time" content="2023-02-17T17:27:16.352Z">
+<meta property="article:modified_time" content="2023-02-19T18:21:15.993Z">
+<meta property="article:author" content="Sisiy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sisiung-1310988733.cos.ap-guangzhou.myqcloud.com/blog/202302180020557.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("/css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("/css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("/css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+  
+<script src="/js/bootstrap.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    
+<link rel="stylesheet" href="/css/dialog.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">Home</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">Archives</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">Categories</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">Tags</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">About</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-vue3" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+    <div class="article-meta">
+      
+	<a href="/2023/02/18/vue3/" class="article-date">
+	  <time datetime="2023-02-17T17:27:16.352Z" itemprop="datePublished">2023-02-18</time>
+	</a>
+
+      
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		PV:<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>vue3对比vue2</p>
+<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><table>
+<thead>
+<tr>
+<th></th>
+<th>vue2</th>
+<th>vue3</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>beforeCreate</td>
+<td>setup</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>created</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>beforeMount</td>
+<td>onBeforeMount</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>mounted</td>
+<td>onMounted</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>beforeUpdate</td>
+<td>onBeforeUpdate</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>updated</td>
+<td>onUpdated</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>beforeDestory</td>
+<td>onBeforeUnmount</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>destroyed</td>
+<td>onUnmounted</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="如何实现响应式"><a href="#如何实现响应式" class="headerlink" title="如何实现响应式"></a>如何实现响应式</h1><p>vue2响应式缺点</p>
+<ol>
+<li>无法对数组的索引</li>
+<li>对对象： 无法监听新增属性、删除属性</li>
+<li>深度监听对象需要一次性递归</li>
+</ol>
+<p>vue3 改善</p>
+<ol>
+<li>可以监听数组变化</li>
+<li>可见听新增/删除属性</li>
+<li>深度监听，性能更好（监听到哪一层才触发响应式get）</li>
+</ol>
+<h1 id="如何理解CompositionAPI和OptionAPI"><a href="#如何理解CompositionAPI和OptionAPI" class="headerlink" title="如何理解CompositionAPI和OptionAPI"></a>如何理解CompositionAPI和OptionAPI</h1><p>CA:</p>
+<p>更好的代码组织</p>
+<p>更好的逻辑复用</p>
+<ul>
+<li>抽离逻辑代码到一个函数</li>
+<li>函数命名约定为useXx格式</li>
+<li>在setup中 引用useXx函数</li>
+</ul>
+<p>更好的类型推导 </p>
+<h1 id="Vue3新特性"><a href="#Vue3新特性" class="headerlink" title="Vue3新特性"></a>Vue3新特性</h1><h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><h1 id="ref全家桶"><a href="#ref全家桶" class="headerlink" title="ref全家桶"></a>ref全家桶</h1><p>isRef</p>
+<p>判断是不是一个ref对象</p>
+<p>shallowRef</p>
+<p>创建一个跟踪自身.value的ref，但是不会是其值也变为响应式的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;button @click=&quot;changeMsg&quot;&gt;change&lt;/button&gt;</span><br><span class="line">    &lt;div&gt;&#123;&#123; message &#125;&#125;&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Ref, shallowRef &#125; from &#x27;vue&#x27;</span><br><span class="line">type Obj = &#123;</span><br><span class="line">  name: string</span><br><span class="line">&#125;</span><br><span class="line">let message: Ref&lt;Obj&gt; = shallowRef(&#123;</span><br><span class="line">  name: &quot;小满&quot;</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">const changeMsg = () =&gt; &#123;</span><br><span class="line">  message.value.name = &#x27;大满&#x27;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>但是这样子可以被监听到修改value</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Ref, shallowRef &#125; from &#x27;vue&#x27;</span><br><span class="line">type Obj = &#123;</span><br><span class="line">  name: string</span><br><span class="line">&#125;</span><br><span class="line">let message: Ref&lt;Obj&gt; = shallowRef(&#123;</span><br><span class="line">  name: &quot;小满&quot;</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">const changeMsg = () =&gt; &#123;</span><br><span class="line">  message.value = &#123; name: &quot;大满&quot; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>triggerRef</p>
+<p>强制更新页面Dom 改变值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;button @click=&quot;changeMsg&quot;&gt;change&lt;/button&gt;</span><br><span class="line">    &lt;div&gt;&#123;&#123; message &#125;&#125;&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Ref, shallowRef,triggerRef &#125; from &#x27;vue&#x27;</span><br><span class="line">type Obj = &#123;</span><br><span class="line">  name: string</span><br><span class="line">&#125;</span><br><span class="line">let message: Ref&lt;Obj&gt; = shallowRef(&#123;</span><br><span class="line">  name: &quot;小满&quot;</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line">const changeMsg = () =&gt; &#123;</span><br><span class="line">  message.value.name = &#x27;大满&#x27;</span><br><span class="line"> triggerRef(message)</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt; </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>customRef</p>
+<p>自定义ref， 它是一个工厂函数，要求返回一个对象，并且实现get和set</p>
+<p>适合做防抖之类的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line"> </span><br><span class="line">  &lt;div ref=&quot;div&quot;&gt;小满Ref&lt;/div&gt;</span><br><span class="line">  &lt;hr&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &#123;&#123; name &#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;hr&gt;</span><br><span class="line">  &lt;button @click=&quot;change&quot;&gt;修改 customRef&lt;/button&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/template&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script setup lang=&#x27;ts&#x27;&gt;</span><br><span class="line">import &#123; ref, reactive, onMounted, shallowRef, customRef &#125; from &#x27;vue&#x27;</span><br><span class="line"> </span><br><span class="line">function myRef&lt;T = any&gt;(value: T) &#123;</span><br><span class="line">  let timer:any;</span><br><span class="line">  return customRef((track, trigger) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      get() &#123;</span><br><span class="line">        track()</span><br><span class="line">        return value</span><br><span class="line">      &#125;,</span><br><span class="line">      set(newVal) &#123;</span><br><span class="line">        clearTimeout(timer)</span><br><span class="line">        timer =  setTimeout(() =&gt; &#123;</span><br><span class="line">          console.log(&#x27;触发了set&#x27;)</span><br><span class="line">          value = newVal</span><br><span class="line">          trigger()</span><br><span class="line">        &#125;,500)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">const name = myRef&lt;string&gt;(&#x27;小满&#x27;)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">const change = () =&gt; &#123;</span><br><span class="line">  name.value = &#x27;大满&#x27;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="to全家桶"><a href="#to全家桶" class="headerlink" title="to全家桶"></a>to全家桶</h1><p>toRef</p>
+<p>只能修改响应式对象的值</p>
+<p>将响应式对象中的某个属性单独给外部使用时使用。</p>
+<p>用法：（响应式对象， key）</p>
+<p><img src="https://sisiung-1310988733.cos.ap-guangzhou.myqcloud.com/blog/202302180020557.webp" alt="image.png"></p>
+<p>toRefs</p>
+<p>批量创建多个ref对象</p>
+<p>解构赋值</p>
+<p>toRaw</p>
+<p>将响应式对象转化为普通对象</p>
+<p>为什么需要toRef和toRefs</p>
+<p>不丢失响应式的情况下，将对象数据分解/扩散</p>
+<p>不创建响应式，而是延续响应式</p>
+<h1 id="ref和reactive的异同"><a href="#ref和reactive的异同" class="headerlink" title="ref和reactive的异同"></a>ref和reactive的异同</h1><p>两者都是构造响应式数据，但是ref主要解决原始值的响应式问题。ref也可以接收对象或者数组等非原始值，但是内部还是reactive实现响应式。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ref</th>
+<th>reactive</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>返回</td>
+<td>响应式ref对象</td>
+<td>响应式代理对象</td>
+</tr>
+<tr>
+<td>实现原理</td>
+<td>内部封装一个RefImpl类，并设置get value /set value，拦截用户对值的访问，从而实现响应式。</td>
+<td>使用proxy代理传入对象并拦截该对象各种操作。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="vue3升级了哪些功能"><a href="#vue3升级了哪些功能" class="headerlink" title="vue3升级了哪些功能"></a>vue3升级了哪些功能</h1><ol>
+<li><p>createApp</p>
+</li>
+<li><p>emits属性</p>
+</li>
+<li><p>多事件定义</p>
+</li>
+<li><p>Fragment</p>
+</li>
+<li><p>移除.sync</p>
+</li>
+<li><p>异步组件的写法</p>
+</li>
+<li><p>移除filter</p>
+</li>
+<li><p>Teleport</p>
+</li>
+<li><p>Suspense</p>
+</li>
+<li><p>CompositionAPI</p>
+</li>
+</ol>
+<h1 id="v-model参数的用法"><a href="#v-model参数的用法" class="headerlink" title="v-model参数的用法"></a>v-model参数的用法</h1><h1 id="watch和watchEffect的用法"><a href="#watch和watchEffect的用法" class="headerlink" title="watch和watchEffect的用法"></a>watch和watchEffect的用法</h1><ul>
+<li>两者都可以监听data属性变化</li>
+<li>watch需要明确监听是哪一个属性</li>
+<li>watchEffect会根据其中的属性，自动监听其变化</li>
+</ul>
+<p>watch ref和reactive包裹的数据才能被监听到</p>
+<p>watch 参数 （监听对象，回调函数，配置对象）</p>
+<p> 监听一个值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">watch(msg, (old,new) =&gt; &#123;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>监听多个值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watch([msg1, msg2], ...)</span><br></pre></td></tr></table></figure>
+
+<p>监听对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 出现问题： 监听深层对象 开启和不开启deep效果一样</span><br><span class="line">import &#123; ref, watch ,reactive&#125; from &#x27;vue&#x27;</span><br><span class="line"> </span><br><span class="line">let message = reactive(&#123;</span><br><span class="line">    nav:&#123;</span><br><span class="line">        bar:&#123;</span><br><span class="line">            name:&quot;&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">watch(message, (newVal, oldVal) =&gt; &#123;</span><br><span class="line">    console.log(&#x27;新的值----&#x27;, newVal);</span><br><span class="line">    console.log(&#x27;旧的值----&#x27;, oldVal);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>监听对象单一值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 不能直接对象.属性</span><br><span class="line">// 因为那样是字符串类型，不是proxy代理的对象</span><br><span class="line">import &#123; ref, watch ,reactive&#125; from &#x27;vue&#x27;</span><br><span class="line"> </span><br><span class="line">let message = reactive(&#123;</span><br><span class="line">    name:&quot;&quot;,</span><br><span class="line">    name2:&quot;&quot;</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">watch(()=&gt;message.name, (newVal, oldVal) =&gt; &#123;</span><br><span class="line">    console.log(&#x27;新的值----&#x27;, newVal);</span><br><span class="line">    console.log(&#x27;旧的值----&#x27;, oldVal);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>配置对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">deep: true, //深度监听</span><br><span class="line">immediate： true, // 立即执行一次，把watch的回调先走一次</span><br><span class="line">flush: &#x27;pre&#x27; // 组件更新之前调用 sync post 控制watch的只能怪顺序</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>watchEffect</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">watchEffect(() =&gt; &#123;</span><br><span class="line">    console.log(&#x27;state.age&#x27;, state.age)</span><br><span class="line">    console.log(&#x27;state.name&#x27;, state.name)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Vue3-treeShaking属性"><a href="#Vue3-treeShaking属性" class="headerlink" title="Vue3 treeShaking属性"></a>Vue3 treeShaking属性</h1>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>Post author:  </strong>Sisiy</a>
+          </li>
+          <li class="post-copyright-link">
+          <strong>Post link:  </strong>
+          <a href="/2023/02/18/vue3/" target="_blank" title="">https://Sisiy-ung.github.io/2023/02/18/vue3/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>Copyright Notice:   </strong>
+            All articles in this blog are licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            unless stating additionally.
+          </li>
+         
+        </ul>
+<div>
+
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/02/20/230220/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/15/async%E5%92%8Cdefer/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">async和defer</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%93%8D%E5%BA%94%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">如何实现响应式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3CompositionAPI%E5%92%8COptionAPI"><span class="nav-number">3.</span> <span class="nav-text">如何理解CompositionAPI和OptionAPI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue3%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">Vue3新特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%BA%E5%88%AB"><span class="nav-number">5.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ref%E5%85%A8%E5%AE%B6%E6%A1%B6"><span class="nav-number">6.</span> <span class="nav-text">ref全家桶</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#to%E5%85%A8%E5%AE%B6%E6%A1%B6"><span class="nav-number">7.</span> <span class="nav-text">to全家桶</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ref%E5%92%8Creactive%E7%9A%84%E5%BC%82%E5%90%8C"><span class="nav-number">8.</span> <span class="nav-text">ref和reactive的异同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue3%E5%8D%87%E7%BA%A7%E4%BA%86%E5%93%AA%E4%BA%9B%E5%8A%9F%E8%83%BD"><span class="nav-number">9.</span> <span class="nav-text">vue3升级了哪些功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v-model%E5%8F%82%E6%95%B0%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">10.</span> <span class="nav-text">v-model参数的用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#watch%E5%92%8CwatchEffect%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">11.</span> <span class="nav-text">watch和watchEffect的用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue3-treeShaking%E5%B1%9E%E6%80%A7"><span class="nav-number">12.</span> <span class="nav-text">Vue3 treeShaking属性</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2013 - 2024 Hexo All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				UV : <span id="busuanzi_value_site_uv"></span> |  
+				PV : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+
+  
+<script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Hexo
+          </div>
+          <div class="panel-body">
+            Copyright © 2024 Sisiy All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
