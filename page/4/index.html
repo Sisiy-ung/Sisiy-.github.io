@@ -11,7 +11,7 @@
   
   <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://sisiy-ung.github.io/page/2/index.html">
+<meta property="og:url" content="https://sisiy-ung.github.io/page/4/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Sisiy">
@@ -265,7 +265,7 @@
         
           <section id="main" style="float:none;">
   
-    <article id="post-Vue组件通信"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-方法调用、computed和watch的区别"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -273,7 +273,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/02/25/Vue%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/">Vue组件通信</a>
+      <a class="article-title" href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/">方法调用、computed和watch的区别</a>
     </h1>
   
 
@@ -281,8 +281,8 @@
     
     <div class="article-meta">
       
-	<a href="/2022/02/25/Vue%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/" class="article-date">
-	  <time datetime="2022-02-25T10:53:59.000Z" itemprop="datePublished">2022-02-25</time>
+	<a href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/" class="article-date">
+	  <time datetime="2021-06-23T15:12:00.000Z" itemprop="datePublished">2021-06-23</time>
 	</a>
 
       
@@ -293,20 +293,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          
-父子组件props / $emit父组件通过props的方式向子组件传递数据，而通过$emit 子组件可以向父组件通信。
-1.父组件向子组件传值步骤：
-
-在父组件中引入子组件
-注册子组件
-父组件页面中，子组件标签上动态绑定
-在子组件中，使用props接收父组件传递过来的值
-
-在子组件my-list中接收父组件的数据list。
-1234567891011121314151617181920212223242526&lt;!-- 父组件 --&gt;&lt;body&gt;    &lt;d...
+          方法：页面数据每次重新渲染都会重新执行。不希望有缓存的时候可以使用。性能消耗大。
+computed:是计算属性，依赖其他属性计算值。computed的值有缓存，只有当计算值变化才会返回内容。
+watch:监听到值得变化就会执行回调，在回调中可以进行一些逻辑操作。
+方法 VS computedcomputed可以实现的，一般采用methods方法调用也可以实现。
+computed的值是有缓存的。多次调用的时候方法会执行多次，但计算属性不会执行多次，除非依赖值改变。
+1234567&lt;di...
         </p>
         <p class="article-more-link">
-          <a href="/2022/02/25/Vue%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1/#more">Read More</a>
+          <a href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/#more">Read More</a>
         </p>
       
     </div>
@@ -325,7 +320,7 @@
 
 
   
-    <article id="post-promise"  class="article article-type-post" itemscope itemprop="blogPost" >
+    <article id="post-hello-world"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -333,7 +328,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/02/16/promise/">Promise</a>
+      <a class="article-title" href="/2021/06/09/hello-world/">Hello World</a>
     </h1>
   
 
@@ -341,8 +336,8 @@
     
     <div class="article-meta">
       
-	<a href="/2022/02/16/promise/" class="article-date">
-	  <time datetime="2022-02-16T10:01:16.000Z" itemprop="datePublished">2022-02-16</time>
+	<a href="/2021/06/09/hello-world/" class="article-date">
+	  <time datetime="2021-06-09T02:53:41.526Z" itemprop="datePublished">2021-06-09</time>
 	</a>
 
       
@@ -353,449 +348,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p class="article-excerpt-content">
-          1. 回调地狱需求：现在有三个文件1.txt,2.txt,3.txt，内容分别是“冬”，“奥”，“会”。使用fs.readFile（异步）顺序读取三个文件里面的内容，再把内容异步写进data.txt中。
-12345678910111213141516171819202122232425262728293031323334let filePath1 = path.join(__dirname, &#x27;files&#x27;, &#x27;1.txt&#x27;)let filePath...
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Hello AoyamaCreate a new post1$ hexo new &quot;My Ne...
         </p>
         <p class="article-more-link">
-          <a href="/2022/02/16/promise/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-数组去重"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/">数组去重</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/" class="article-date">
-	  <time datetime="2022-02-10T12:45:31.000Z" itemprop="datePublished">2022-02-10</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          之前遇到过一个数组去重的面试题，整理一下。
-给定一个数组，去除重复项。
-1let arr =  [1,2,2,4,null,null,&#x27;3&#x27;,&#x27;abc&#x27;,3,5,4,1,2,2,4,null,null,&#x27;3&#x27;,&#x27;abc&#x27;,3,5,4]
-
-indexOf()indexOf()方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
-12345678let newArr = []arr.forEa...
-        </p>
-        <p class="article-more-link">
-          <a href="/2022/02/10/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-虚拟dom和diff算法"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/20/%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/">虚拟dom和diff算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2022/01/20/%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/" class="article-date">
-	  <time datetime="2022-01-20T15:42:36.000Z" itemprop="datePublished">2022-01-20</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          **数据改变 **–&gt; 虚拟DOM(计算变更)  –&gt; 操作Dom –&gt; 视图更新
-什么是虚拟DOM？虚拟DOM是一个对象，一个用来表示真实DOM的对象。
-首先看一段html代码
-12345678&lt;div id=&quot;app&quot; class=&quot;container&quot;&gt;  &lt;h1&gt;虚拟DOM&lt;/h1&gt;  &lt;ul style=&quot;color: orange&quot;&gt;    &lt;li...
-        </p>
-        <p class="article-more-link">
-          <a href="/2022/01/20/%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-Vue2之数组"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/19/Vue2%E4%B9%8B%E6%95%B0%E7%BB%84/">Vue2之数组</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2022/01/19/Vue2%E4%B9%8B%E6%95%B0%E7%BB%84/" class="article-date">
-	  <time datetime="2022-01-19T06:28:25.000Z" itemprop="datePublished">2022-01-19</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          前言数组的索引和数组长度发生改变，Vue2检测不到变化。
-Vue官方文档
-
-由于 JavaScript 的限制，Vue 不能检测数组和对象的变化。
-
-Vue 不能检测以下数组的变动：
-
-当你利用索引直接设置一个数组项时，例如：vm.items[indexOfItem] = newValue
-当你修改数组的长度时，例如：vm.items.length = newLength
-
-Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，是Object.de...
-        </p>
-        <p class="article-more-link">
-          <a href="/2022/01/19/Vue2%E4%B9%8B%E6%95%B0%E7%BB%84/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-HTTPS"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/11/HTTPS/">HTTPS</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2022/01/11/HTTPS/" class="article-date">
-	  <time datetime="2022-01-11T08:57:49.000Z" itemprop="datePublished">2022-01-11</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          对称加密使用相同密钥进行加解密。适用于大量数据的加密场景算法公开，安全性取决于秘钥大小，但秘钥越大效率越低，需要权衡在安全和效率中做权衡。
-特点算法本身安全，但使用场景不够安全，因为解密和加密都是同一个秘钥。但对称加密的速度快很多。
-
-常见算法DES、3DES、AES、Blowfish、IDEA、RC5、RC6。
-非对称加密使用 匹配的一对密钥 来分别进行加密和解密，这两个秘钥是公开密钥（public key，简称公钥）和私有密钥（private key，简称私钥）。
-注意：公钥加密的数据...
-        </p>
-        <p class="article-more-link">
-          <a href="/2022/01/11/HTTPS/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-Vue响应式原理"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/08/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">Vue响应式原理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2022/01/08/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" class="article-date">
-	  <time datetime="2022-01-08T11:57:39.000Z" itemprop="datePublished">2022-01-08</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          一个new Vue的过程:
-1234567891011121314151617181920212223242526272829303132333435363738// 1.Vue.proptotype._init(option)// 2.initState(vm)// 3.observe(vm.data)// 4.new Observer(data)// 5.调用walk方法，遍历data中的每一个属性，监听数据的变化function walk(obj)&#123;  const keys...
-        </p>
-        <p class="article-more-link">
-          <a href="/2022/01/08/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-220106笔试复盘"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/06/220106%E7%AC%94%E8%AF%95%E5%A4%8D%E7%9B%98/">220106笔试复盘</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2022/01/06/220106%E7%AC%94%E8%AF%95%E5%A4%8D%E7%9B%98/" class="article-date">
-	  <time datetime="2022-01-06T10:07:59.000Z" itemprop="datePublished">2022-01-06</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          
-标签包含信息
-
-123456&lt;head&gt;  &lt;meta charset=&quot;UTF-8&quot;&gt;  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt; ...
-        </p>
-        <p class="article-more-link">
-          <a href="/2022/01/06/220106%E7%AC%94%E8%AF%95%E5%A4%8D%E7%9B%98/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-对称加密与非对称加密"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/06/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/">对称加密与非对称加密</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2022/01/06/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/" class="article-date">
-	  <time datetime="2022-01-05T17:58:15.000Z" itemprop="datePublished">2022-01-06</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          对称加密对称密钥算法（英语：Symmetric-key algorithm）又称为对称加密、私钥加密、共享密钥加密，是密码学中的一类加密算法。这类算法在加密和解密时使用相同的密钥，或是使用两个可以简单地相互推算的密钥。事实上，这组密钥成为在两个或多个成员间的共同秘密，以便维持专属的通信联系。
-为什么叫对称加密呢，你可以这么理解，一方通过密钥将信息加密后，把密文传给另一方，另一方通过这个相同的密钥将密文解密，转换成可以理解的明文。他们之间的关系如下：明文 &lt;-&gt; 密钥 &lt;-...
-        </p>
-        <p class="article-more-link">
-          <a href="/2022/01/06/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-220104笔试题目复盘"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2022/01/05/220104%E7%AC%94%E8%AF%95%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%9B%98/">22/01/04笔试题目复盘</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2022/01/05/220104%E7%AC%94%E8%AF%95%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%9B%98/" class="article-date">
-	  <time datetime="2022-01-05T15:40:18.000Z" itemprop="datePublished">2022-01-05</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          
-并发与并行
-
-并发：并发（Concurrent），在操作系统中，是指一个时间段中有几个程序都处于已启动运行到运行完毕之间，且这几个程序都是在同一个处理机上运行。
-并行：并行（Parallel），当系统有一个以上CPU时，当一个CPU执行一个进程时，另一个CPU可以执行另一个进程，两个进程互不抢占CPU资源，可以同时进行，这种方式我们称之为并行(Parallel)。
-
-进程切换
-
-默认事务隔离级别
-什么是事务？
-事务，由一个有限的数据库操作序列构成，这些操作要么全部执行,要么全部不执行，是...
-        </p>
-        <p class="article-more-link">
-          <a href="/2022/01/05/220104%E7%AC%94%E8%AF%95%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%9B%98/#more">Read More</a>
+          <a href="/2021/06/09/hello-world/#more">Read More</a>
         </p>
       
     </div>
@@ -818,7 +375,7 @@ Vue监听Array变化Vue2是通过Object.defineProperty实现响应式数据，�
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
   </nav>
 
 </section>

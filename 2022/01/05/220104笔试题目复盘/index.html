@@ -3,26 +3,31 @@
 <head>
   <meta charset="utf-8">
   
-  <title>对称加密与非对称加密 | Hexo</title>
+  <title>22/01/04笔试题目复盘 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="keywords" content="笔试" />
   
   
   
-  <meta name="description" content="对称加密对称密钥算法（英语：Symmetric-key algorithm）又称为对称加密、私钥加密、共享密钥加密，是密码学中的一类加密算法。这类算法在加密和解密时使用相同的密钥，或是使用两个可以简单地相互推算的密钥。事实上，这组密钥成为在两个或多个成员间的共同秘密，以便维持专属的通信联系。 为什么叫对称加密呢，你可以这么理解，一方通过密钥将信息加密后，把密文传给另一方，另一方通过这个相同的密钥将">
+  
+  <meta name="description" content="并发与并行  并发：并发（Concurrent），在操作系统中，是指一个时间段中有几个程序都处于已启动运行到运行完毕之间，且这几个程序都是在同一个处理机上运行。 并行：并行（Parallel），当系统有一个以上CPU时，当一个CPU执行一个进程时，另一个CPU可以执行另一个进程，两个进程互不抢占CPU资源，可以同时进行，这种方式我们称之为并行(Parallel)。  进程切换  默认事务隔离级别">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对称加密与非对称加密">
-<meta property="og:url" content="https://sisiy-ung.github.io/2022/01/06/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/index.html">
+<meta property="og:title" content="22&#x2F;01&#x2F;04笔试题目复盘">
+<meta property="og:url" content="https://sisiy-ung.github.io/2022/01/05/220104%E7%AC%94%E8%AF%95%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%9B%98/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="对称加密对称密钥算法（英语：Symmetric-key algorithm）又称为对称加密、私钥加密、共享密钥加密，是密码学中的一类加密算法。这类算法在加密和解密时使用相同的密钥，或是使用两个可以简单地相互推算的密钥。事实上，这组密钥成为在两个或多个成员间的共同秘密，以便维持专属的通信联系。 为什么叫对称加密呢，你可以这么理解，一方通过密钥将信息加密后，把密文传给另一方，另一方通过这个相同的密钥将">
+<meta property="og:description" content="并发与并行  并发：并发（Concurrent），在操作系统中，是指一个时间段中有几个程序都处于已启动运行到运行完毕之间，且这几个程序都是在同一个处理机上运行。 并行：并行（Parallel），当系统有一个以上CPU时，当一个CPU执行一个进程时，另一个CPU可以执行另一个进程，两个进程互不抢占CPU资源，可以同时进行，这种方式我们称之为并行(Parallel)。  进程切换  默认事务隔离级别">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png">
-<meta property="article:published_time" content="2022-01-05T17:58:15.000Z">
-<meta property="article:modified_time" content="2022-01-05T18:08:09.901Z">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/166df30f1b0bed86~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/1712b5213446a402~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/3/1713ff64103ccba6~tplv-t2oaga2asx-watermark.awebp">
+<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220106010939071.png">
+<meta property="article:published_time" content="2022-01-05T15:40:18.000Z">
+<meta property="article:modified_time" content="2024-08-24T00:31:00.120Z">
 <meta property="article:author" content="Sisiy">
+<meta property="article:tag" content="笔试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png">
+<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/166df30f1b0bed86~tplv-t2oaga2asx-watermark.awebp">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -174,7 +179,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-对称加密与非对称加密" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-220104笔试题目复盘" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
@@ -182,7 +187,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      对称加密与非对称加密
+      22/01/04笔试题目复盘
     </h1>
   
 
@@ -190,8 +195,8 @@
     
     <div class="article-meta">
       
-	<a href="/2022/01/06/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/" class="article-date">
-	  <time datetime="2022-01-05T17:58:15.000Z" itemprop="datePublished">2022-01-06</time>
+	<a href="/2022/01/05/220104%E7%AC%94%E8%AF%95%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%9B%98/" class="article-date">
+	  <time datetime="2022-01-05T15:40:18.000Z" itemprop="datePublished">2022-01-05</time>
 	</a>
 
       
@@ -207,24 +212,76 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h1><p>对称密钥算法（英语：Symmetric-key algorithm）又称为对称加密、私钥加密、共享密钥加密，是密码学中的一类加密算法。这类算法在加密和解密时使用相同的密钥，或是使用两个可以简单地相互推算的密钥。事实上，这组密钥成为在两个或多个成员间的共同秘密，以便维持专属的通信联系。</p>
-<p>为什么叫对称加密呢，你可以这么理解，一方通过密钥将信息加密后，把密文传给另一方，另一方通过这个相同的密钥将密文解密，转换成可以理解的明文。他们之间的关系如下：明文 &lt;-&gt; 密钥 &lt;-&gt; 密文。</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png" alt="对称加密"></p>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
-<li>可以加密也可以解密，使用密钥；</li>
-<li>与非对称加密相比，要求双方获取相同的密钥是对称密钥加密的主要缺点之一，但对称加密的速度快很多。</li>
-</ul>
-<h2 id="常见算法"><a href="#常见算法" class="headerlink" title="常见算法"></a>常见算法</h2><p>常见的对称加密算法有 DES、3DES、AES、Blowfish、IDEA、RC5、RC6。</p>
-<h2 id="常见应用场景"><a href="#常见应用场景" class="headerlink" title="常见应用场景"></a>常见应用场景</h2><p>对用户的敏感信息，比如身份证号码，手机号码等等加密存储，同样显示的时候也需要反向解密出来。</p>
-<h1 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h1><p>公开密钥密码学（英语：Public-key cryptography，也称非对称式密码学）是密码学的一种算法，它需要两个密钥，一个是公开密钥，另一个是私有密钥；一个用作加密，另一个则用作解密。使用其中一个密钥把明文加密后所得的密文，只能用相对应的另一个密钥才能解密得到原本的明文；甚至连最初用来加密的密钥也不能用作解密。由于加密和解密需要两个不同的密钥，故被称为非对称加密；不同于加密和解密都使用同一个密钥的对称加密。虽然两个密钥在数学上相关，但如果知道了其中一个，并不能凭此计算出另外一个；因此其中一个可以公开，称为公钥，任意向外发布；不公开的密钥为私钥，必须由用户自行严格秘密保管，绝不透过任何途径向任何人提供，也不会透露给被信任的要通信的另一方。</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.png" alt="非对称加密"></p>
-<h2 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h2><ul>
-<li>加密的时候使用公钥，解密的时候使用私钥；</li>
-<li>公钥是公开的，私钥是私有的；</li>
-<li>相对于对称加密性能差，但比其安全，因为公钥可以被伪造。</li>
-</ul>
-<h2 id="常见算法-1"><a href="#常见算法-1" class="headerlink" title="常见算法"></a>常见算法</h2><p>常见的对称加密算法有 RSA。</p>
-<h2 id="常见应用场景-1"><a href="#常见应用场景-1" class="headerlink" title="常见应用场景"></a>常见应用场景</h2><p>在 HTTPS 协议中用于对称加密的私钥传输。</p>
+        <ol>
+<li><p>并发与并行</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/166df30f1b0bed86~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+<p>并发：并发（Concurrent），在操作系统中，是指一个时间段中有几个程序都处于已启动运行到运行完毕之间，且这几个程序都是在同一个处理机上运行。</p>
+<p>并行：并行（Parallel），当系统有一个以上CPU时，当一个CPU执行一个进程时，另一个CPU可以执行另一个进程，两个进程互不抢占CPU资源，可以同时进行，这种方式我们称之为并行(Parallel)。</p>
+</li>
+<li><p>进程切换</p>
+</li>
+<li><p>默认事务隔离级别</p>
+<p>什么是事务？</p>
+<p>事务，由一个有限的数据库操作序列构成，这些操作要么全部执行,要么全部不执行，是一个不可分割的工作单位。</p>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/1712b5213446a402~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="img"></p>
+<p>事务A、B交替执行，事务A被事务B干扰到了，因为事务A读取到事务B未提交的数据,这就是<strong>脏读</strong>。</p>
+<p>在事务A范围内，两个相同的查询，读取同一条记录，却返回了不同的数据，这就是<strong>不可重复读</strong>。</p>
+<p>事务A查询一个范围的结果集，另一个并发事务B往这个范围中插入/删除了数据，并静悄悄地提交，然后事务A再次查询相同的范围，两次读取得到的结果集不一样了，这就是<strong>幻读</strong>。</p>
+<p>既然并发事务存在<strong>脏读、不可重复、幻读</strong>等问题，InnoDB实现了哪几种事务的隔离级别应对呢。</p>
+<p>读未提交（Read Uncommitted）</p>
+<p>读已提交（Read Committed）</p>
+<p>可重复读（Repeatable Read）</p>
+<p>串行化（Serializable）</p>
+<p>mysql的默认隔离级别是repeatable，可重复读<br>oracle,sqlserver的默认隔离级别是read commited, 读已提交</p>
+</li>
+<li><p>排序（适用于前k个元素之前）</p>
+</li>
+<li><p>24小时之内，时、分、秒重合几次</p>
+</li>
+<li><p>二叉树 已知先序、中序遍历</p>
+</li>
+<li><p>死锁产生条件</p>
+</li>
+</ol>
+<p><strong>死锁的定义</strong></p>
+<p>各进程(至少有两个或两个以上的进程)互相等待对方手里的资源,导致各进程都阻塞,无法向前推进的现象。</p>
+<p><strong>死锁原因</strong>：</p>
+<p>① 系统资源不足（对不可剥夺资源的竞争）</p>
+<p>② 进程推进顺序不当（P1拥有A申请B，P2拥有B申请A）</p>
+<p>③信号量的使用不当</p>
+<p><strong>产生死锁的必要条件</strong>：</p>
+<p>四个条件同时出现。</p>
+<p>① 互斥条件：只有对必须<code>互斥使用的资源</code>的争抢才会导致死锁(如哲学家的筷子/打印机设备等)。</p>
+<p>②请求和保持条件：指进程<code>已经保持至少一个资源</code>，但又提出了新的资源<code>请求</code>，而该资源已被其它进程占有，此时请求进程阻塞，但又对自己已获得的其它资源<code>保持</code>不放。</p>
+<p>③ 不剥夺条件：指进程已获得的资源，在未使用完之前，<code>不能被其他进程剥夺</code>，只能在使用完时由自己释放。</p>
+<p>④ 循环等待条件：指在发生死锁时，必然存在一个进程<code>资源的循环等待链</code>,链中的每一个进程已获得的资源同时被下一个进程所请求。(必要不充分条件)</p>
+<p><strong>解决死锁问题的措施</strong></p>
+<p>①死锁的预防。破坏死锁产生的四个必要条件中的一个或几个。</p>
+<p>②死锁的避免。在资源动态分配图中,用某种方法防止系统进入不安全状态。</p>
+<p>③死锁的检测和解除。允许死锁发生,不过操作系统会负责检测出死锁的发生,然后采取某种措施解除死锁。</p>
+<ol start="8">
+<li><p>不稳定的排序</p>
+</li>
+<li><p>事务</p>
+</li>
+<li><p>对称加密算法</p>
+</li>
+<li><p>基于IP协议</p>
+<p>IP协议对应于OSI标准模型的<code>网络层</code>。<br>TCP/IP:<br>数据链路层：ARP,RARP<br>网络层： IP,ICMP,IGMP<br>传输层：TCP ,UDP,UGP<br>应用层：Telnet,FTP,SMTP,SNMP.<br>OSI:<br>物理层：EIA/TIA-232, EIA/TIA-499, V.35, V.24, RJ45, Ethernet, 802.3, 802.5, FDDI, NRZI, NRZ, B8ZS<br>数据链路层：Frame Relay, HDLC, PPP, IEEE 802.3/802.2, FDDI, ATM, IEEE 802.5/802.2<br>网络层：IP，IPX，AppleTalk DDP<br>传输层：TCP，UDP，SPX<br>会话层：RPC,SQL,NFS,NetBIOS,names,AppleTalk,ASP,DECnet,SCP<br>表示层:TIFF,GIF,JPEG,PICT,ASCII,EBCDIC,encryption,MPEG,MIDI,HTML<br>应用层：FTP,WWW,Telnet,NFS,SMTP,Gateway,SNMP</p>
+</li>
+<li><p>如何确定一条TCP连接</p>
+</li>
+<li><p>局域网地址</p>
+</li>
+<li><p>进程 运行-&gt;就绪</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/4/3/1713ff64103ccba6~tplv-t2oaga2asx-watermark.awebp" alt="img"></p>
+</li>
+</ol>
+<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220106010939071.png"></p>
+<p>参考链接：</p>
+<p>[计算机考研复试面试常问问题 操作系统篇][<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904114229346312]">https://juejin.cn/post/6844904114229346312]</a></p>
+<p>[王道计算机考研-死锁][<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YE411D7nH?p=29%5D">https://www.bilibili.com/video/BV1YE411D7nH?p=29]</a></p>
+<p>[一文彻底读懂MySQL事务的四大隔离级别][<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904115353436174]">https://juejin.cn/post/6844904115353436174]</a></p>
 
       
     </div>
@@ -253,7 +310,7 @@ var a = new Donate({
           </li>
           <li class="post-copyright-link">
           <strong>Post link:  </strong>
-          <a href="/2022/01/06/对称加密与非对称加密/" target="_blank" title="对称加密与非对称加密">https://Sisiy-ung.github.io/2022/01/06/对称加密与非对称加密/</a>
+          <a href="/2022/01/05/220104笔试题目复盘/" target="_blank" title="22/01/04笔试题目复盘">https://Sisiy-ung.github.io/2022/01/05/220104笔试题目复盘/</a>
           </li>
           <li class="post-copyright-license">
             <strong>Copyright Notice:   </strong>
@@ -293,6 +350,8 @@ var a = new Donate({
       
       
         
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AF%95/" rel="tag">笔试</a></li></ul>
+
       
 
     </footer>
@@ -301,19 +360,19 @@ var a = new Donate({
     
 <nav id="article-nav">
   
-    <a href="/2022/01/06/220106%E7%AC%94%E8%AF%95%E5%A4%8D%E7%9B%98/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/01/06/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%B8%8E%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          220106笔试复盘
+          对称加密与非对称加密
         
       </div>
     </a>
   
   
-    <a href="/2022/01/05/220104%E7%AC%94%E8%AF%95%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%9B%98/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/12/21/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">22/01/04笔试题目复盘</div>
+      <div class="article-nav-title">清除浮动</div>
     </a>
   
 </nav>
@@ -327,7 +386,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">1.</span> <span class="nav-text">对称加密</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">常见算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.3.</span> <span class="nav-text">常见应用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">2.</span> <span class="nav-text">非对称加密</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E7%82%B9-1"><span class="nav-number">2.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95-1"><span class="nav-number">2.2.</span> <span class="nav-text">常见算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF-1"><span class="nav-number">2.3.</span> <span class="nav-text">常见应用场景</span></a></li></ol></li></ol>
+        <ol class="nav">None</ol>
     
     </div>
   </aside>

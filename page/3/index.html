@@ -265,6 +265,178 @@
         
           <section id="main" style="float:none;">
   
+    <article id="post-清除浮动"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2021/12/21/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/">清除浮动</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/12/21/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/" class="article-date">
+	  <time datetime="2021-12-21T10:45:40.000Z" itemprop="datePublished">2021-12-21</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+           为什么要清除浮动？
+因为浮动的盒子脱离文档流，如果包含块没有高度，或者高度自适应，此时，浮动元素的高度不会被计算进去，包含块撑不起来，形成塌陷的状态。
+clear最后一个浮动元素之后添加一个空的块级元素，并添加clear:both样式。
+BFC创建BFC包含住浮动的子元素。
+overflow在包含块元素的样式添加overflow:hidden或者overflow:auto。
+float在包含块元素的样式添加float属性，但是这种方式会影响布局，十分局限。
+伪元素（最推荐）1234567...
+        </p>
+        <p class="article-more-link">
+          <a href="/2021/12/21/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-JavaScript的执行机制"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2021/12/21/JavaScript%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/">JavaScript的执行机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/12/21/JavaScript%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/" class="article-date">
+	  <time datetime="2021-12-21T08:18:44.000Z" itemprop="datePublished">2021-12-21</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          js是一门单线程语言。事件循环（Event Loop）是一种解决JavaScript单线程运行时不会阻塞的一种机制。
+
+同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入Event Table并注册函数。
+当指定的事情完成时，Event Table会将这个函数移入Event Queue。
+主线程内的任务执行完毕为空，会去Event Queue读取对应的函数，进入主线程执行。
+上述过程会不断重复，也就是常说的Event Loop(事件循环)。
+
+一次事件循环只执行处于 M...
+        </p>
+        <p class="article-more-link">
+          <a href="/2021/12/21/JavaScript%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-深拷贝与浅拷贝"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2021/12/20/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">深拷贝与浅拷贝</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2021/12/20/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" class="article-date">
+	  <time datetime="2021-12-19T17:38:05.000Z" itemprop="datePublished">2021-12-20</time>
+	</a>
+
+      
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          浅拷贝的原理与实现
+浅拷贝指的是一个新的对象对原始对象的属性值进行精确地拷贝。如果拷贝的是基本数据类型，拷贝的就是基本数据类型的值；如果拷贝的是引用数据类型，拷贝的就是内存地址。如果其中一个对象的引用内存地址发生改变，另一个对象也发生变化(指向同一地址)。
+基本数据类型：
+
+
+引用数据类型：   
+
+
+Object.assign()object.assign 是 ES6 中 object 的一个方法，该方法可以用于 JS 对象的合并。我们可以使用它来实现浅拷贝。
+1Object.assig...
+        </p>
+        <p class="article-more-link">
+          <a href="/2021/12/20/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/#more">Read More</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
     <article id="post-cookie、localStorage、sessionStorage的区别"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
@@ -746,117 +918,11 @@ findIndex()
 
 
   
-    <article id="post-方法调用、computed和watch的区别"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/">方法调用、computed和watch的区别</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/" class="article-date">
-	  <time datetime="2021-06-23T15:12:00.000Z" itemprop="datePublished">2021-06-23</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          方法：页面数据每次重新渲染都会重新执行。不希望有缓存的时候可以使用。性能消耗大。
-computed:是计算属性，依赖其他属性计算值。computed的值有缓存，只有当计算值变化才会返回内容。
-watch:监听到值得变化就会执行回调，在回调中可以进行一些逻辑操作。
-方法 VS computedcomputed可以实现的，一般采用methods方法调用也可以实现。
-computed的值是有缓存的。多次调用的时候方法会执行多次，但计算属性不会执行多次，除非依赖值改变。
-1234567&lt;di...
-        </p>
-        <p class="article-more-link">
-          <a href="/2021/06/23/%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E3%80%81computed%E5%92%8Cwatch%E7%9A%84%E5%8C%BA%E5%88%AB/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-hello-world"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2021/06/09/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2021/06/09/hello-world/" class="article-date">
-	  <time datetime="2021-06-09T02:53:41.526Z" itemprop="datePublished">2021-06-09</time>
-	</a>
-
-      
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Hello AoyamaCreate a new post1$ hexo new &quot;My Ne...
-        </p>
-        <p class="article-more-link">
-          <a href="/2021/06/09/hello-world/#more">Read More</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
   </nav>
 
 </section>
