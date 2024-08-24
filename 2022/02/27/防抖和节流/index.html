@@ -18,17 +18,17 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="防抖例子 这里一个例子：  有一个自动感应的门，当有人经过的时候，触发了大门的感应，大门执行了开门的动作（**触发事件**）。 开门了之后这个门是需要关闭的，门不能关得太快也不能关得太慢，因此我们需要设定时间，这个时间就是延迟关门的时间(setTimeOut)，这里假设时间是5s。 门感应到有人，打开门，并且开始5s倒计时。在5s内如果又有人靠近门边，门感应到人，打开门，重新5s计时。 5s过去了">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/GIF%202022-2-27%2018-17-37.gif">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220227184859537.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220227221930123.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/GIF%202022-2-27%2022-30-06.gif">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/GIF%202022-2-27%2022-53-52.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/202408250126880.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/202408250126644.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/202408250126555.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/202408250126280.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/202408250127964.gif">
 <meta property="article:published_time" content="2022-02-27T10:03:51.000Z">
-<meta property="article:modified_time" content="2022-03-24T08:54:10.750Z">
+<meta property="article:modified_time" content="2024-08-24T17:27:09.542Z">
 <meta property="article:author" content="Sisiy">
 <meta property="article:tag" content="javaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/GIF%202022-2-27%2018-17-37.gif">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/202408250126880.gif">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -213,7 +213,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h1><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/GIF%202022-2-27%2018-17-37.gif" alt="GIF 2022-2-27 18-17-37"></p>
+        <h1 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h1><h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/202408250126880.gif"></p>
 <p>这里一个例子：</p>
 <ul>
 <li>有一个自动感应的门，当有人经过的时候，触发了大门的感应，大门执行了开门的动作（**<code>触发事件</code>**）。</li>
@@ -223,7 +223,7 @@
 </ul>
 <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><strong>防抖就是指触发事件后 n 秒后才执行函数，如果在 n 秒内又触发了事件，则重新计时。</strong></p>
 <h2 id="手写防抖"><a href="#手写防抖" class="headerlink" title="手写防抖"></a>手写防抖</h2><p>假设现在需要防止用户因为手抖多次进行付款操作，这里需要进行防抖操作。</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220227184859537.png" alt="image-20220227184859537"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/202408250126644.png" alt="image-20220227184859537"></p>
 <ol>
 <li>首先按钮被点击执行<code>payMoney</code>函数</li>
 </ol>
@@ -258,7 +258,7 @@
 </ul>
 <h1 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h1><h2 id="基本概念-1"><a href="#基本概念-1" class="headerlink" title="基本概念"></a>基本概念</h2><p><strong>节流就是指连续触发事件但是在规定的时间内只执行一次函数。</strong></p>
 <p>整个流程就是：</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220227221930123.png" alt="image-20220227221930123"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/202408250126555.png" alt="image-20220227221930123"></p>
 <p>如果时间间隔内有触发行为就取消任务，如果时间间隔后有触发行为，就再次执行任务和设置时间间隔。</p>
 <h2 id="手写节流"><a href="#手写节流" class="headerlink" title="手写节流"></a>手写节流</h2><p>现在要实现一个监听用户改变页面尺寸的事件，在改变尺寸的时候有相应背景颜色改变的效果。</p>
 <ol>
@@ -267,7 +267,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">coloring</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> r = <span class="built_in">Math</span>.floor( <span class="built_in">Math</span>.random() * <span class="number">255</span>)</span><br><span class="line">  <span class="keyword">let</span> g = <span class="built_in">Math</span>.floor( <span class="built_in">Math</span>.random() * <span class="number">255</span>)</span><br><span class="line">  <span class="keyword">let</span> b = <span class="built_in">Math</span>.floor( <span class="built_in">Math</span>.random() * <span class="number">255</span>)</span><br><span class="line">  <span class="built_in">document</span>.body.style.background = <span class="string">`rgb(<span class="subst">$&#123;r&#125;</span>, <span class="subst">$&#123;b&#125;</span>, <span class="subst">$&#123;b&#125;</span>)`</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;resize&#x27;</span>, coloring)</span><br></pre></td></tr></table></figure>
 
 <p>现在效果：</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/GIF%202022-2-27%2022-30-06.gif" alt="GIF 2022-2-27 22-30-06"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/202408250126280.gif" alt="GIF 2022-2-27 22-30-06"></p>
 <h3 id="定时器版本"><a href="#定时器版本" class="headerlink" title="定时器版本"></a>定时器版本</h3><ol start="2">
 <li>创建节流函数。节流函数也需要两个基本的参数：<code>执行任务的函数</code>和<code>延迟的时间</code>。</li>
 </ol>
@@ -296,7 +296,7 @@
 <h3 id="时间戳版本"><a href="#时间戳版本" class="headerlink" title="时间戳版本"></a>时间戳版本</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">func, delay</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> pre = <span class="number">0</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//保存执行函数当时的时间,但是需要和前一个时间点进行比较才能确定是否已经过了时间间隔（创建变量pre）</span></span><br><span class="line">    <span class="keyword">let</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    <span class="keyword">let</span> context = <span class="built_in">this</span></span><br><span class="line">    <span class="keyword">let</span> args = <span class="built_in">arguments</span></span><br><span class="line">    <span class="comment">//已经过了时间间隔，执行函数</span></span><br><span class="line">    <span class="keyword">if</span>(now - pre &gt; delay) &#123;</span><br><span class="line">      func.apply(context, args)</span><br><span class="line">      <span class="comment">//执行完以后需要把当前时间点的毫秒数赋值给表示前一个时间点的变量，这样就修改了pre变量的值</span></span><br><span class="line">      pre = now</span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>现在效果：</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/GIF%202022-2-27%2022-53-52.gif" alt="GIF 2022-2-27 22-53-52"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/202408250127964.gif" alt="GIF 2022-2-27 22-53-52"></p>
 <h2 id="应用场景-1"><a href="#应用场景-1" class="headerlink" title="应用场景"></a>应用场景</h2><ul>
 <li><code>scroll</code> 事件，每隔一秒计算一次位置信息等</li>
 <li>浏览器播放事件，每个一秒计算一次进度信息等</li>

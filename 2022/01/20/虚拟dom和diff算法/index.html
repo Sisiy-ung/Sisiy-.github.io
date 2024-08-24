@@ -18,22 +18,22 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="**数据改变 **–&gt; 虚拟DOM(计算变更)  –&gt; 操作Dom –&gt; 视图更新 什么是虚拟DOM？虚拟DOM是一个对象，一个用来表示真实DOM的对象。 首先看一段html代码 12345678&lt;div id&#x3D;&quot;app&quot; class&#x3D;&quot;container&quot;&gt;  &lt;h1&gt;虚拟DOM&lt;&#x2F;h1&gt;  &lt;u">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://github.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212195023249.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212211654815.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212183502328.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212184226792.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212184444187.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212190746709.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191113905.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191251446.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191521416.png">
-<meta property="og:image" content="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212193529243.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/202408240114592.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212211654815.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212183502328.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212184226792.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212184444187.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212190746709.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212191113905.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212191251446.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212191521416.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212193529243.png">
 <meta property="article:published_time" content="2022-01-20T15:42:36.000Z">
-<meta property="article:modified_time" content="2024-08-23T16:14:56.123Z">
+<meta property="article:modified_time" content="2024-08-24T17:35:17.290Z">
 <meta property="article:author" content="Sisiy">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212195023249.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/202408240114592.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -229,9 +229,9 @@
 <p><strong>虚拟DOM算法操作真实DOM，性能高于直接操作真实DOM。</strong></p>
 <h1 id="什么是diff算法"><a href="#什么是diff算法" class="headerlink" title="什么是diff算法?"></a>什么是diff算法?</h1><p>用虚拟DOM表示真实DOM，计算出最小的变化，根据变化去更新真实DOM。</p>
 <p><strong>diff算法是一种对比算法。</strong>对比<code>旧虚拟DOM和新虚拟DOM</code>,对比出哪个是<code>虚拟节点</code>更改了，从而<code>找出</code>这个<code>虚拟节点</code>，<code>更新</code>这个虚拟节点对应的<code>真实节点</code>，实现<code>精准</code>更新真实DOM，进而提高效率。</p>
-<h1 id="diff算法原理"><a href="#diff算法原理" class="headerlink" title="diff算法原理"></a>diff算法原理</h1><h2 id="diff同层对比"><a href="#diff同层对比" class="headerlink" title="diff同层对比"></a>diff同层对比</h2><p><img src="https://github.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212195023249.png" alt="image-20220212195023249"></p>
+<h1 id="diff算法原理"><a href="#diff算法原理" class="headerlink" title="diff算法原理"></a>diff算法原理</h1><h2 id="diff同层对比"><a href="#diff同层对比" class="headerlink" title="diff同层对比"></a>diff同层对比</h2><p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/202408240114592.png" alt="image-20220212195023249"></p>
 <h2 id="diff对比流程"><a href="#diff对比流程" class="headerlink" title="diff对比流程"></a>diff对比流程</h2><p>当数据改变时，会触发<code>setter</code>，并且通过<code>Dep.notify</code>去通知所有<code>订阅者Watcher</code>，订阅者们就会调用<code>patch方法</code>，给真实DOM打补丁，更新相应的视图。</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212211654815.png" alt="image-20220212211654815"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212211654815.png" alt="image-20220212211654815"></p>
 <h2 id="patch函数"><a href="#patch函数" class="headerlink" title="patch函数"></a>patch函数</h2><p>作用：对比当前同层的虚拟节点<code>是否为同一类型的标签</code>。</p>
 <ul>
 <li>是：继续执行<code>patchVnode方法</code>进行深层比对</li>
@@ -265,29 +265,29 @@
 
 <h2 id="updateChildren函数"><a href="#updateChildren函数" class="headerlink" title="updateChildren函数"></a>updateChildren函数</h2><p>在patchVnode函数中如果oldVnode和newVnode<code>都有子节点</code>，则需要执行<code>updateChildren</code>函数比较子节点。</p>
 <p>这里的对比采用的是<code>首尾指针法</code>。新的子节点集合和老的子节点集合，各有首尾两个指针。</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212183502328.png" alt="image-20220212183502328"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212183502328.png" alt="image-20220212183502328"></p>
 <p>指针指向的节点就会互相进行比较，总共有五种比较情况。</p>
 <p>1、<code>oldS 和 newS </code>使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldS, newS)</code></p>
 <p>2、<code>oldS 和 newE </code>使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldS, newE)</code></p>
 <p>3、<code>oldE 和 newS </code>使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldE, newS)</code></p>
 <p>4、<code>oldE 和 newE </code>使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldE, newE)</code></p>
 <p>5、如果以上逻辑都匹配不到，再把所有旧子节点的 <code>key</code> 做一个映射到旧节点下标的 <code>key -&gt; index</code> 表，然后用新 <code>vnode</code> 的 <code>key</code> 去找出在旧节点中可以复用的位置。</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212184226792.png" alt="image-20220212184226792"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212184226792.png" alt="image-20220212184226792.png"></p>
 <p>比较过程如下：</p>
 <p>移动是以<code>newCh</code>的位置为准的，也就是说移动的时候需要将原来的<code>真实DOM</code>位置移到<code>newCh</code>所对应的位置。（找相等节点，移节点，移指针）</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212184444187.png" alt="image-20220212184444187"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212184444187.png" alt="image-20220212184444187.png"></p>
 <ol>
 <li><p>oldS和newE相等，节点a移动到newE对应的位置，同时oldS++，newE–</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212190746709.png" alt="image-20220212190746709"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212190746709.png" alt="image-20220212190746709.png"></p>
 </li>
 <li><p>oldS和newS相等，节点b移动到newS对应的位置，同时oldS++，newS++</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191113905.png" alt="image-20220212191113905"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212191113905.png" alt="image-20220212191113905"></p>
 </li>
 <li><p>oldE，oldS和newS相等，节点c移动到newS对应的位置，同时oldE–，oldS++和newS++</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191251446.png" alt="image-20220212191251446"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212191251446.png" alt="image-20220212191251446"></p>
 </li>
 <li><p>此时oldS &gt; oldE，则oldCh已经遍历完了，而newCh还没有遍历完，说明newCh比oldCh多，需要将多余的节点插入到真实DOM对应的位置上。</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212191521416.png" alt="image-20220212191521416"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212191521416.png" alt="image-20220212191521416"></p>
 </li>
 </ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateChildren</span>(<span class="params">parentElm, oldCh, newCh</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> oldStartIdx = <span class="number">0</span>, newStartIdx = <span class="number">0</span></span><br><span class="line">  <span class="keyword">let</span> oldEndIdx = oldCh.length - <span class="number">1</span></span><br><span class="line">  <span class="keyword">let</span> oldStartVnode = oldCh[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">let</span> oldEndVnode = oldCh[oldEndIdx]</span><br><span class="line">  <span class="keyword">let</span> newEndIdx = newCh.length - <span class="number">1</span></span><br><span class="line">  <span class="keyword">let</span> newStartVnode = newCh[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">let</span> newEndVnode = newCh[newEndIdx]</span><br><span class="line">  <span class="keyword">let</span> oldKeyToIdx</span><br><span class="line">  <span class="keyword">let</span> idxInOld</span><br><span class="line">  <span class="keyword">let</span> elmToMove</span><br><span class="line">  <span class="keyword">let</span> before</span><br><span class="line">  <span class="keyword">while</span> (oldStartIdx &lt;= oldEndIdx &amp;&amp; newStartIdx &lt;= newEndIdx) &#123;</span><br><span class="line">    <span class="keyword">if</span> (oldStartVnode == <span class="literal">null</span>) &#123;</span><br><span class="line">      oldStartVnode = oldCh[++oldStartIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (oldEndVnode == <span class="literal">null</span>) &#123;</span><br><span class="line">      oldEndVnode = oldCh[--oldEndIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newStartVnode == <span class="literal">null</span>) &#123;</span><br><span class="line">      newStartVnode = newCh[++newStartIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newEndVnode == <span class="literal">null</span>) &#123;</span><br><span class="line">      newEndVnode = newCh[--newEndIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sameVnode(oldStartVnode, newStartVnode)) &#123;</span><br><span class="line">      patchVnode(oldStartVnode, newStartVnode)</span><br><span class="line">      oldStartVnode = oldCh[++oldStartIdx]</span><br><span class="line">      newStartVnode = newCh[++newStartIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sameVnode(oldEndVnode, newEndVnode)) &#123;</span><br><span class="line">      patchVnode(oldEndVnode, newEndVnode)</span><br><span class="line">      oldEndVnode = oldCh[--oldEndIdx]</span><br><span class="line">      newEndVnode = newCh[--newEndIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sameVnode(oldStartVnode, newEndVnode)) &#123;</span><br><span class="line">      patchVnode(oldStartVnode, newEndVnode)</span><br><span class="line">      api.insertBefore(parentElm, oldStartVnode.el, api.nextSibling(oldEndVnode.el))</span><br><span class="line">      oldStartVnode = oldCh[++oldStartIdx]</span><br><span class="line">      newEndVnode = newCh[--newEndIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sameVnode(oldEndVnode, newStartVnode)) &#123;</span><br><span class="line">      patchVnode(oldEndVnode, newStartVnode)</span><br><span class="line">      api.insertBefore(parentElm, oldEndVnode.el, oldStartVnode.el)</span><br><span class="line">      oldEndVnode = oldCh[--oldEndIdx]</span><br><span class="line">      newStartVnode = newCh[++newStartIdx]</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 使用key时的比较</span></span><br><span class="line">      <span class="keyword">if</span> (oldKeyToIdx === <span class="literal">undefined</span>) &#123;</span><br><span class="line">        oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx) <span class="comment">// 有key生成index表</span></span><br><span class="line">      &#125;</span><br><span class="line">      idxInOld = oldKeyToIdx[newStartVnode.key]</span><br><span class="line">      <span class="keyword">if</span> (!idxInOld) &#123;</span><br><span class="line">        api.insertBefore(parentElm, createEle(newStartVnode).el, oldStartVnode.el)</span><br><span class="line">        newStartVnode = newCh[++newStartIdx]</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        elmToMove = oldCh[idxInOld]</span><br><span class="line">        <span class="keyword">if</span> (elmToMove.sel !== newStartVnode.sel) &#123;</span><br><span class="line">          api.insertBefore(parentElm, createEle(newStartVnode).el, oldStartVnode.el)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          patchVnode(elmToMove, newStartVnode)</span><br><span class="line">          oldCh[idxInOld] = <span class="literal">null</span></span><br><span class="line">          api.insertBefore(parentElm, elmToMove.el, oldStartVnode.el)</span><br><span class="line">        &#125;</span><br><span class="line">        newStartVnode = newCh[++newStartIdx]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (oldStartIdx &gt; oldEndIdx) &#123;</span><br><span class="line">    before = newCh[newEndIdx + <span class="number">1</span>] == <span class="literal">null</span> ? <span class="literal">null</span> : newCh[newEndIdx + <span class="number">1</span>].el</span><br><span class="line">    addVnodes(parentElm, before, newCh, newStartIdx, newEndIdx)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newStartIdx &gt; newEndIdx) &#123;</span><br><span class="line">    removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -300,7 +300,7 @@
 <p><code>v-for</code>默认使用就地<code>复用</code>策略，列表数据修改的时候，他会根据<code>key值</code>去判断某个值是否修改，如果修改，则重新渲染这一项，否则复用之前的元素。</p>
 <p>整个过程就是：</p>
 <p>先进行<code>sameNode</code>对比，相同key节点会去进行<code>patchVnode</code>更新文本，而原来就有的节点<code>c</code>，因为之前没有<code>key</code>为4的节点，就被当成了新节点，所以最后新增的是原本已经存在的c节点。总结就是前三个进行<code>patchVnode</code>更新文本，最后一个进行<code>新增</code>。</p>
-<p><img src="https://gitee.com/Sisiy-ung/my-image-host/raw/master/img/image-20220212193529243.png" alt="image-20220212193529243"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Sisiy-ung/MyImageHost/img/image-20220212193529243.png" alt="image-20220212193529243"></p>
 <p>所以最好就是使用一个<code>独一无二的值</code>来作为key。</p>
 <p>参考：</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/snabbdom/snabbdom">snabbdom</a></p>
